@@ -44,7 +44,10 @@ function idCheck(id) {
             userId : id
         }
     }).done(function(data){
-        if(data > 0) {
+
+        var obj = JSON.parse(data);
+
+        if(obj.count < 1) {
             $("#checkResult").text("사용 가능");
             $('#checkedId').val(id);
         }
@@ -119,26 +122,59 @@ function phoneNumCheck(phone) {
 
 function userJoin(){
 
-    if(!nameCheck($('#name').val())) {
+    var name = $('#name').val();
+    var phoneNumber = $('#phoneNumber').val();
+    var userId = $('#checkedId').val();
+    var password = $('#checkPassword').val();
+    var gender = $('#gender').val();
+
+    if(!nameCheck(name)) {
         alert("이름을 확인해 주세요.");
         return;
     }
 
-    if(!phoneNumCheck($('#phoneNumber').val())) {
+    if(!phoneNumCheck(phoneNumber)) {
         alert("휴대폰 번호를 확인해 주세요.");
         return;
     }
 
-    if($('#checkedId').val().length < 1 || ($('#checkedId').val() != $('#userId').val())) {
+    if(userId.length < 1 || (userId != $('#userId').val())) {
         alert("아이디를 확인해 주세요.");
         return;
     }
     
-    if(!pwCheck($('#password').val(), $('#checkPassword').val())) {
+    if(!pwCheck($('#password').val(), password)) {
         alert("비밀번호를 확인해 주세요.");
         return;
     }
-    
-    $('#joinForm').submit();
+
+    $.ajax({
+        url : '/loginboard2/process/user/join.php',
+        type : 'POST',
+        data : {
+            name : name,
+            phoneNumber : phoneNumber,
+            userId : userId,
+            password : password,
+            gender : gender
+        },
+    })
+    .done(function(data) {
+ 
+        var obj = JSON.parse(data);
+
+        if(obj.result) {
+            alert('회원가입 성공');
+            location.href = '/loginboard2/controller/user/UserLoginController.php';
+        }
+        else {
+           alert('회원가입 실패');
+        }
+
+    })
+    .fail(function(textStatus) {
+        console.log(textStatus);
+        alert('회원가입 실패');
+    });
 
 }

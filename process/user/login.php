@@ -27,6 +27,5 @@
     // 세션 추가
     $_SESSION['userId'] = $result['user_id'];
     $_SESSION['no'] = $result['no'];
-    echo $_SESSION['userId'];
 
     echo '<script>login()</script>';

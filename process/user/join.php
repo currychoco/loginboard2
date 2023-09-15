@@ -1,4 +1,3 @@
-<script src="/loginboard2/js/user/user.js"></script>
 <?php
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT']."/loginboard2/conf.php";
@@ -17,9 +16,6 @@
     $user['gender'] = $utility->filter_SQL($_POST['gender']);
     
     $result = $dao->setUser($user);
+    $data = array('result'=>$result);
 
-    if($result){
-        echo "<script>joinSuccess();</script>";
-    }else{
-       echo "<script>joinFail();</script>";
-    }
+    echo json_encode($data);
