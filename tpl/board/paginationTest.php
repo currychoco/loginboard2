@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <?php include ROOT_PATH . '/common/head.php'?>
+	    <?php include  $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/head.php'?>
+        <script src='/loginboard2/js/board/board.js'></script>
 	</head>
 	<body>
         <!-- header -->
-        <?php include ROOT_PATH . '/common/header.php'?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
         <div class="container body-container">
             <table class="table table-hover">
                 <thead>
@@ -47,9 +48,7 @@
             <form>
                 <input type="hidden" value="<?=$no?>">
             </form>
-            <div class="text-center">
-                <?php include ROOT_PATH . "/common/pagination.php"?>
-            </div>
+            <div class="text-center" id='pagination'></div>
             <a href="write.php" style="float:right;">
                 <button class="btn btn-primary">글쓰기</button>
             </a>
