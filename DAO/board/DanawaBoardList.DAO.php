@@ -1,12 +1,10 @@
 <?php
-
-class DanawaBoardList {
-
-    private $conn;
+include DAO_PATH . '/Common.DAO.php';
+class DanawaBoardList extends CommonDAO {
 
     //생성자 - DB 커넥션 연결
     public function __construct(){
-        $this->conn = mysqli_connect("localhost", "root", "password", "mysql");
+        parent::__construct();
     }
 
     // 쿼리로 조회된 결과물 배열로 반환

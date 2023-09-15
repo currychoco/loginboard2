@@ -1,11 +1,10 @@
 <?php
 
-class UserDAO {
-
-    private $conn;
+include DAO_PATH . '/Common.DAO.php';
+class UserDAO extends CommonDAO {
 
     public function __construct(){
-        $this->conn = mysqli_connect("localhost", "root", "password", "mysql");
+       parent::__construct();
     }
 
     public function setUser($user){
