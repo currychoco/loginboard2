@@ -6,7 +6,7 @@ $(function(){
         nameCheck($("#name").val());
     });
 
-    $('#phoneNumber').keyup(function() {
+    $("input[type='tel']").keyup(function() {
         phoneNumCheck($("#phoneNumber").val());
     });
 
@@ -25,6 +25,14 @@ $(function(){
     $('#joinButton').click(function() {
         userJoin();
     });
+
+    // 다양한 이벤트 써보기
+
+    $('#nameTooltip').tooltip();
+
+    $("input[type='tel']").mouseenter(function() {
+        $("input[type='tel']").tooltip();
+    })
     
 });
 

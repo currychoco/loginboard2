@@ -5,7 +5,7 @@
         <script src='/loginboard2/js/user/join.js'></script>
         <script>
             // 로그인 체크
-            const userId = "<?= $userId ?>";
+            const userId = $('#no').val();
             if(userId){
                 location.href = '/loginboard2/controller/board/BoardListController.php';
             }
@@ -21,10 +21,11 @@
             <form action = "/loginboard2/process/user/join.php" method = "POST" id = "joinForm">
                 <div class="form-inline" style="margin-bottom: 15px">
                     <input type="text" class="form-control" name="name" id="name" placeholder="이름" required />
+                    <span id="nameTooltip" title="이름은 한글로 2글자 이상, 4글자 이하만 가능합니다." class="glyphicon glyphicon-question-sign"></span>
                     <span id="checkNameResult"></span>
                 </div>
                 <div class="form-inline" style="margin-bottom: 15px">
-                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="휴대전화" required />
+                    <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="휴대전화" title='ex) 010-0000-0000' required />
                     <span id="checkNumResult"></span>
                 </div>
                 <div class="form-inline" style="margin-bottom: 15px">
@@ -51,6 +52,7 @@
                 </div>
                 <div>
                     <input type="hidden" id="checkedId">
+                    <input type='hidden' id='no' val="<?=$no?>">
                 </div> 
             </form>
         </div>

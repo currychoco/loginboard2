@@ -6,6 +6,8 @@
         <script>
             $(function() {
                 pagination();
+
+                $('tbody tr:nth-child(odd)').css('background', '#9F9F9F');
             })
         </script>
 	</head>

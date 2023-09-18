@@ -8,6 +8,12 @@
             loginCheckToLogin(userId);
 
             $(function() {
+				$("input[type='password']").keydown(function(key) {
+					if(key.keyCode == 13) {
+						clickLoginButton($('#userId').val(), $('#password').val());
+					}
+				});
+
                 $('#loginButton').click(function(){
                     clickLoginButton($('#userId').val(), $('#password').val());
                 });
