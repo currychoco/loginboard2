@@ -3,6 +3,11 @@
 	<head>
 	    <?php include  $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/head.php'?>
         <script src='/loginboard2/js/board/board.js'></script>
+        <script>
+            $(function() {
+                pagination();
+            })
+        </script>
 	</head>
 	<body>
         <!-- header -->
@@ -46,9 +51,14 @@
             </table>
 
             <form>
-                <input type="hidden" value="<?=$no?>">
+                <input type="hidden" value="<?=$no?>" id='no'>
+                <input type="hidden" value="<?=$totalRow?>" id='totalRow'>
+                <input type="hidden" value="<?=$pageSize?>" id='pageSize'>
+                <input type="hidden" value="<?=$pageListSize?>" id='pageListSize'>
             </form>
+
             <div class="text-center" id='pagination'></div>
+
             <a href="write.php" style="float:right;">
                 <button class="btn btn-primary">글쓰기</button>
             </a>

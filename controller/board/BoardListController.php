@@ -31,9 +31,12 @@
 	$oTemplate->set("listResult", $listResult);
     $oTemplate->set("no", $no);
     $oTemplate->set("totalRow", $listResultCnt);
+    $oTemplate->set("pageSize", PAGE_SIZE);
+    $oTemplate->set("pageListSize", PAGE_LIST_SIZE);
 
     //템플릿 위치 지정
-	$templateType = ROOT_PATH . "/tpl/board/boardListView.tpl.php";
+    //$templateType = ROOT_PATH . "/tpl/board/boardListView.tpl.php"; // 기존에 페이징 부분을 'include'로 처리했었던 템플릿
+	$templateType = ROOT_PATH . "/tpl/board/paginationTest.tpl.php"; // 페이징 부분을 ajax를 통해 html 문서를 받아오는 템플릿
 
     //패치
     echo $oTemplate->fetch($templateType);

@@ -1,6 +1,8 @@
 <?php
-    $pageSize = PAGE_SIZE;
-    $pageListSize = PAGE_LIST_SIZE;
+    $pageSize = $_GET['pageSize'];
+    $pageListSize = $_GET['pageListSize'];
+    $totalRow = $_GET['totalRow'];
+    $no = $_GET['no'];
 
     $totalPage = ceil($totalRow / $pageSize);
 
@@ -15,13 +17,13 @@
     }
     if($startPage >= $pageListSize){
         $prevList = ($startPage - 2) * $pageSize;
-        echo "<a href=\"$_SERVER[PHP_SELF]?no=$prevList\">◀</a>\n";
+        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$prevList\">◀</a>\n";
     }
 
     for($i = $startPage; $i <= $endPage; $i++){
         $page = ($i - 1) * $pageSize;
         if($no != $page){
-            echo "<a href=\"$_SERVER[PHP_SELF]?no=$page\">";
+            echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$page\">";
         }
 
         echo " $i ";
@@ -33,5 +35,5 @@
 
     if($totalPage > $endPage){
         $nextList = $endPage * $pageSize;
-        echo "<a href=\"$_SERVER[PHP_SELF]?no=$nextList\">▶</a>\n";
+        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$nextList\">▶</a>\n";
     }
