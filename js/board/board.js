@@ -45,3 +45,35 @@ function getBoardList() {
         console.log(textStatus);
     });
 }
+
+function checkLogin() {
+    var login = $('#checkLogin').val();
+    var no = $('#no').val();
+
+    if(!login) {
+        alert('로그인이 필요합니다.');
+        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
+    }
+}
+
+function writeButton() {
+
+    $('#writeForm').submit();
+
+    // $.ajax({
+    //     url : '/loginboard2/process/board/write.php',
+    //     type : 'POST',
+    //     data : $('#writeForm').serialize(),
+    //     processData : false,
+    //     contentType : false,
+    //     enctype : 'multipart/form-data',
+    //     dataType : 'json',
+
+    //     success : function(data) {
+    //         console.log(data);
+    //     },
+    //     error : function(request) {
+    //         console.log(request.responseText);
+    //     }
+    // });
+}

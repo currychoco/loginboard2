@@ -12,9 +12,8 @@
     $no = 0;
     if(isset($_GET['no']) && $_GET['no'] > 0) {
         $no = $_GET['no'];
+        $no = $utility->filter_SQL($no);
     }
-
-    $no = $utility->filter_SQL($no);
 
     $boardDao  = new DanawaBoardList();
 

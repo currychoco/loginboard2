@@ -8,6 +8,10 @@
                 pagination();
 
                 $('tbody tr:nth-child(odd)').css('background', '#9F9F9F');
+
+                $('button').click(function() {
+                    location.href = '/loginboard2/controller/board/BoardWriteController.php?no=' + $('#no').val();
+                });
             })
         </script>
 	</head>
@@ -61,9 +65,9 @@
 
             <div class="text-center" id='pagination'></div>
 
-            <a href="write.php" style="float:right;">
+            <div style="float:right;">
                 <button class="btn btn-primary">글쓰기</button>
-            </a>
+            </div>
         </div>
 	</body>
 </html>

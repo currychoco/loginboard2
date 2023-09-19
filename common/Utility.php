@@ -27,4 +27,17 @@ require_once $_SERVER['DOCUMENT_ROOT']."/loginboard2/conf.php";
         private function SQL_Injection($get_Str) { 
             return preg_replace("/( select| union| insert| update| delete| drop| and| or|\"|\'|#|\/\*|\*\/|\\\|\;)/i","", $get_Str); 
         }
+
+        public function checkLogin($reqId, $reqNo){
+            $userId = $this->filter_SQL($reqId);
+            $no = $this->filter_SQL($reqNo);
+
+            $user = array(
+                'userId' => $userId,
+                'no' => $no
+            );
+
+            return $user;
+        }
+        
     }

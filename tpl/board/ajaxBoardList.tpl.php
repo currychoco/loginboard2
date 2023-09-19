@@ -39,7 +39,7 @@
 
             <div class="text-center" id='pagination'></div>
 
-            <a href="write.php" style="float:right;">
+            <a href="/loginboard2/controller/BoardWriteController.php?no=" style="float:right;">
                 <button class="btn btn-primary">글쓰기</button>
             </a>
         </div>
