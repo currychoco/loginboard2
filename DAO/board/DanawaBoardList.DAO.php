@@ -53,4 +53,45 @@ class DanawaBoardList extends CommonDAO {
 
     }
 
+    // 게시글 생성
+    public function insertBoard($title, $content, $userNo) {
+
+        $stmt = $this->conn->prepare("
+            INSERT INTO login_board (
+                title,
+                content,
+                user_no
+            ) 
+            VALUES (
+                ?, ?, ?
+            )
+        ");
+
+        $stmt->bind_param('sss', $title, $content, $userNo);
+        $stmt->execute();
+
+        return $this->conn->insert_id;
+    }
+
+    // 이미지 저장
+    public function insertImage($image) {
+
+        $stmt = $this->conn->prepare("
+            INSERT INTO image (
+                board_id,
+                server_name,
+                original_name,
+                path,
+                size
+            ) 
+            VALUES (
+                ?, ?, ?, ?, ?
+            )
+        ");
+
+        $stmt->bind_param('isssi', $image['boardId'], $image['serverName'], $image['originalName'], $image['path'], $image['size']);
+
+        return $stmt->execute();
+        
+    }
 }

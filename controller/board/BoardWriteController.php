@@ -10,6 +10,7 @@
 
     // 로그인 체크
     $login = false;
+    $user;
     if(isset($_SESSION['userId']) && isset($_SESSION['no'])) {
         $user = $utility->checkLogin($_SESSION['userId'], $_SESSION['no']);
         
