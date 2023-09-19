@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <?php include  $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/head.php'?>
+	    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/head.php'?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script>
             $(function() {
@@ -12,7 +12,7 @@
 	</head>
 	<body>
         <!-- header -->
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
 
         <form>
             <input type="hidden" value="<?=$no?>" id='no'>

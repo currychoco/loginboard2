@@ -47,21 +47,29 @@ function idCheck(id) {
 
     $.ajax({
         url : "/loginboard2/process/user/idCheck.php",
-        type: "GET",
+        type : "GET",
         data : {
             userId : id
-        }
-    }).done(function(data){
+        },
+        dataType : 'json',
 
-        var obj = JSON.parse(data);
+        success : function(data) {
 
-        if(obj.count < 1) {
-            $("#checkResult").text("사용 가능");
-            $('#checkedId').val(id);
-        }
-        else {
-            $("#checkResult").text("중복된 아이디입니다.");
-            $('#checkedId').val('');
+            //var obj = JSON.parse(data);
+            console.log(data);
+
+            if(data.count < 1) {
+                $("#checkResult").text("사용 가능");
+                $('#checkedId').val(id);
+            }
+            else {
+                $("#checkResult").text("중복된 아이디입니다.");
+                $('#checkedId').val('');
+            }
+
+        },
+        error : function(request, status, error) {
+            console.log(status);
         }
     });
 
@@ -166,23 +174,24 @@ function userJoin(){
             password : password,
             gender : gender
         },
-    })
-    .done(function(data) {
- 
-        var obj = JSON.parse(data);
+        dataType : 'json',
+        
+        success : function(data) {
 
-        if(obj.result) {
-            alert('회원가입 성공');
-            location.href = '/loginboard2/controller/user/UserLoginController.php';
-        }
-        else {
-           alert('회원가입 실패');
-        }
+            console.log(data);
+            if(data.result) {
+                alert('회원가입 성공');
+                location.href = '/loginboard2/controller/user/UserLoginController.php';
+            }
+            else {
+                alert('회원가입 실패');
+            }
 
-    })
-    .fail(function(textStatus) {
-        console.log(textStatus);
-        alert('회원가입 실패');
+        },
+        error : function(request, status, error) {
+            console.log(request.responseText);
+            console.log(status);
+            console.log(error);
+        }
     });
-
 }
