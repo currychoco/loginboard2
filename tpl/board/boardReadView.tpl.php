@@ -26,8 +26,10 @@
                 </tr>
                 <tr>
                     <td colspan = 4>
-                        <pre><img src="<?=$image['path']?>" alt='왜안뜨죠'/><br><?=$board['content']?>
-                        </pre>
+                        <?php if(!empty($image)) { ?>
+                            <img src="C:\xampp\htdocs\loginboard2\img\20230920\2d889cd5-687a-429a-b417-29c4fa0ed568.jpg"/>
+                        <?php } ?>
+                        <pre><?=$board['content']?></pre>
                     </td>
                 </tr>
             </table>

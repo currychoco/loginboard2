@@ -89,7 +89,7 @@
 
 
         $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
-        $path = $dirPath . "/$serverName";
+        $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
         
         $up = move_uploaded_file($tmp_name, $path); // 지정 경로로 파일 업로드
 
