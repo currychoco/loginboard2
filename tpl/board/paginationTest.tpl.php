@@ -35,10 +35,10 @@
                     ?>
                     <tr>
                         <td>
-                            <a href="/loginboard/board/read.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['id']?></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['id']?></a>
                         </td>
                         <td>
-                            <a href="/loginboard/board/read.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['title']?></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['title']?></a>
                         </td>
                         <td>
                             <p><?=$listResult[$i]['user_id']?></p>

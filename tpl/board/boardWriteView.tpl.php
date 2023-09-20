@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard/comm/head.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script>
 
@@ -23,7 +23,7 @@
     </head>
 	<body>
         <!-- header -->
-        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard/comm/header.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/header.php"; ?>
 
         <div class="container body-container">
             <br>

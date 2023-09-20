@@ -94,4 +94,49 @@ class DanawaBoardList extends CommonDAO {
         return $stmt->execute();
         
     }
+
+    // 게시글 id 기반 하나 불러오기
+    public function getBoardById($id) {
+
+        // 게시글
+        $stmt = $this->conn->prepare("
+            SELECT 
+                b.id,
+                b.title,
+                b.content,
+                u.user_id,
+                b.reg_date,
+                b.view_count
+            FROM login_board b
+                INNER JOIN board_user u ON b.user_no = u.no
+            WHERE id = ?
+        ");
+        $stmt->bind_param('i', $id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $board = mysqli_fetch_array($result);
+
+
+        // 이미지
+        $image = array();
+        $stmt = $this->conn->prepare("
+            SELECT
+                board_id,
+                server_name,
+                original_name,
+                path,
+                size
+            FROM image
+            WHERE board_id = ?
+        ");
+        $stmt->bind_param('i', $board['id']);
+
+        if($stmt->execute()) {
+            $result = $stmt->get_result();
+            $image = mysqli_fetch_array($result);
+        }
+
+        return array('board' => $board, 'image' => $image);
+    }
 }
