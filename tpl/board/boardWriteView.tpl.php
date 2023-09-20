@@ -14,7 +14,7 @@
                 });
 
                 $('#toList').click(function() {
-
+                    toListButton();
                 });
 
             })

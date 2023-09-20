@@ -59,21 +59,15 @@ function checkLogin() {
 function writeButton() {
 
     $('#writeForm').submit();
+    
+}
 
-    // $.ajax({
-    //     url : '/loginboard2/process/board/write.php',
-    //     type : 'POST',
-    //     data : $('#writeForm').serialize(),
-    //     processData : false,
-    //     contentType : false,
-    //     enctype : 'multipart/form-data',
-    //     dataType : 'json',
+function toListButton() {
 
-    //     success : function(data) {
-    //         console.log(data);
-    //     },
-    //     error : function(request) {
-    //         console.log(request.responseText);
-    //     }
-    // });
+    $no = $('#no').val();
+
+    if(confirm('글을 저장하지 않고 현재 페이지를 나가겠습니까?')) {
+        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + $no;
+    }
+
 }
