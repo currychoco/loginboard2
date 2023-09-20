@@ -31,10 +31,11 @@ foreign key(user_no) references board_user(no) on delete cascade
 );
 
 create table image (
-board_id int primary key,
-server_name varchar(255) primary key,
+board_id int,
+server_name varchar(255),
 original_name varchar(30) not null,
 path varchar(255) not null,
 size int(8) not null,
+CONSTRAINT imagePK PRIMARY KEY(board_id, server_name),
 foreign key(board_id) references login_board(id) on delete cascade
 );

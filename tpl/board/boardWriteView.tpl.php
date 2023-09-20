@@ -30,10 +30,10 @@
 
             <form >
                 <input type='hidden' id='checkLogin' value="<?=$checkLogin?>">
-                <input type='hidden' id='no' value="<?=$no?>">
             </form>
 
             <form id="writeForm" enctype='multipart/form-data' action='/loginboard2/process/board/write.php' method='POST'> 
+                <input type='hidden' id='no' value="<?=$no?>">
                 <table class="table">
                     <colgroup>
                         <col width="10%" />

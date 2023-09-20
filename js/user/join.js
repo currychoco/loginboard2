@@ -37,7 +37,7 @@ $(function(){
 });
 
 function idCheck(id) {
-    console.log($('#joinForm').serialize());
+
     const reg = /^[a-z]+[a-z0-9]{5,19}$/g;
 
     if(!reg.test(id)) {
@@ -54,10 +54,6 @@ function idCheck(id) {
         dataType : 'json',
 
         success : function(data) {
-
-            //var obj = JSON.parse(data);
-            console.log(data);
-
             if(data.count < 1) {
                 $("#checkResult").text("사용 가능");
                 $('#checkedId').val(id);
@@ -167,15 +163,7 @@ function userJoin(){
     $.ajax({
         url : '/loginboard2/process/user/join.php',
         type : 'POST',
-        data : $('#joinForm').serialize() // form 값을 한 번에 전부 넘기는 방법
-        // {
-        //     name : name,
-        //     phoneNumber : phoneNumber,
-        //     userId : userId,
-        //     password : password,
-        //     gender : gender
-        // }
-        ,
+        data : $('#joinForm').serialize(),
         dataType : 'json',
         
         success : function(data) {
