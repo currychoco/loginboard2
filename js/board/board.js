@@ -91,3 +91,30 @@ function toUpdateButton() {
     location.href = '/loginboard2/controller/board/BoardUpdateController.php?no=' + no + '&boardId=' + boardId;
 
 }
+
+function deleteBoard() {
+    var boardId = $('#boardId').val();
+    var no = $('#no').val();
+
+    $.ajax({
+        url : '/loginboard2/process/board/delete.php',
+        type : 'GET',
+        data : {
+            boardId : boardId
+        },
+        dataType : 'json',
+
+        success : function(data) {
+            if(data) {
+                alert('삭제되었습니다.');
+                location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
+            }
+            else {
+                alert('삭제에 실패하였습니다.');
+            }
+        },
+        error : function(request, status, error) {
+            console.log(request.responseText);
+        }
+    });
+}

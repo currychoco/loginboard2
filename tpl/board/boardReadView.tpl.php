@@ -12,6 +12,10 @@
                 $('#toList').click(function() {
                     toListButton();
                 });
+
+                $('#delete').click(function() {
+                    deleteBoard();
+                });
             })
         </script>
     </head>

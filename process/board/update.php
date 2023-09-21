@@ -55,9 +55,9 @@
     // 게시글 업데이트
     $result = $dao->updateBoardById($boardId, $title, $content);
     
-    // 이미지 변도 있을 시 기존 이미지 정보 삭제
+    // 이미지 변동 있을 시 기존 이미지 정보 삭제
     if($imageChange) {
-        $dao->deleteImageByID($boardId);
+        $dao->deleteImageById($boardId);
     }
 
     if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'])) {
