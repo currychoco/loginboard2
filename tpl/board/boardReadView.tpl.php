@@ -2,10 +2,26 @@
 <html>
     <head>
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
+        <script src='/loginboard2/js/board/board.js'></script>
+        <script>
+            $(function() {
+                $('#write').click(function() {
+                    writeButton();
+                });
+
+                $('#toList').click(function() {
+                    toListButton();
+                });
+            })
+        </script>
     </head>
     <body>
         <!-- header -->
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/header.php"; ?>
+
+        <form>
+            <input type='hidden' id='no' val=<?=$no?>>
+        </form>
 
         <div class="container body-container">
             <table class="table">
@@ -26,10 +42,28 @@
                 </tr>
                 <tr>
                     <td colspan = 4>
-                        <?php if(!empty($image)) { ?>
-                            <img src="C:\xampp\htdocs\loginboard2\img\20230920\2d889cd5-687a-429a-b417-29c4fa0ed568.jpg"/>
-                        <?php } ?>
-                        <pre><?=$board['content']?></pre>
+                        <div style='text-align:center; margin:10px'>
+                            <?php if(!empty($image)) { ?>
+                                <img src="<?=$image['path']?>"/>
+                            <?php } ?>
+                        </div>
+                        <div>
+                            <pre><?=$board['content']?></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- 기타 버튼 -->
+                    <td colspan = 4>
+                        <button class="btn btn-primary" id='toList'>목록보기</button>
+                        <?php
+                            if(!empty($user) && ($user['userId'] == $board['user_id'])){
+                        ?>
+                            <button class="btn btn-warning" id='update'>수정</button>
+                            <button class="btn btn-danger" id='delete'>삭제</button>
+                        <?php
+                            }
+                        ?>
                     </td>
                 </tr>
             </table>

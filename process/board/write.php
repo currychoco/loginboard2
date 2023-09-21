@@ -90,8 +90,9 @@
 
         $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
         $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
+        $dirPath .= "/$serverName";
         
-        $up = move_uploaded_file($tmp_name, $path); // 지정 경로로 파일 업로드
+        $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
 
         $image = array(
             'boardId' => $boardId,
@@ -102,19 +103,19 @@
         );
 
         if(!$dao->insertImage($image)) {
-            echo ("
-            <script>
-                alert('파일이 정상적으로 등록되지 않았습니다.');
-                go.history(-1);
-            </script>
-            ");
+            // echo ("
+            // <script>
+            //     alert('파일이 정상적으로 등록되지 않았습니다.');
+            //     go.history(-1);
+            // </script>
+            // ");
         } 
         else {
-            echo ("
-            <script>
-                location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-            </script>
-            ");
+            // echo ("
+            // <script>
+            //     location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
+            // </script>
+            // ");
         }
         
     }

@@ -65,9 +65,8 @@ function writeButton() {
 function toListButton() {
 
     $no = $('#no').val();
+    console.log(no);
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + $no;
 
-    if(confirm('글을 저장하지 않고 현재 페이지를 나가겠습니까?')) {
-        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + $no;
-    }
 
 }
