@@ -24,8 +24,12 @@
          $no = $utility->filter_SQL($_POST['no']);
      }
 
+    // 게시글 id 체크
+    $boardId = $utility->filter_SQL($_POST['boardId']);
 
     // 제목, 내용 유효성 검사
+    $title = '';
+    $content = '';
     if(isset($_POST['title']) && isset($_POST['content'])) {
 
         $title = $utility->filter_SQL($_POST['title']);
@@ -42,13 +46,20 @@
             exit;
         }
     }
+
+    // 이미지 변동 여부
+    $imageChange = $utility->filter_SQL($_POST['checkFileUpdate']);
     
     $dao = new DanawaBoardList();
 
-    // 게시글 생성 후 생성된 게시글의 id 반환
-    $boardId = $dao->insertBoard($title, $content, $user['no']);
+    // 게시글 업데이트
+    $result = $dao->updateBoardById($boardId, $title, $content);
     
-    // 업로드 된 이미지 지정된 파일로 이동
+    // 이미지 변도 있을 시 기존 이미지 정보 삭제
+    if($imageChange) {
+        $dao->deleteImageByID($boardId);
+    }
+
     if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'])) {
 
         $tmp_name = $_FILES['imageFile']['tmp_name'];
@@ -102,25 +113,11 @@
             'size' => $size
         );
 
-        if(!$dao->insertImage($image)) {
-            echo ("
-            <script>
-                alert('파일이 정상적으로 등록되지 않았습니다.');
-                go.history(-1);
-            </script>
-            ");
-        } 
-        else {
-            echo ("
-            <script>
-                location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-            </script>
-            ");
-        }
+        !$dao->insertImage($image);
         
     }
-    echo ("
-    <script>
-        location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-    </script>
+    echo("
+        <script>
+            location.href = '/loginboard2/controller/board/BoardReadController.php?no=$no&id=$boardId';
+        </script>
     ");

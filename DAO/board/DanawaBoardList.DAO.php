@@ -139,4 +139,30 @@ class DanawaBoardList extends CommonDAO {
 
         return array('board' => $board, 'image' => $image);
     }
+
+    // 게시글 수정
+    public function updateBoardById($boardId, $title, $content) {
+
+        $stmt = $this->conn->prepare("
+            UPDATE login_board
+            SET
+                title = ?,
+                content = ?,
+                mod_date = now()
+            WHERE id = ?
+        ");
+
+        $stmt->bind_param('ssi', $title, $content, $boardId);
+
+        return $stmt->execute();
+    }
+
+    // 이미지 삭제
+    public function deleteImageByID($boardId) {
+
+        $stmt = $this->conn->prepare("DELETE FROM image WHERE board_id = ?");
+        $stmt->bind_param("i", $boardId);
+
+        return $stmt->execute();
+    }
 }

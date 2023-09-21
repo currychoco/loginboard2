@@ -34,7 +34,7 @@
     $result = $dao->getBoardById($id);
     $board = $result['board'];
     $image = $result['image'];
-
+    
     // 템플릿 클래스 생성
     $oTemplate = new Template();
 

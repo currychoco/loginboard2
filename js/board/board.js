@@ -64,9 +64,30 @@ function writeButton() {
 
 function toListButton() {
 
-    $no = $('#no').val();
-    console.log(no);
-    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + $no;
+    var no = $('#no').val();
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
 
+}
+
+function checkWriter() {
+
+    checkLogin();
+
+    var no = $('#no').val();
+    var writer = $('#checkWriter').val();
+
+    if(!writer) {
+        alert('본인이 작성할 글만 수정 가능합니다.');
+        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
+    }
+
+}
+
+function toUpdateButton() {
+
+    var no = $('#no').val();
+    var boardId = $('#boardId').val();
+
+    location.href = '/loginboard2/controller/board/BoardUpdateController.php?no=' + no + '&boardId=' + boardId;
 
 }

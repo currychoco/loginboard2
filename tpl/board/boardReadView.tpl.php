@@ -5,8 +5,8 @@
         <script src='/loginboard2/js/board/board.js'></script>
         <script>
             $(function() {
-                $('#write').click(function() {
-                    writeButton();
+                $('#update').click(function() {
+                    toUpdateButton();
                 });
 
                 $('#toList').click(function() {
@@ -20,7 +20,8 @@
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/header.php"; ?>
 
         <form>
-            <input type='hidden' id='no' val=<?=$no?>>
+            <input type='hidden' id='no' value="<?=$no?>">
+            <input type='hidden' id='boardId' value="<?=$board['id']?>">
         </form>
 
         <div class="container body-container">
