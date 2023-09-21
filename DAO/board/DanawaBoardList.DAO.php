@@ -178,7 +178,7 @@ class DanawaBoardList extends CommonDAO {
 
             $stmt2 = $this->conn->prepare("DELETE FROM image WHERE board_id = ?");
             $stmt2->bind_param("i", $boardId);
-            
+
             $stmt1->execute();
             $stmt2->execute();
             $this->conn->commit();
@@ -189,4 +189,7 @@ class DanawaBoardList extends CommonDAO {
             return false;
         }
     }
+
+    // 게시글 검색 기능
+    
 }
