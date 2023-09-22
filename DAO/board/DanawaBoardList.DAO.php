@@ -8,27 +8,55 @@ class DanawaBoardList extends CommonDAO {
     }
 
     // 쿼리로 조회된 결과물 배열로 반환
-    public function getBoardList($no = 0, $pageSize = PAGE_SIZE) {
+    public function getBoardList($no = 0, $pageSize = PAGE_SIZE, $search='') {
 
-        $query = ("
-            select 
-                b.id,
-                b.title,
-                b.content,
-                u.user_id,
-                b.reg_date,
-                b.view_count
-            from login_board b
-            inner join board_user u
-            on b.user_no = u.no
-            order by id desc
-            limit ?, ?
-        ");
+        $stmt = null;
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ii", $no, $pageSize);
+        if(empty($search) && strlen($search) < 1) {
 
-        $stmt->execute();
+            $query = ("
+                SELECT 
+                    b.id,
+                    b.title,
+                    b.content,
+                    u.user_id,
+                    b.reg_date,
+                    b.view_count
+                FROM login_board b
+                INNER JOIN board_user u
+                ON b.user_no = u.no
+                ORDER BY id DESC
+                LIMIT ?, ?
+            ");
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("ii", $no, $pageSize);
+            $stmt->execute();
+        }
+        else {
+
+            $query = ("
+                SELECT 
+                    b.id,
+                    b.title,
+                    b.content,
+                    u.user_id,
+                    b.reg_date,
+                    b.view_count
+                FROM login_board b
+                INNER JOIN board_user u
+                ON b.user_no = u.no
+                WHERE title like CONCAT('%', ?, '%')
+                ORDER BY id DESC
+                LIMIT ?, ?
+            ");
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sii", $search, $no, $pageSize);
+            $stmt->execute();
+        }
+
+        
         $result = $stmt->get_result();
 
         $listResult = array();
@@ -43,10 +71,26 @@ class DanawaBoardList extends CommonDAO {
     }
 
     // 총 게시글 개수 반환
-    public function getBoardListCount(){
+    public function getBoardListCount($search=''){
 
-        $query ="select count(*) as count from login_board;";
-        $result = mysqli_query($this->conn, $query);
+        $result = null;
+        if(empty($search) && strlen($search) < 1) {
+
+            $query = "SELECT COUNT(*) AS count FROM login_board";
+            $result = mysqli_query($this->conn, $query);
+
+        }
+        else {
+
+            $query = "SELECT COUNT(*) AS count FROM login_board WHERE title like CONCAT('%', ?, '%')";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $search);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+        }
+
         $row = mysqli_fetch_array($result);
 
         return $row['count'];

@@ -1,9 +1,15 @@
 function pagination(){
 
+
+
     var no = $('#no').val();
     var totalRow = $('#totalRow').val();
     var pageSize = $('#pageSize').val();
     var pageListSize = $('#pageListSize').val();
+
+    var tmpSearch = $('#search').val();
+    var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+    var search = tmpSearch.replace(reg, '');
 
     $.ajax({
         url : '/loginboard2/common/paginationTest.php',
@@ -12,7 +18,8 @@ function pagination(){
             totalRow : totalRow,
             no : no,
             pageSize : pageSize,
-            pageListSize : pageListSize
+            pageListSize : pageListSize,
+            search : search
         },
         dataType : 'html'
     })
@@ -65,7 +72,10 @@ function writeButton() {
 function toListButton() {
 
     var no = $('#no').val();
-    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
+    var search = $('#search').val();
+    console.log(search);
+
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search;
 
 }
 
@@ -117,4 +127,16 @@ function deleteBoard() {
             console.log(request.responseText);
         }
     });
+}
+
+function search() {
+
+    var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+    var tmpSearch = $('#search').val();
+    var no = $('#no').val();
+
+    var search = tmpSearch.replace(reg, '');
+
+    location.href = '/loginboard2/controller/board/BoardListController.php?search=' + search;
+
 }

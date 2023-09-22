@@ -9,16 +9,26 @@
 
                 $('tbody tr:nth-child(odd)').css('background', '#9F9F9F');
 
-                $('button').click(function() {
+                $('#toWrite').click(function() {
                     location.href = '/loginboard2/controller/board/BoardWriteController.php?no=' + $('#no').val();
                 });
+
+                $('#searchButton').click(function() {
+                    search();
+                })
             })
         </script>
 	</head>
 	<body>
         <!-- header -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
+
         <div class="container body-container">
+
+            <div class="form-inline" style="margin-bottom: 15px; float: right;">
+                <input type="text" class="form-control" id="search" placeholder="제목 검색" value="<?=$search?>"/><button class='glyphicon glyphicon-search btn btn-primary' id='searchButton'></button>
+            </div>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -35,10 +45,10 @@
                     ?>
                     <tr>
                         <td>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['id']?></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['id']?></a>
                         </td>
                         <td>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>"><?=$listResult[$i]['title']?></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a>
                         </td>
                         <td>
                             <p><?=$listResult[$i]['user_id']?></p>
@@ -66,7 +76,7 @@
             <div class="text-center" id='pagination'></div>
 
             <div style="float:right;">
-                <button class="btn btn-primary">글쓰기</button>
+                <button class="btn btn-primary" id='toWrite'>글쓰기</button>
             </div>
         </div>
 	</body>

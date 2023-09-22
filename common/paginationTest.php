@@ -1,8 +1,14 @@
 <?php
-    $pageSize = $_GET['pageSize'];
-    $pageListSize = $_GET['pageListSize'];
-    $totalRow = $_GET['totalRow'];
-    $no = $_GET['no'];
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
+    require_once ROOT_PATH . '/common/Utility.php';
+
+    $utility = new Utility();
+
+    $pageSize = $utility->filter_SQL($_GET['pageSize']);
+    $pageListSize = $utility->filter_SQL($_GET['pageListSize']);
+    $totalRow = $utility->filter_SQL($_GET['totalRow']);
+    $no = $utility->filter_SQL($_GET['no']);
+    $search = $utility->filter_SQL($_GET['search']);
 
     $totalPage = ceil($totalRow / $pageSize);
 
@@ -17,13 +23,13 @@
     }
     if($startPage >= $pageListSize){
         $prevList = ($startPage - 2) * $pageSize;
-        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$prevList\">◀</a>\n";
+        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$prevList&search=$search\">◀</a>\n";
     }
 
     for($i = $startPage; $i <= $endPage; $i++){
         $page = ($i - 1) * $pageSize;
         if($no != $page){
-            echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$page\">";
+            echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$page&search=$search\">";
         }
 
         echo " $i ";
@@ -35,5 +41,5 @@
 
     if($totalPage > $endPage){
         $nextList = $endPage * $pageSize;
-        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$nextList\">▶</a>\n";
+        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$nextList&search=$search\">▶</a>\n";
     }

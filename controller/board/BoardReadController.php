@@ -14,6 +14,12 @@
         $no = $utility->filter_SQL($_GET['no']);
     }
 
+    // 검색 키워드 체크
+    $search = '';
+    if(isset($_GET['search'])) {
+        $search = $utility->filter_SQL($_GET['search']);
+    }
+
     // 로그인 체크
     $login = false;
     $user = array();
@@ -42,6 +48,7 @@
     $oTemplate->set('board', $board);
     $oTemplate->set('image', $image);
     $oTemplate->set('user', $user);
+    $oTemplate->set('search', $search);
 
     $templateType = ROOT_PATH . '/tpl/board/boardReadView.tpl.php';
 

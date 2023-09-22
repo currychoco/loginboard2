@@ -26,6 +26,7 @@
         <form>
             <input type='hidden' id='no' value="<?=$no?>">
             <input type='hidden' id='boardId' value="<?=$board['id']?>">
+            <input type='hidden' id='search' value="<?=$search?>">
         </form>
 
         <div class="container body-container">
@@ -49,7 +50,7 @@
                     <td colspan = 4>
                         <div style='text-align:center; margin:10px'>
                             <?php if(!empty($image)) { ?>
-                                <img src="<?=$image['path']?>"/>
+                                <img src="http://myimage.com<?=$image['path']?>"/>
                             <?php } ?>
                         </div>
                         <div>
