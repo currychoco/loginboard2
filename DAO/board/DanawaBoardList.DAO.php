@@ -21,10 +21,13 @@ class DanawaBoardList extends CommonDAO {
                     b.content,
                     u.user_id,
                     b.reg_date,
-                    b.view_count
+                    b.view_count,
+                    i.path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
+                LEFT OUTER JOIN image i
+                ON b.id = i.board_id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
@@ -42,10 +45,13 @@ class DanawaBoardList extends CommonDAO {
                     b.content,
                     u.user_id,
                     b.reg_date,
-                    b.view_count
+                    b.view_count,
+                    i.path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
+                LEFT OUTER JOIN image i
+                ON b.id = i.board_id
                 WHERE title like CONCAT('%', ?, '%')
                 ORDER BY id DESC
                 LIMIT ?, ?

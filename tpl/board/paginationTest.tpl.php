@@ -7,7 +7,7 @@
             $(function() {
                 pagination();
 
-                $('tbody tr:nth-child(odd)').css('background', '#9F9F9F');
+                $('.table tbody tr:nth-child(odd)').css('background', '#9F9F9F');
 
                 $('#toWrite').click(function() {
                     location.href = '/loginboard2/controller/board/BoardWriteController.php?no=' + $('#no').val();
@@ -15,9 +15,21 @@
 
                 $('#searchButton').click(function() {
                     search();
-                })
+                });
+
+                $('#textList').click(function() {
+                    setList('text');
+                });
+
+                $('#imageList').click(function() {
+                    setList('image');
+                });
+
             })
         </script>
+
+        <link rel = 'stylesheet' href='/loginboard2/css/imageList.css' />
+
 	</head>
 	<body>
         <!-- header -->
@@ -25,58 +37,101 @@
 
         <div class="container body-container">
 
-            <div class="form-inline" style="margin-bottom: 15px; float: right;">
-                <input type="text" class="form-control" id="search" placeholder="제목 검색" value="<?=$search?>"/><button class='glyphicon glyphicon-search btn btn-primary' id='searchButton'></button>
+            <!-- 검색창 -->
+            <div class="form-inline" style="margin-bottom: 15px; text-align: right;">
+                <input type="text" class="form-control" id="search" placeholder="제목 검색" value="<?=$search?>"/><button class='glyphicon glyphicon-search btn btn-primary' id='searchButton'></button><br>
+            </div>
+            
+            <!-- 출력형 -->
+            <div style="float: right;">
+                <ul style="float: right;">
+                    <li><a href='#' class='glyphicon glyphicon-th-list' id='textList' title='글 목록 형태'></a></li>
+                    <li><a href='#' class='glyphicon glyphicon-th-large' id='imageList' title='이미지 목록 형태'></a></li>
+                </ul>
             </div>
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>글쓴이</td>
-                        <td>날짜</td>
-                        <td>조회수</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        for($i = 0; $i < count($listResult); $i++) {
-                    ?>
-                    <tr>
-                        <td>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['id']?></a>
-                        </td>
-                        <td>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a>
-                        </td>
-                        <td>
-                            <p><?=$listResult[$i]['user_id']?></p>
-                        </td>
-                        <td>
-                            <p><?=$listResult[$i]['reg_date']?></p>
-                        </td>
-                        <td>
-                            <p><?=$listResult[$i]['view_count']?></p>
-                        </td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                </tbody>
-            </table>
+            <!-- text 형 -->
+            <?php if($list == 'text') { ?>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>번호</td>
+                            <td>제목</td>
+                            <td>글쓴이</td>
+                            <td>날짜</td>
+                            <td>조회수</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php for($i = 0; $i < count($listResult); $i++) { ?>
+                        <tr>
+                            <td>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['id']?></a>
+                            </td>
+                            <td>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a>
+                            </td>
+                            <td>
+                                <p><?=$listResult[$i]['user_id']?></p>
+                            </td>
+                            <td>
+                                <p><?=$listResult[$i]['reg_date']?></p>
+                            </td>
+                            <td>
+                                <p><?=$listResult[$i]['view_count']?></p>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+                
+            <!-- image 형 -->
+            <?php if($list == 'image') { ?>
+            <div class='imageList'>
+                <?php for($i = 0; $i < count($listResult); $i++) { ?>
+
+                    <div class='contentBox'>
+                        <div><?=$listResult[$i]['id']?></div>
+                        <div>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
+                         </div>
+                         <table>
+                            <tr>
+                                <th>제목</th>
+                                <td><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a></td>
+                            </tr>
+                            <tr>
+                                <th>작성자</th>
+                                <td><?=$listResult[$i]['user_id']?></td>
+                            </tr>
+                            <tr>
+                                <th>작성일</th>
+                                <td><?=$listResult[$i]['reg_date']?></td>
+                            </tr>
+                            <tr>
+                                <th>조회수</th>
+                                <td><?=$listResult[$i]['view_count']?></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                <?php } ?>
+            </div>
+            <?php } ?>    
 
             <form>
                 <input type="hidden" value="<?=$no?>" id='no'>
                 <input type="hidden" value="<?=$totalRow?>" id='totalRow'>
                 <input type="hidden" value="<?=$pageSize?>" id='pageSize'>
                 <input type="hidden" value="<?=$pageListSize?>" id='pageListSize'>
+                <input type='hidden' value="<?=$list?>" id='list'>
             </form>
 
             <div class="text-center" id='pagination'></div>
 
             <div style="float:right;">
-                <button class="btn btn-primary" id='toWrite'>글쓰기</button>
+                <button class="btn btn-primary" id='toWrite' style="margin-bottom: 20px">글쓰기</button>
             </div>
         </div>
 	</body>

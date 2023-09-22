@@ -53,6 +53,22 @@ function getBoardList() {
     });
 }
 
+function setList(type) {
+    
+    var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+    var tmpSearch = $('#search').val();
+    var no = $('#no').val();
+    var search = tmpSearch.replace(reg, '');
+
+    if(type == 'text') {
+        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&list=text';
+    }
+    else if(type == 'image') {
+        location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&list=image';
+    }
+
+}
+
 function checkLogin() {
     var login = $('#checkLogin').val();
     var no = $('#no').val();

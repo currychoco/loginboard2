@@ -21,6 +21,32 @@
         $search = $utility->filter_SQL($_GET['search']);
     }
     
+    // list 파라미터 체크
+    $list = '';
+    $setList = '';
+    if(isset($_GET['list'])) {
+        $list = $utility->filter_SQL(($_GET['list']));
+
+        // 쿠키 list 설정
+        if($list == 'text') {
+            setcookie('list', 'text', time() + 86400);
+        }
+        else if($list == 'image') {
+            setcookie('list', 'image', time() + 86400);
+        }
+
+        $setList = $list;
+    }
+    else {
+        
+        if(isset($_COOKIE['list'])) {
+            $setList = $utility->filter_SQL($_COOKIE['list']);
+        }
+        else {
+            $setList = 'text';
+        }
+    }
+    
 
     $boardDao  = new DanawaBoardList();
 
@@ -40,6 +66,7 @@
     $oTemplate->set("pageSize", PAGE_SIZE);
     $oTemplate->set("pageListSize", PAGE_LIST_SIZE);
     $oTemplate->set('search', $search);
+    $oTemplate->set('list', $setList);
 
     //템플릿 위치 지정
     //$templateType = ROOT_PATH . "/tpl/board/boardListView.tpl.php"; // 기존에 페이징 부분을 'include'로 처리했었던 템플릿

@@ -1,0 +1,31 @@
+ul{
+    list-style : none;
+}
+li{
+    float: left;
+    margin-right: 20px;
+}
+
+.imageList{
+    display : grid;
+    grid-template-columns : 1fr 1fr 1fr 1fr;
+}
+
+.contentBox{
+    margin : 10px;
+    border : 1px;
+}
+
+img{
+    width : 260px;
+    height : 220px;
+    object-fit : contain;
+}
+
+.contentBox {
+    width : 100%;
+}
+
+.contentBox td {
+    text-align: center;
+}
