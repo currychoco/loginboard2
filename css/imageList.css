@@ -22,10 +22,15 @@ img{
     object-fit : contain;
 }
 
-.contentBox {
-    width : 100%;
+
+.contentBox table {
+    width : 255px;
 }
 
-.contentBox td {
+.contentBox table th {
+    padding-left: 5px;
+}
+
+.contentBox table td {
     text-align: center;
 }

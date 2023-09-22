@@ -92,7 +92,6 @@
                 <?php for($i = 0; $i < count($listResult); $i++) { ?>
 
                     <div class='contentBox'>
-                        <div><?=$listResult[$i]['id']?></div>
                         <div>
                             <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
                          </div>
