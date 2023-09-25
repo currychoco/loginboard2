@@ -49,9 +49,18 @@
                 <tr>
                     <td colspan = 4>
                         <div style='text-align:center; margin:10px'>
-                            <?php if(!empty($image)) { ?>
-                                <img src="http://myimage.com<?=$image['path']?>"/>
-                            <?php } ?>
+                            <?php
+                                if(!empty($image)) {
+                                for($i = count($image) - 1; $i >= 0; $i--){
+                            ?>
+
+                                <img src="http://myimage.com<?=$image[$i]['path']?>"/>
+                                <br>
+
+                            <?php 
+                                    } 
+                                }
+                            ?>
                         </div>
                         <div>
                             <pre><?=$board['content']?></pre>

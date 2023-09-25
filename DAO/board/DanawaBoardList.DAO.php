@@ -22,12 +22,13 @@ class DanawaBoardList extends CommonDAO {
                     u.user_id,
                     b.reg_date,
                     b.view_count,
-                    i.path
+                    MAX(i.path) as path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
                 LEFT OUTER JOIN image i
                 ON b.id = i.board_id
+                GROUP BY b.id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
@@ -46,13 +47,14 @@ class DanawaBoardList extends CommonDAO {
                     u.user_id,
                     b.reg_date,
                     b.view_count,
-                    i.path
+                    MAX(i.path) as path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
                 LEFT OUTER JOIN image i
                 ON b.id = i.board_id
                 WHERE title like CONCAT('%', ?, '%')
+                GROUP BY b.id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
@@ -172,6 +174,7 @@ class DanawaBoardList extends CommonDAO {
         $image = array();
         $stmt = $this->conn->prepare("
             SELECT
+                id,
                 board_id,
                 server_name,
                 original_name,
@@ -181,10 +184,14 @@ class DanawaBoardList extends CommonDAO {
             WHERE board_id = ?
         ");
         $stmt->bind_param('i', $board['id']);
+        $stmt->execute();
 
-        if($stmt->execute()) {
-            $result = $stmt->get_result();
-            $image = mysqli_fetch_array($result);
+        $result = $stmt->get_result();
+
+        while($row = mysqli_fetch_array($result)) {
+
+            array_push($image, $row);
+
         }
 
         return array('board' => $board, 'image' => $image);
@@ -210,13 +217,13 @@ class DanawaBoardList extends CommonDAO {
     // 이미지 삭제
     public function deleteImageById($boardId) {
 
-        $stmt = $this->conn->prepare("DELETE FROM imagee WHERE board_id = ?");
+        $stmt = $this->conn->prepare("DELETE FROM image WHERE board_id = ?");
         $stmt->bind_param("i", $boardId);
 
-        return $stmt->execute();
+        $stmt->execute();
     }
 
-    // 게시글 삭제 -> delete on cascade 써서 게시글만 지워도 image 테이블 정보 함께 삭제
+    // 게시글 삭제
     public function deleteBoardById($boardId) {
 
         $stmt = $this->conn->prepare("DELETE FROM login_board where id = ?");

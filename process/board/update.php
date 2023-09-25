@@ -53,67 +53,81 @@
     $dao = new DanawaBoardList();
 
     // 게시글 업데이트
-    $result = $dao->updateBoardById($boardId, $title, $content);
+    $dao->updateBoardById($boardId, $title, $content);
     
     // 이미지 변동 있을 시 기존 이미지 정보 삭제
     if($imageChange) {
+
+        $result = $dao->getBoardById($boardId);
+
+        // 삭제할 게시글의 파일 삭제
+        if(!empty($result['image'])) {
+
+            for($i = 0; $i < count($result['image']); $i++) {
+
+                $imgPath = $_SERVER['DOCUMENT_ROOT'] . $result['image'][$i]['path'];
+                unlink($imgPath);
+            }
+        }
         $dao->deleteImageById($boardId);
     }
 
-    if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'])) {
+    if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'][0])) {
 
-        $tmp_name = $_FILES['imageFile']['tmp_name'];
-        $name = $_FILES['imageFile']['name'];
+        for($i = 0; $i < count($_FILES['imageFile']['name']); $i++) {
+            $tmp_name = $_FILES['imageFile']['tmp_name'][$i];
+            $name = $_FILES['imageFile']['name'][$i];
 
-        $dirPath = ROOT_PATH . '/img' . '/' . date('Ymd');
+            $dirPath = ROOT_PATH . '/img' . '/' . date('Ymd');
 
-        if(!file_exists($dirPath)) { // 경로 폴더가 없을 경우 폴더 생성
-            mkdir($dirPath, 0777);
+            if(!file_exists($dirPath)) { // 경로 폴더가 없을 경우 폴더 생성
+                mkdir($dirPath, 0777);
+            }
+
+            $extension = pathinfo((string)$name, PATHINFO_EXTENSION); // 업로드 된 파일의 확장자 추출
+            $extensionArr = array('jpeg', 'bmp', 'gif', 'png');
+
+            if(in_array($extension, $extensionArr)) { // 이미지 확장자 체크
+                echo ("
+                    <script>
+                        alert('이미지 파일만 첨부 가능합니다.');
+                        go.history(-1);
+                    </script>
+                ");
+
+                exit;
+            }
+
+            $size = $_FILES['imageFile']['size'][$i];
+
+            if($size > 10000) { // 파일 크기 체크
+                echo ("
+                    <script>
+                        alert('파일의 크기는 10000바이트 이하만 가능합니다.');
+                        go.history(-1);
+                    </script>
+                ");
+
+                exit;
+            }
+
+
+            $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
+            $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
+            $dirPath .= "/$serverName";
+            
+            $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
+
+            $image = array(
+                'boardId' => $boardId,
+                'serverName' => $serverName,
+                'originalName' => $name,
+                'path' => $path,
+                'size' => $size
+            );
+
+            $dao->insertImage($image);
         }
-
-        $extension = pathinfo($name, PATHINFO_EXTENSION); // 업로드 된 파일의 확장자 추출
-        $extensionArr = array('jpeg', 'bmp', 'gif', 'png');
-
-        if(in_array($extension, $extensionArr)) { // 이미지 확장자 체크
-            echo ("
-                <script>
-                    alert('이미지 파일만 첨부 가능합니다.');
-                    go.history(-1);
-                </script>
-            ");
-
-            exit;
-        }
-
-        $size = $_FILES['imageFile']['size'];
-
-        if($size > 10000) { // 파일 크기 체크
-            echo ("
-                <script>
-                    alert('파일의 크기는 10000바이트 이하만 가능합니다.');
-                    go.history(-1);
-                </script>
-            ");
-
-            exit;
-        }
-
-
-        $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
-        $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
-        $dirPath .= "/$serverName";
-        
-        $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
-
-        $image = array(
-            'boardId' => $boardId,
-            'serverName' => $serverName,
-            'originalName' => $name,
-            'path' => $path,
-            'size' => $size
-        );
-
-        !$dao->insertImage($image);
         
     }
     echo("

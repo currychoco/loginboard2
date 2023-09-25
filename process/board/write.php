@@ -42,80 +42,84 @@
             exit;
         }
     }
-    
+
     $dao = new DanawaBoardList();
 
     // 게시글 생성 후 생성된 게시글의 id 반환
     $boardId = $dao->insertBoard($title, $content, $user['no']);
     
     // 업로드 된 이미지 지정된 파일로 이동
-    if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'])) {
+    if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'][0])) {
 
-        $tmp_name = $_FILES['imageFile']['tmp_name'];
-        $name = $_FILES['imageFile']['name'];
+        for($i = 0; $i < count($_FILES['imageFile']['name']); $i++) {
+            echo json_encode($_FILES['imageFile']['name'][$i]);
 
-        $dirPath = ROOT_PATH . '/img' . '/' . date('Ymd');
+            $tmp_name = $_FILES['imageFile']['tmp_name'][$i];
+            $name = $_FILES['imageFile']['name'][$i];
 
-        if(!file_exists($dirPath)) { // 경로 폴더가 없을 경우 폴더 생성
-            mkdir($dirPath, 0777);
-        }
+            $dirPath = ROOT_PATH . '/img' . '/' . date('Ymd');
 
-        $extension = pathinfo($name, PATHINFO_EXTENSION); // 업로드 된 파일의 확장자 추출
-        $extensionArr = array('jpeg', 'bmp', 'gif', 'png');
+            if(!file_exists($dirPath)) { // 경로 폴더가 없을 경우 폴더 생성
+                mkdir($dirPath, 0777);
+            }
 
-        if(in_array($extension, $extensionArr)) { // 이미지 확장자 체크
-            echo ("
+            $extension = pathinfo($name, PATHINFO_EXTENSION); // 업로드 된 파일의 확장자 추출
+            $extensionArr = array('jpeg', 'bmp', 'gif', 'png');
+
+            if(in_array($extension, $extensionArr)) { // 이미지 확장자 체크
+                echo ("
+                    <script>
+                        alert('이미지 파일만 첨부 가능합니다.');
+                        go.history(-1);
+                    </script>
+                ");
+
+                exit;
+            }
+
+            $size = $_FILES['imageFile']['size'][$i];
+
+            if($size > 10000) { // 파일 크기 체크
+                echo ("
+                    <script>
+                        alert('파일의 크기는 10000바이트 이하만 가능합니다.');
+                        go.history(-1);
+                    </script>
+                ");
+
+                exit;
+            }
+
+
+            $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
+            $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
+            $dirPath .= "/$serverName";
+            
+            $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
+
+            $image = array(
+                'boardId' => $boardId,
+                'serverName' => $serverName,
+                'originalName' => $name,
+                'path' => $path,
+                'size' => $size
+            );
+
+            if(!$dao->insertImage($image)) {
+                echo ("
                 <script>
-                    alert('이미지 파일만 첨부 가능합니다.');
+                    alert('파일이 정상적으로 등록되지 않았습니다.');
                     go.history(-1);
                 </script>
-            ");
-
-            exit;
-        }
-
-        $size = $_FILES['imageFile']['size'];
-
-        if($size > 10000) { // 파일 크기 체크
-            echo ("
+                ");
+            } 
+            else {
+                echo ("
                 <script>
-                    alert('파일의 크기는 10000바이트 이하만 가능합니다.');
-                    go.history(-1);
+                    location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
                 </script>
-            ");
-
-            exit;
-        }
-
-
-        $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
-        $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
-        $dirPath .= "/$serverName";
-        
-        $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
-
-        $image = array(
-            'boardId' => $boardId,
-            'serverName' => $serverName,
-            'originalName' => $name,
-            'path' => $path,
-            'size' => $size
-        );
-
-        if(!$dao->insertImage($image)) {
-            echo ("
-            <script>
-                alert('파일이 정상적으로 등록되지 않았습니다.');
-                go.history(-1);
-            </script>
-            ");
-        } 
-        else {
-            echo ("
-            <script>
-                location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-            </script>
-            ");
+                ");
+            }
         }
         
     }

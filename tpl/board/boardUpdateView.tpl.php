@@ -22,7 +22,7 @@
                 $('#changeImage').click(function() {
                     $('#getFile').hide();
                     $('#setFile').show(); 
-                    $('#changeImage').val('1');
+                    $('#checkFileUpdate').val('1');
                 });
             })
 
@@ -66,13 +66,22 @@
                     <tr>
                         <td colspan="2">
                             <div id='setFile' style='display:none'>
-                                <input type='file' name='imageFile'>
+                                <input type='file' name='imageFile[]' multiple>
                                 <br>
                             </div>
                             <div id='getFile' style='display:none'>
                                 <p>
                                     <input type='button' id='changeImage' value='이미지 파일 변경하기'>
-                                    저장된 파일 : <?=$image['original_name']?>
+                                    저장된 파일 : 
+                                    <?php
+                                    for($i = count($image) - 1; $i >= 0; $i--) {
+                                        echo $image[$i]['original_name'];
+                                        if($i != 0) {
+                                            echo ', ';
+                                        }
+                                    }
+                                     
+                                    ?>
                                 </p>
                             </div>
                             <input type="submit" class="btn btn-success" id='update' value="글 수정하기">
