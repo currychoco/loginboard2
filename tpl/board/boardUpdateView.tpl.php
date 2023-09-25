@@ -74,9 +74,9 @@
                                     <input type='button' id='changeImage' value='이미지 파일 변경하기'>
                                     저장된 파일 : 
                                     <?php
-                                    for($i = count($image) - 1; $i >= 0; $i--) {
+                                    for($i = 0; $i < count($image); $i++) {
                                         echo $image[$i]['original_name'];
-                                        if($i != 0) {
+                                        if($i != count($image) - 1) {
                                             echo ', ';
                                         }
                                     }

@@ -52,7 +52,6 @@
     if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'][0])) {
 
         for($i = 0; $i < count($_FILES['imageFile']['name']); $i++) {
-            echo json_encode($_FILES['imageFile']['name'][$i]);
 
             $tmp_name = $_FILES['imageFile']['tmp_name'][$i];
             $name = $_FILES['imageFile']['name'][$i];

@@ -22,7 +22,7 @@ class DanawaBoardList extends CommonDAO {
                     u.user_id,
                     b.reg_date,
                     b.view_count,
-                    MAX(i.path) as path
+                    i.path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
@@ -47,7 +47,7 @@ class DanawaBoardList extends CommonDAO {
                     u.user_id,
                     b.reg_date,
                     b.view_count,
-                    MAX(i.path) as path
+                    MIN(i.path) as path
                 FROM login_board b
                 INNER JOIN board_user u
                 ON b.user_no = u.no
@@ -105,7 +105,7 @@ class DanawaBoardList extends CommonDAO {
 
     }
 
-    // 게시글 생성 -> 게시글 생성 후 해당 id를 받아서 바로 이미지를 저장해야함!
+    // 게시글 생성
     public function insertBoard($title, $content, $userNo) {
 
         $stmt = $this->conn->prepare("
