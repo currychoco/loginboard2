@@ -103,7 +103,7 @@ class DanawaBoardList extends CommonDAO {
 
     }
 
-    // 게시글 생성
+    // 게시글 생성 -> 게시글 생성 후 해당 id를 받아서 바로 이미지를 저장해야함!
     public function insertBoard($title, $content, $userNo) {
 
         $stmt = $this->conn->prepare("
@@ -216,30 +216,14 @@ class DanawaBoardList extends CommonDAO {
         return $stmt->execute();
     }
 
-    // 게시글 삭제
+    // 게시글 삭제 -> delete on cascade 써서 게시글만 지워도 image 테이블 정보 함께 삭제
     public function deleteBoardById($boardId) {
-        // 트랜잭션
-        $this->conn->begin_transaction();
 
-        try{
-            
-            $stmt1 = $this->conn->prepare("DELETE FROM login_board where id = ?");
-            $stmt1->bind_param("i", $boardId);
+        $stmt = $this->conn->prepare("DELETE FROM login_board where id = ?");
+        $stmt->bind_param("i", $boardId);
 
-            $stmt2 = $this->conn->prepare("DELETE FROM image WHERE board_id = ?");
-            $stmt2->bind_param("i", $boardId);
+        return  $stmt->execute();
 
-            $stmt1->execute();
-            $stmt2->execute();
-            $this->conn->commit();
-            return true;
-        }
-        catch(mysqli_sql_exception $exception) {
-            $this->conn->rollback();
-            return false;
-        }
     }
-
-    // 게시글 검색 기능
     
 }

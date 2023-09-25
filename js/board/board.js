@@ -114,6 +114,11 @@ function toUpdateButton() {
 }
 
 function deleteBoard() {
+
+    if(!confirm('삭제하시겠습니까?')) {
+        return;
+    }
+
     var boardId = $('#boardId').val();
     var no = $('#no').val();
 
@@ -126,6 +131,7 @@ function deleteBoard() {
         dataType : 'json',
 
         success : function(data) {
+
             if(data) {
                 alert('삭제되었습니다.');
                 location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;

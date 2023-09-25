@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type='file' name='imageFile' >
+                            <input type='file' name='imageFile' multiple>
                             <br>
                             <input type="button" class="btn" id='write' value="글 저장하기">
                             &nbsp;&nbsp;

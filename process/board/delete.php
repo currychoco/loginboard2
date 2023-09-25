@@ -37,6 +37,14 @@
         $isWriter = true;
     }
 
+    // 삭제할 게시글의 파일 삭제
+    if(!empty($result['image'])) {
+
+        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $result['image']['path'];
+        unlink($imgPath);
+
+    }
+
     // 삭제
-    $result = $dao->deleteBoardById($boardId);
-    echo json_encode($result);
+    $deleteResult = $dao->deleteBoardById($boardId);
+    echo json_encode($deleteResult);
