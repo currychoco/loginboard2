@@ -66,16 +66,14 @@ class Comment extends CommonDAO {
     }
 
     // 댓글 삭제
-    public function deleteComment($commentId) {
+    public function deleteCommentById($commentId) {
 
         $query = ("DELETE FROM comment WHERE id = ?");
 
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param('i', $commentId);
 
-        $stmt->execute();
-
-        $result = $stmt->get_result();
+        $result = $stmt->execute();
 
         return $result;
     }

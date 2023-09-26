@@ -129,6 +129,10 @@ function updateComment(commentId) {
 
 function toDeleteComment(commentId) {
     
+    if(!confirm('댓글을 삭제하시겠습니까?')) {
+        return ;
+    }
+
     $.ajax({
         url : '/loginboard2/process/comment/delete.php',
         type : 'POST',
@@ -139,6 +143,12 @@ function toDeleteComment(commentId) {
 
         success : function(data) {
 
+            if(data.result){
+                getCommentList();
+            }
+            else {
+                alert(data.msg);
+            }
         },
         error : function(request) {
             console.log(request.responseText);

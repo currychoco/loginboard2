@@ -9,7 +9,6 @@
 
     $commentId = $utility->filter_SQL($_POST['commentId']);
     $result = false;
-    $msg = null;
     $commentVal = $_POST['comment'];
 
     // 로그인 체크
