@@ -155,3 +155,57 @@ function toDeleteComment(commentId) {
         }
     })
 }
+
+function getAnswerList(commentId) {
+
+    $('#answerList' + commentId).empty();
+
+    $.ajax({
+        url : '/loginboard2/controller/comment/AnswerListController.php',
+        type : 'POST',
+        data : {
+            commentId : commentId
+        },
+        dataType : 'html',
+
+        success : function(data) {
+            console.log(data);
+            $('#answerList' + commentId).append(data);
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+
+    });
+
+}
+
+function writeAnswer(commentId) {
+
+    $boardId = $('#boardID').val();
+    $comment = $('#answer' + commentId).val();
+
+    if(comment < 2 || comment > 255) {
+        alert('댓글은 2자 이상, 255자 이하만 가능합니다.');
+        return;
+    }
+
+    $.ajax({
+        url : '/loginboard2/process/comment/answerWrite.php',
+        type : 'POST',
+        data : {
+            boardId : boardId,
+            commentId : commentId,
+            comment : comment
+        },
+        dataType : 'json',
+
+        success : function(data) {
+            console.log(data);
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+        
+    });
+}

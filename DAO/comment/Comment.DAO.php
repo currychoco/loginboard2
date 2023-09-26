@@ -44,7 +44,9 @@ class Comment extends CommonDAO {
             FROM comment c
             INNER JOIN board_user u
             ON c.user_no = u.no
-            WHERE board_id = ?
+            WHERE 
+                board_id = ?
+                AND c.parent_id IS NULL
             ORDER BY id DESC;
         ");
         
@@ -122,5 +124,40 @@ class Comment extends CommonDAO {
         $result = $stmt ->execute();
 
         return $result;
+    }
+
+    // 답글 리스트
+    public function getAnswerList($commentId) {
+        $query = ("
+            SELECT
+                c.id,
+                c.board_id,
+                u.user_id,
+                c.parent_id,
+                c.comment,
+                c.reg_date,
+                c.mod_date
+            FROM comment c
+            INNER JOIN board_user u
+            ON c.user_no = u.no
+            WHERE parent_id = ?
+            ORDER BY id DESC;
+        ");
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $commentId);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $listResult = array();
+        while($row = mysqli_fetch_array($result)) {
+
+            array_push($listResult, $row);
+
+        }
+
+        return $listResult;
     }
 }
