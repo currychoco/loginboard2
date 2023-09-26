@@ -13,6 +13,10 @@
                     toListButton();
                 });
 
+                $('#update').click(function() {
+                    updateButton();
+                })
+
                 <?php if(empty($image)) { ?>
                     $('#setFile').show(); 
                 <?php } else { ?>
@@ -39,7 +43,7 @@
                 <input type='hidden' id='checkLogin' value="<?=$checkLogin?>"> 
             </form>
 
-            <form id="writeForm" enctype='multipart/form-data' action='/loginboard2/process/board/update.php' method='POST'> 
+            <form id="updateForm" enctype='multipart/form-data' action='/loginboard2/process/board/update.php' method='POST'> 
 
                 <input type='hidden' name='no' id='no' value="<?=$no?>">
                 <input type='hidden' name='checkWriter' id='checkWriter' value="<?=$checkWriter?>">
@@ -84,7 +88,7 @@
                                     ?>
                                 </p>
                             </div>
-                            <input type="submit" class="btn btn-success" id='update' value="글 수정하기">
+                            <input type="button" class="btn btn-success" id='update' value="글 수정하기">
                             &nbsp;&nbsp;
                             <input type="reset" class="btn btn-warning" value="다시 쓰기">
                             &nbsp;&nbsp;

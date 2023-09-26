@@ -28,8 +28,10 @@
     // 제목, 내용 유효성 검사
     if(isset($_POST['title']) && isset($_POST['content'])) {
 
-        $title = $utility->filter_SQL($_POST['title']);
-        $content = $utility->filter_SQL($_POST['content']);
+        // $title = $utility->filter_SQL($_POST['title']);
+        // $content = $utility->filter_SQL($_POST['content']);
+        $title = $_POST['title'];
+        $content = $_POST['content'];
 
         if(strlen($title) < 2 || empty($content)) {
             echo ("

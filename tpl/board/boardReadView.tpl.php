@@ -3,8 +3,11 @@
     <head>
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
+        <script src='/loginboard2/js/comment/comment.js'></script>
         <script>
             $(function() {
+                getCommentList();
+
                 $('#update').click(function() {
                     toUpdateButton();
                 });
@@ -16,6 +19,15 @@
                 $('#delete').click(function() {
                     deleteBoard();
                 });
+
+                <?php if(isset($user['userId'])) { ?>
+                    $('#commentForm').show();
+                <?php } ?>
+
+                $('#writeComment').click(function() {
+                    writeComment();
+                });
+
             })
         </script>
     </head>
@@ -51,7 +63,7 @@
                         <div style='text-align:center; margin:10px'>
                             <?php
                                 if(!empty($image)) {
-                                for($i = count($image) - 1; $i >= 0; $i--){
+                                for($i = 0; $i < count($image); $i++){
                             ?>
 
                                 <img src="http://myimage.com<?=$image[$i]['path']?>"/>
@@ -82,6 +94,23 @@
                     </td>
                 </tr>
             </table>
+            
+            <!-- 댓글 -->
+            <div id='commentDiv'>
+
+                <!-- 댓글 작성 -->
+                <form id='commentForm' style='display:none'>
+                    <div class="form-inline" style="margin-bottom: 15px">
+                        <textarea class='form-control' name='comment' id='comment' cols=80 rows=2></textarea>
+                        <input type='button' class='btn btn-primary' id='writeComment' value='댓글작성'>
+                    </div>
+                </form>
+                
+                <!-- 댓글 목록 -->
+                <div id='commentList'>
+                    
+                </div>
+            </div>
         </div>
     </body>
 </html>

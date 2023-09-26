@@ -1,7 +1,5 @@
 function pagination(){
 
-
-
     var no = $('#no').val();
     var totalRow = $('#totalRow').val();
     var pageSize = $('#pageSize').val();
@@ -76,6 +74,19 @@ function checkLogin() {
 
 function writeButton() {
 
+    // 유효성 검사
+    var title = $('#title').val();
+    var content = $('#content').val();
+
+    if(title.length < 2 || title.length > 30) {
+        alert('제목은 2자 이상 30자 이하여야 합니다.');
+        return;
+    }
+    if(content.length < 1) {
+        alert('내용은 1자 이상이어야 합니다.');
+        return;
+    }
+
     $('#writeForm').submit();
     
 }
@@ -111,6 +122,24 @@ function toUpdateButton() {
 
     location.href = '/loginboard2/controller/board/BoardUpdateController.php?no=' + no + '&boardId=' + boardId;
 
+}
+
+function updateButton() {
+
+    // 유효성 검사
+    var title = $('#title').val();
+    var content = $('#content').val();
+
+    if(title.length < 2 || title.length > 30) {
+        alert('제목은 2자 이상 30자 이하여야 합니다.');
+        return;
+    }
+    if(content.length < 1) {
+        alert('내용은 1자 이상이어야 합니다.');
+        return;
+    }
+
+    $('#updateForm').submit();
 }
 
 function deleteBoard() {
