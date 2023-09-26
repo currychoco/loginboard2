@@ -22,10 +22,11 @@
 
     // 로그인 체크
     $login = false;
-    $user = array();
+    $user = null;
+    $userId = null;
     if(isset($_SESSION['userId']) && isset($_SESSION['no'])) {
         $user = $utility->checkLogin($_SESSION['userId'], $_SESSION['no']);
-        
+        $userId = $user['userId'];
         if(!empty($user)) {
             $login = true;
         }
@@ -48,6 +49,7 @@
     $oTemplate->set('board', $board);
     $oTemplate->set('image', $image);
     $oTemplate->set('user', $user);
+    $oTemplate->set('userId', $userId);
     $oTemplate->set('search', $search);
 
     $templateType = ROOT_PATH . '/tpl/board/boardReadView.tpl.php';

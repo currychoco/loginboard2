@@ -4,32 +4,6 @@
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script src='/loginboard2/js/comment/comment.js'></script>
-        <script>
-            $(function() {
-                getCommentList();
-
-                $('#update').click(function() {
-                    toUpdateButton();
-                });
-
-                $('#toList').click(function() {
-                    toListButton();
-                });
-
-                $('#delete').click(function() {
-                    deleteBoard();
-                });
-
-                <?php if(isset($user['userId'])) { ?>
-                    $('#commentForm').show();
-                <?php } ?>
-
-                $('#writeComment').click(function() {
-                    writeComment();
-                });
-
-            })
-        </script>
     </head>
     <body>
         <!-- header -->
@@ -39,6 +13,7 @@
             <input type='hidden' id='no' value="<?=$no?>">
             <input type='hidden' id='boardId' value="<?=$board['id']?>">
             <input type='hidden' id='search' value="<?=$search?>">
+            <input type='hidden' id='userId' value="<?=$userId?>">
         </form>
 
         <div class="container body-container">

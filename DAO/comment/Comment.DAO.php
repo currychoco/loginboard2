@@ -64,4 +64,65 @@ class Comment extends CommonDAO {
 
         return $listResult;
     }
+
+    // 댓글 삭제
+    public function deleteComment($commentId) {
+
+        $query = ("DELETE FROM comment WHERE id = ?");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $commentId);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+
+    // id를 통한 댓글 조회
+    public function getCommentById($commentId) {
+        
+        $query = ("
+            SELECT
+                id,
+                board_id,
+                user_no,
+                parent_id,
+                reg_date,
+                mod_date
+            FROM comment
+            WHERE
+                id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $commentId);
+
+        $stmt->execute();
+        $tmp = $stmt->get_result();
+
+        $result = mysqli_fetch_array($tmp);
+
+        return $result;
+    }
+
+    // 댓글 수정
+    public function updateCommentById($comment) {
+        
+        $query = ("
+            UPDATE comment
+            SET
+                comment = ?,
+                mod_date = now()
+            WHERE
+                id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('si', $comment['comment'], $comment['id']);
+        $result = $stmt ->execute();
+
+        return $result;
+    }
 }
