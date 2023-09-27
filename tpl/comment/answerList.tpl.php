@@ -30,9 +30,9 @@
                     if($listResult[$i]['user_id'] == $user['userId']) {
 
             ?>
-                    <span><a onclick="toUpdateComment(<?=$listResult[$i]['id']?>)">수정</a></span>
+                    <span><a onclick="toUpdateAnswer(<?=$listResult[$i]['id']?>)">수정</a></span>
                     &nbsp;|&nbsp;
-                    <span><a onclick="toDeleteComment(<?=$listResult[$i]['id']?>)">삭제</a></span>       
+                    <span><a onclick="toDeleteAnswer(<?=$listResult[$i]['id']?>)">삭제</a></span>       
 
             <?php
                     }
@@ -47,7 +47,7 @@
 ?>
 <form id='answerForm'>
     <div class="form-inline" style="margin-bottom: 15px">
-        <textarea style='width:40%;' class='form-control' id="answer<?=$commentId?>" cols=80 rows=2></textarea>
-        <input type='button' class='btn btn-primary' onclick="writeAnswer(<?=$commentId?>)" value='답글작성'>
+        <textarea style='width:40%; margin-top:10px;' class='form-control' id="answer<?=$commentId?>" cols=80 rows=2></textarea>
+        <input type='button' class='btn' onclick="writeAnswer(<?=$commentId?>)" value='답글작성'>
     </div>
 </form>

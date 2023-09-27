@@ -40,7 +40,8 @@ class Comment extends CommonDAO {
                 c.parent_id,
                 c.comment,
                 c.reg_date,
-                c.mod_date
+                c.mod_date,
+                (SELECT COUNT(*) FROM comment sub WHERE c.id = sub.parent_id) as answer
             FROM comment c
             INNER JOIN board_user u
             ON c.user_no = u.no

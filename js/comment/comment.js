@@ -1,6 +1,7 @@
 $(function() {
     getCommentList();
 
+
     if($('#userId').val()) {
         $('#commentForm').show();   
     }
@@ -158,45 +159,69 @@ function toDeleteComment(commentId) {
 
 function getAnswerList(commentId) {
 
-    $('#answerList' + commentId).empty();
+    var clickAnswer = $('#clickAnswer' + commentId).val();
+    console.log(clickAnswer);
 
-    $.ajax({
-        url : '/loginboard2/controller/comment/AnswerListController.php',
-        type : 'POST',
-        data : {
-            commentId : commentId
-        },
-        dataType : 'html',
+    if(clickAnswer == 1) {
 
-        success : function(data) {
-            console.log(data);
-            $('#answerList' + commentId).append(data);
-        },
-        error : function(request) {
-            console.log(request.responseText);
-        }
+        $('#answerList' + commentId).empty();
 
-    });
+        $.ajax({
+            url : '/loginboard2/controller/comment/AnswerListController.php',
+            type : 'POST',
+            data : {
+                commentId : commentId
+            },
+            dataType : 'html',
+
+            success : function(data) {
+
+                $('#answerList' + commentId).append(data);
+
+                
+                $('input[id^="clickAnswer_"]').each(function(data) {
+                    console.log(data);
+                    var _thisId = $(this).attr('id');
+                });
+
+
+            },
+            error : function(request) {
+                console.log(request.responseText);
+            }
+
+        });
+
+        $('#clickAnswer' + commentId).val(2);
+
+    }
+    else {
+        $('#answerList' + commentId).empty();
+        $('#clickAnswer' + commentId).val(1);
+    }
 
 }
 
 function writeAnswer(commentId) {
 
-    $boardId = $('#boardID').val();
-    $comment = $('#answer' + commentId).val();
+    var boardId = $('#boardId').val();
+    var comment = $('#answer' + commentId).val();
 
     if(comment < 2 || comment > 255) {
         alert('댓글은 2자 이상, 255자 이하만 가능합니다.');
         return;
     }
 
+    console.log(commentId);
+
     $.ajax({
-        url : '/loginboard2/process/comment/answerWrite.php',
+        url : '/loginboard2/process/comment/write.php',
         type : 'POST',
         data : {
             boardId : boardId,
             commentId : commentId,
-            comment : comment
+            comment : comment,
+            parentId : commentId
         },
         dataType : 'json',
 
@@ -208,4 +233,10 @@ function writeAnswer(commentId) {
         }
         
     });
+}
+
+function toUpdateAnswer(answerId) {
+
+    $('#readAnswer' + answerId).hide();
+    $('#updateAnswer' + answerId).show();
 }

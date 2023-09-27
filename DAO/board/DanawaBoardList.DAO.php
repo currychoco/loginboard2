@@ -232,5 +232,16 @@ class DanawaBoardList extends CommonDAO {
         return  $stmt->execute();
 
     }
+
+    // 게시글 조회수
+    public function countView($boardId) {
+
+        $query = 'update login_board set view_count=view_count+1 where id= ?';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $boardId);
+
+        return $stmt->execute();
+
+    }
     
 }

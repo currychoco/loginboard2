@@ -19,13 +19,14 @@
                     <textarea class='form-control' id="comment<?=$listResult[$i]['id']?>" cols=80 rows=2><?=$listResult[$i]['comment']?></textarea>
                     <input type='button' class='btn btn-warning' onclick="updateComment(<?=$listResult[$i]['id']?>)" value='댓글수정'>
                     <input type='button' class='btn' id='cancelUpdate' value='수정취소'>
+                    <input type='hidden' id="clickAnswer<?=$listResult[$i]['id']?>" value=1>
                 </div>
             </form>
         </div>
 
         <div>
 
-            <span><a onclick="getAnswerList(<?=$listResult[$i]['id']?>)">답글</a></span>
+            <span><a onclick="getAnswerList(<?=$listResult[$i]['id']?>)">답글(<?=$listResult[$i]['answer']?>)</a></span>
             
 
             <?php
