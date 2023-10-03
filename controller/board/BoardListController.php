@@ -9,11 +9,13 @@
 
     $utility = new Utility();
 
-    $no = 0;
+    $no = 1;
     if(isset($_GET['no']) && $_GET['no'] > 0) {
         $no = $_GET['no'];
         $no = $utility->filter_SQL($no);
     }
+
+    $firstNo = ($no - 1) * PAGE_SIZE;
 
     // 검색 키워드 체크
     $search = '';
@@ -51,7 +53,7 @@
     $boardDao  = new DanawaBoardList();
 
     // 리스트
-    $listResult = $boardDao->getBoardList($no, PAGE_SIZE, $search);
+    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search);
 
     // 리스트 총 개수
     $listResultCnt = $boardDao->getBoardListCount($search);

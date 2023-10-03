@@ -32,7 +32,7 @@
             ?>
                     <span><a onclick="toUpdateAnswer(<?=$listResult[$i]['id']?>)">수정</a></span>
                     &nbsp;|&nbsp;
-                    <span><a onclick="toDeleteAnswer(<?=$listResult[$i]['id']?>)">삭제</a></span>       
+                    <span><a onclick="toDeleteComment(<?=$listResult[$i]['id']?>)">삭제</a></span>       
 
             <?php
                     }

@@ -226,7 +226,7 @@ function writeAnswer(commentId) {
         dataType : 'json',
 
         success : function(data) {
-            console.log(data);
+            getCommentList(commentId);
         },
         error : function(request) {
             console.log(request.responseText);

@@ -10,9 +10,11 @@
     $no = $utility->filter_SQL($_GET['no']);
     $search = $utility->filter_SQL($_GET['search']);
 
+    $firstNo = ($no - 1) * 20;
+
     $totalPage = ceil($totalRow / $pageSize);
 
-    $currentPage = ceil(($no + 1) / $pageSize);
+    $currentPage = ceil(($firstNo + 1) / $pageSize);
 
     $startPage = floor(($currentPage - 1) / $pageListSize) * $pageListSize + 1;
 
@@ -28,18 +30,18 @@
 
     for($i = $startPage; $i <= $endPage; $i++){
         $page = ($i - 1) * $pageSize;
-        if($no != $page){
-            echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$page&search=$search\">";
+        if($firstNo != $page){
+            echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$i&search=$search\">";
         }
 
         echo " $i ";
 
-        if($no != $page){
+        if($firstNo != $page){
             echo "</a>";
         }
     }
 
     if($totalPage > $endPage){
         $nextList = $endPage * $pageSize;
-        echo "<a href=\"/loginboard2/controller/board/BoardListController.php?no=$nextList&search=$search\">▶</a>\n";
+        echo "<a href=\"/loginboard2/ntroller/board/BoardListController.php?no=$nextList&search=$search\">▶</a>\n";
     }
