@@ -1,15 +1,13 @@
 <?php
     for($i = 0; $i < count($listResult); $i++) {
 ?>
-
-<div>
+<div class='answer'>
     <div>
         <span><?=$listResult[$i]['user_id']?></span>&nbsp;
         <span><?=$listResult[$i]['reg_date']?></span>
     </div>
     
     <div>
-
         <div id="readAnswer<?=$listResult[$i]['id']?>">
             <pre style='width:40%; margin:0px'><?=$listResult[$i]['comment']?></pre>
         </div>
@@ -45,7 +43,7 @@
 <?php
     }
 ?>
-<form id='answerForm'>
+<form  class='answer' id='answerForm'>
     <div class="form-inline" style="margin-bottom: 15px">
         <textarea style='width:40%; margin-top:10px;' class='form-control' id="answer<?=$commentId?>" cols=80 rows=2></textarea>
         <input type='button' class='btn' onclick="writeAnswer(<?=$commentId?>)" value='답글작성'>

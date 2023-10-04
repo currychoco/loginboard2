@@ -4,6 +4,7 @@
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script src='/loginboard2/js/comment/comment.js'></script>
+        <link rel = 'stylesheet' href='/loginboard2/css/answerList.css' />
     </head>
     <body>
         <!-- header -->
