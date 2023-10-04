@@ -40,3 +40,14 @@ mod_date timestamp null,
 foreign key(board_id) references login_board(id) on delete cascade,
 foreign key(user_no) references board_user(no) on delete cascade
 );
+
+create table category (
+id int primary key auto_increment,
+name varchar(20) not null unique,
+parent_id int not null
+);
+
+alter table `board_user` add `admin` char(1) null;
+
+alter table `login_board` add `category_id` int;
+alter table `login_board` add foreign key(category_id) references `category`(`id`) on delete cascade;
