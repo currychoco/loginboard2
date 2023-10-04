@@ -39,7 +39,13 @@
 
             <!-- 검색창 -->
             <div class="form-inline" style="margin-bottom: 15px; text-align: right;">
-                <input type="text" class="form-control" id="search" placeholder="제목 검색" value="<?=$search?>"/><button class='glyphicon glyphicon-search btn btn-primary' id='searchButton'></button><br>
+
+                    <select class="form-control" id="search" name="search">
+                        <option value="title">제목</option>
+                        <option value="writer" <?php if($search == 'writer')  {?> selected='selected' <?php } ?>>작성자</option>
+                    </select>
+
+                <input type="text" class="form-control" id="keyword" placeholder="제목 검색" value="<?=$keyword?>"/><button class='glyphicon glyphicon-search btn btn-primary' id='searchButton'></button><br>
             </div>
             
             <!-- 출력형 -->
@@ -66,10 +72,10 @@
                         <?php for($i = 0; $i < count($listResult); $i++) { ?>
                         <tr>
                             <td>
-                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['id']?></a>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['id']?></a>
                             </td>
                             <td>
-                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['title']?></a>
                             </td>
                             <td>
                                 <p><?=$listResult[$i]['user_id']?></p>
@@ -93,12 +99,12 @@
 
                     <div class='contentBox'>
                         <div>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
                          </div>
                          <table>
                             <tr>
                                 <th>제목</th>
-                                <td><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>"><?=$listResult[$i]['title']?></a></td>
+                                <td><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['title']?></a></td>
                             </tr>
                             <tr>
                                 <th>작성자</th>

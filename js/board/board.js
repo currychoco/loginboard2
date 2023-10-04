@@ -5,9 +5,11 @@ function pagination(){
     var pageSize = $('#pageSize').val();
     var pageListSize = $('#pageListSize').val();
 
-    var tmpSearch = $('#search').val();
+    var tmpKeyword = $('#keyword').val();
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-    var search = tmpSearch.replace(reg, '');
+    var keyword = tmpKeyword.replace(reg, '');
+
+    var search = $('#search').val();
 
     $.ajax({
         url : '/loginboard2/common/paginationTest.php',
@@ -17,7 +19,8 @@ function pagination(){
             no : no,
             pageSize : pageSize,
             pageListSize : pageListSize,
-            search : search
+            search : search,
+            keyword : keyword
         },
         dataType : 'html'
     })
@@ -54,11 +57,11 @@ function getBoardList() {
 function setList(type) {
     
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-    var tmpSearch = $('#search').val();
+    var tmpKeyword = $('#keyword').val();
     var no = $('#no').val();
-    var search = tmpSearch.replace(reg, '');
+    var keyword = tmpKeyword.replace(reg, '');
 
-    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&list=' + type;
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&keyword=' + keyword + '&list=' + type;
 
 }
 
@@ -95,9 +98,10 @@ function toListButton() {
 
     var no = $('#no').val();
     var search = $('#search').val();
+    var keyword = $('#keyword').val();
     console.log(search);
 
-    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search;
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&keyword=' + keyword;
 
 }
 
@@ -178,11 +182,12 @@ function deleteBoard() {
 function search() {
 
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-    var tmpSearch = $('#search').val();
-    var no = $('#no').val();
+    var tmpKeyword = $('#keyword').val();
 
-    var search = tmpSearch.replace(reg, '');
+    var keyword = tmpKeyword.replace(reg, '');
 
-    location.href = '/loginboard2/controller/board/BoardListController.php?search=' + search;
+    var search = $('#search').val();
+
+    location.href = '/loginboard2/controller/board/BoardListController.php?search=' + search + '&keyword=' + keyword;
 
 }

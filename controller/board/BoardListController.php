@@ -22,6 +22,11 @@
     if(isset($_GET['search'])) {
         $search = $utility->filter_SQL($_GET['search']);
     }
+
+    $keyword = '';
+    if(isset($_GET['keyword'])) {
+        $keyword = $utility->filter_SQL($_GET['keyword']);
+    }
     
     // list 파라미터 체크
     $list = '';
@@ -53,10 +58,10 @@
     $boardDao  = new DanawaBoardList();
 
     // 리스트
-    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search);
+    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword);
 
     // 리스트 총 개수
-    $listResultCnt = $boardDao->getBoardListCount($search);
+    $listResultCnt = $boardDao->getBoardListCount($search, $keyword);
 
     //생성자
     $oTemplate = new Template();
@@ -67,6 +72,7 @@
     $oTemplate->set("totalRow", $listResultCnt);
     $oTemplate->set("pageSize", PAGE_SIZE);
     $oTemplate->set("pageListSize", PAGE_LIST_SIZE);
+    $oTemplate->set('keyword', $keyword);
     $oTemplate->set('search', $search);
     $oTemplate->set('list', $setList);
 

@@ -14,6 +14,7 @@
             <input type='hidden' id='no' value="<?=$no?>">
             <input type='hidden' id='boardId' value="<?=$board['id']?>">
             <input type='hidden' id='search' value="<?=$search?>">
+            <input type='hidden' id='keyword' value="<?=$keyword?>">
             <input type='hidden' id='userId' value="<?=$userId?>">
         </form>
 

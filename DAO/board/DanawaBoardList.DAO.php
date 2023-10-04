@@ -8,11 +8,11 @@ class DanawaBoardList extends CommonDAO {
     }
 
     // 쿼리로 조회된 결과물 배열로 반환
-    public function getBoardList($no = 0, $pageSize = PAGE_SIZE, $search='') {
+    public function getBoardList($no = 0, $pageSize = PAGE_SIZE, $search='', $keyword='') {
 
         $stmt = null;
 
-        if(empty($search) && strlen($search) < 1) {
+        if(empty($keyword) && strlen($keyword) < 1) {
 
             $query = ("
                 SELECT 
@@ -37,7 +37,7 @@ class DanawaBoardList extends CommonDAO {
             $stmt->bind_param("ii", $no, $pageSize);
             $stmt->execute();
         }
-        else {
+        else if($search == 'title') { 
 
             $query = ("
                 SELECT 
@@ -60,7 +60,33 @@ class DanawaBoardList extends CommonDAO {
             ");
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("sii", $search, $no, $pageSize);
+            $stmt->bind_param("sii", $keyword, $no, $pageSize);
+            $stmt->execute();
+        }
+        else if($search == 'writer') {
+
+            $query = ("
+                SELECT 
+                    b.id,
+                    b.title,
+                    b.content,
+                    u.user_id,
+                    b.reg_date,
+                    b.view_count,
+                    MIN(i.path) as path
+                FROM login_board b
+                INNER JOIN board_user u
+                ON b.user_no = u.no
+                LEFT OUTER JOIN image i
+                ON b.id = i.board_id
+                WHERE u.user_id like CONCAT('%', ?, '%')
+                GROUP BY b.id
+                ORDER BY id DESC
+                LIMIT ?, ?
+            ");
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sii", $keyword, $no, $pageSize);
             $stmt->execute();
         }
 
@@ -79,24 +105,40 @@ class DanawaBoardList extends CommonDAO {
     }
 
     // 총 게시글 개수 반환
-    public function getBoardListCount($search=''){
+    public function getBoardListCount($search = '', $keyword = ''){
 
         $result = null;
-        if(empty($search) && strlen($search) < 1) {
+        if(empty($keyword) && strlen($keyword) < 1) {
 
             $query = "SELECT COUNT(*) AS count FROM login_board";
             $result = mysqli_query($this->conn, $query);
 
         }
-        else {
+        else if($search == 'title') {
 
-            $query = "SELECT COUNT(*) AS count FROM login_board WHERE title like CONCAT('%', ?, '%')";
+            $query = "SELECT COUNT(*) AS count FROM login_board WHERE title LIKE CONCAT('%', ?, '%')";
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('s', $search);
+            $stmt->bind_param('s', $keyword);
             $stmt->execute();
             $result = $stmt->get_result();
 
+        }
+        else if($search == 'writer') {
+
+            $query = ("
+                SELECT COUNT(*) AS count
+                FROM login_board b
+                INNER JOIN board_user u
+                ON u.no = b.user_no
+                WHERE
+                    u.user_id LIKE CONCAT('%', ?, '%')       
+            ");
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $keyword);
+            $stmt->execute();
+            $result = $stmt->get_result();
         }
 
         $row = mysqli_fetch_array($result);

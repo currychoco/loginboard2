@@ -20,6 +20,11 @@
         $search = $utility->filter_SQL($_GET['search']);
     }
 
+    $keyword = '';
+    if(isset($_GET['keyword'])) {
+        $keyword = $utility->filter_SQL($_GET['keyword']);
+    }
+
     // 로그인 체크
     $login = false;
     $user = null;
@@ -68,6 +73,7 @@
     $oTemplate->set('user', $user);
     $oTemplate->set('userId', $userId);
     $oTemplate->set('search', $search);
+    $oTemplate->set('keyword', $keyword);
 
     $templateType = ROOT_PATH . '/tpl/board/boardReadView.tpl.php';
 
