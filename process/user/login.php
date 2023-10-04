@@ -27,5 +27,14 @@
     // 세션 추가
     $_SESSION['userId'] = $result['user_id'];
     $_SESSION['no'] = $result['no'];
+    
+    // 관리자일 경우
+    if($result['admin'] != null) {
+        $_SESSION['user'] = 'admin';
+    }
+    else {
+        $_SESSION['user'] = 'normal';
+    }
+    
 
     echo '<script>login()</script>';

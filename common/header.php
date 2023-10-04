@@ -24,6 +24,11 @@
                     <li>
                         <a href="javascript:location.href='/loginboard2/process/user/logout.php'"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a>
                     </li>
+                    <?php if($_SESSION['user'] == 'admin') { ?>
+                        <li>
+                            <a href="/loginboard2/controller/admin/MenuListController.php"><span class="glyphicon glyphicon-cog"></span> 관리자 페이지</a>
+                        </li> 
+                    <?php } ?>
                 <?php } ?>
             </ul>
         </div>

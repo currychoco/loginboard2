@@ -35,7 +35,7 @@ class UserDAO extends CommonDAO {
 
     public function getUserIdAndPw($id, $pw){
 
-        $query = "SELECT no, user_id, password FROM board_user WHERE user_id = ?";
+        $query = "SELECT no, user_id, password, admin FROM board_user WHERE user_id = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("s", $id);
