@@ -18,6 +18,7 @@
 
         <div class="container body-container">
             <h3 class="title">카테고리 생성</h3>
+            
             <form id = "categoryForm">
                 <div class="form-inline" style="margin-bottom: 15px">
                     <input type="text" class="form-control" name="name" id="name" placeholder="카테고리명" />

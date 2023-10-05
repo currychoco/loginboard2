@@ -12,7 +12,9 @@ class MenuDAO extends CommonDAO {
             SELECT 
                 id,
                 name,
-                parent_id
+                content,
+                parent_id,
+                visible
             FROM menu
         ");
 
@@ -26,5 +28,24 @@ class MenuDAO extends CommonDAO {
         }
 
         return $listResult;
+    }
+
+    public function createMenu($menu) {
+
+        $query = ("
+            INSERT INTO menu (
+                name,
+                content,
+                category_id,
+                visible
+            )
+            values (
+                ?, ?, ?, ?
+            )
+        ");
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ssis", $menu['name'], $menu['content'], $menu['categoryId'], $menu['visible']);
+        return $stmt->execute();
     }
 }

@@ -17,16 +17,16 @@
     }
 
     $dao = new CategoryDAO();
-    $listResult = $dao->getCategoryList();
+    $categoryList = $dao->getCategoryList();
 
     //생성자
     $oTemplate = new Template();
 
     //변수 셋팅
-	$oTemplate->set("listResult", $listResult);
+    $oTemplate->set('categoryList', $categoryList);
 
     //템플릿 위치 지정
-	$templateType = ROOT_PATH . "/tpl/admin/categoryList.tpl.php";
+	$templateType = ROOT_PATH . "/tpl/admin/createMenu.tpl.php";
 
     //패치
     echo $oTemplate->fetch($templateType);

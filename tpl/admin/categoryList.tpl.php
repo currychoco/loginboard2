@@ -6,7 +6,7 @@
         <script>
             $(function() {
                 $('#toMakeCategory').click(function() {
-                    createMenu();
+                    toMakeCategory();
                 });
             });
         </script>
@@ -17,7 +17,7 @@
 
         <div class="container body-container">
 
-            <h3>메뉴 리스트</h3><br>
+            <h3>카테고리 리스트</h3><br>
 
             <table class="table table-hover">
                 <thead>
@@ -45,7 +45,7 @@
             </table>
 
             <div style="float:right;">
-                <button class="btn btn-primary" id='toMakeCategory' style="margin-bottom: 20px">메뉴 생성</button>
+                <button class="btn btn-primary" id='toMakeCategory' style="margin-bottom: 20px">카테고리 생성</button>
             </div>
 
         </div>

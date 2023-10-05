@@ -20,4 +20,22 @@
             </ul>
         </div>
     </nav>
+
+    <div class="col-sm-1 sidenav">
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>관리자 메뉴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href='/loginboard2/controller/admin/CategoryListController.php'>카테고리</a></td>
+                </tr>
+                <tr>
+                    <td><a href='/loginboard2/controller/admin/MenuListController.php'>메뉴</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </header>
