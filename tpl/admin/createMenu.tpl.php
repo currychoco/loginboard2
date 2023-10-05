@@ -39,6 +39,15 @@
                         <td><textarea class='form-control' name="content" id="content" cols=65 rows=4></textarea></td>
                     </tr>
                     <tr>
+                        <th>하위 메뉴 생성</th>
+                        <td>
+                            <select class='form-control' id='onlyMenu' name='onlyMenu'>
+                                <option value='1'>하위 메뉴 생성 O (중간 메뉴로 사용)</option>
+                                <option value='0'>하위 메뉴 생성 X (글 기재 메뉴로 사용)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>메뉴 보이기</th>
                         <td>
                             <select class='form-control' id='visible' name='visible'>

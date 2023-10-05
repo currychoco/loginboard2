@@ -16,7 +16,7 @@
                     </li>
                 <?php }else{ ?>
                     <li>
-                        <p style="margin-top:13px;"><?=$_SESSION['userId'];?>님 안녕하세요</p>
+                        <p style="margin-top:13px;"><?=$_SESSION['userId']?>님 안녕하세요</p>
                     </li>
                     <li>
                         <a href="javascript:location.href='/loginboard2/controller/user/UserInfoController.php'">회원정보</a>

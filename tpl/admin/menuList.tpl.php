@@ -5,8 +5,8 @@
         <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
             $(function() {
-                $('#toMakeCategory').click(function() {
-                    createMenu();
+                $('#toMakeMenu').click(function() {
+                    toMakeMenu();
                 });
             });
         </script>
@@ -23,21 +23,29 @@
                 <thead>
                    <tr>
                         <th>아이디</th>
+                        <th>카테고리</th>
                         <th>이름</th>
-                        <th>설명</th>
+                        <th>순서</th>
+                        <th>상위 메뉴</th>
                    </tr> 
                 </thead>
                 <tbody>
                 <?php for($i = 0; $i < count($listResult); $i++) { ?>
                     <tr>
                         <td>
-                            <a href=''><?=$listResult[$i]['id']?></a>
+                            <?=$listResult[$i]['id']?>
+                        </td>
+                        <td>
+                            <?=$listResult[$i]['category']?>
                         </td>
                         <td>
                             <a href=''><?=$listResult[$i]['name']?></a>
                         </td>
                         <td>
-                            <?=$listResult[$i]['content']?>
+                            <?=$listResult[$i]['order']?>
+                        </td>
+                        <td>
+                            <?=$listResult[$i]['parent_id']?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -45,7 +53,7 @@
             </table>
 
             <div style="float:right;">
-                <button class="btn btn-primary" id='toMakeCategory' style="margin-bottom: 20px">메뉴 생성</button>
+                <button class="btn btn-primary" id='toMakeMenu' style="margin-bottom: 20px">메뉴 생성</button>
             </div>
 
         </div>

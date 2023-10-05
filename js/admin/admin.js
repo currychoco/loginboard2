@@ -50,7 +50,7 @@ function createCategory() {
 }
 
 function toMakeMenu() {
-    location.href = '/loginboard2/controller/admin/CreateCategoryController.php';
+    location.href = '/loginboard2/controller/admin/CreateMenuController.php';
 }
 
 function createMenu() {

@@ -1,9 +1,11 @@
 <?php
 include DAO_PATH . '/Common.DAO.php';
-class CategoryDAO extends CommonDAO {
+class CategoryDAO {
+
+    private $conn;
 
     public function __construct(){
-       parent::__construct();
+        $this->conn = mysqli_connect("localhost", "root", "password", "mysql");
     }
 
     public function createCategory($category) {

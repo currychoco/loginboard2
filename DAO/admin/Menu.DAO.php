@@ -1,21 +1,28 @@
 <?php
 include DAO_PATH . '/Common.DAO.php';
-class MenuDAO extends CommonDAO {
+class MenuDAO {
+
+    private $conn;
 
     public function __construct(){
-       parent::__construct();
+        $this->conn = mysqli_connect("localhost", "root", "password", "mysql");
     }
+
 
     public function getMenuList() {
 
         $query = ("
             SELECT 
-                id,
-                name,
-                content,
-                parent_id,
-                visible
-            FROM menu
+                m.id,
+                m.name,
+                m.content,
+                m.parent_id,
+                m.visible,
+                m.order,
+                c.name as category
+            FROM menu m
+            INNER JOIN category c
+            ON m.category_id = c.id
         ");
 
         $result = mysqli_query($this->conn, $query);
