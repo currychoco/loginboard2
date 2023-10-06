@@ -2,7 +2,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/loginboard2/controller/board/BoardListController.php" style="padding: 15px 10px;">
+                <a class="navbar-brand" href="/loginboard2/controller/admin/MenuListController.php" style="padding: 15px 10px;">
                     다나가 관리자
                 </a>
             </div>

@@ -6,7 +6,7 @@
     require_once ROOT_PATH . "/common/Template.php";
     require_once ROOT_PATH . "/common/Utility.php";
     require_once DAO_PATH . "/board/DanawaBoardList.DAO.php";
-    // require_once DAO_PATH . '/admin/Category.DAO.php';
+    require_once DAO_PATH . '/admin/Admin.DAO.php';
 
     $utility = new Utility();
 

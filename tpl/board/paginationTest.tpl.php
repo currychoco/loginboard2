@@ -3,8 +3,10 @@
 	<head>
 	    <?php include  $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/head.php'?>
         <script src='/loginboard2/js/board/board.js'></script>
+        <script src='/loginboard2/js/common/common.js'></script>
         <script>
             $(function() {
+                header();
                 pagination();
 
                 $('.table tbody tr:nth-child(odd)').css('background', '#9F9F9F');
@@ -33,7 +35,10 @@
 	</head>
 	<body>
         <!-- header -->
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
+        <?php // include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
+        <div id='header'>
+
+        </div>
 
         <div class="container body-container">
 

@@ -1,5 +1,5 @@
 <?php
-    
+    namespace common;
     class CommonDAO{
 
         protected $conn;

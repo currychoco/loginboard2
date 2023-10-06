@@ -5,7 +5,7 @@
     require_once $_SERVER['DOCUMENT_ROOT']."/loginboard2/conf.php";
     require_once ROOT_PATH . "/common/Template.php";
     require_once ROOT_PATH . "/common/Utility.php";
-    require_once DAO_PATH . '/admin/Menu.DAO.php';
+    require_once DAO_PATH . '/admin/Admin.DAO.php';
 
     // 관리자 아닐 경우 게시판 리스트로
     if($_SESSION['user'] != 'admin') {
@@ -16,7 +16,7 @@
         ");
     }
 
-    $dao = new MenuDAO();
+    $dao = new AdminDAO();
     $listResult = $dao->getMenuList();
 
     //생성자

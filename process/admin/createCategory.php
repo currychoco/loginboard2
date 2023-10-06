@@ -2,7 +2,7 @@
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/Utility.php';
-    require_once DAO_PATH . '/admin/Category.DAO.php';
+    require_once DAO_PATH . '/admin/Admin.DAO.php';
 
     if($_SESSION['user'] != 'admin') {
         echo json_encode(array('result' => -2, 'msg' => '관리자 권한이 필요합니다.'));
@@ -19,7 +19,7 @@
         'content' => $content
     );
 
-    $dao = new CategoryDAO();
+    $dao = new AdminDAO();
     $result = $dao->createCategory($category);
 
     if($result) {
