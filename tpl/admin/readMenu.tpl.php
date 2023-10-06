@@ -8,6 +8,9 @@
                 $('#toUpdateMenu').click(function() {
                     toUpdateMenu();
                 });
+                $('#deleteMenu').click(function() {
+                    deleteMenu();
+                });
             });
         </script>
 	</head>
@@ -54,6 +57,7 @@
                     <tr>
                         <td colspan='2' style='text-align:right;'>
                             <input type='button' class='btn btn-primary' id='toUpdateMenu' value='수정하기'>
+                            <input type='button' class='btn btn-danger' id='deleteMenu' value='삭제'>
                         </td>
                     </tr>
                 </table>

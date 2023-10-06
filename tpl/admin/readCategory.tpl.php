@@ -8,6 +8,9 @@
                 $('#toUpdateCategory').click(function() {
                     toUpdateCategory();
                 });
+                $('#deleteCategory').click(function() {
+                    deleteCategory();
+                });
             });
         </script>
 	</head>
@@ -32,6 +35,7 @@
                     <tr>
                         <td colspan='2' style='text-align:right;'>
                             <button type="button" class="btn btn-primary" id="toUpdateCategory">수정하기</button>
+                            <button type="button" class="btn btn-danger" id="deleteCategory">삭제</button>
                         </td>
                     </tr>
                 </table>

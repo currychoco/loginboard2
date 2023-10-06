@@ -199,3 +199,67 @@ function toUpdateCategory() {
     var categoryId = $('#categoryId').val();
     location.href = '/loginboard2/controller/admin/UpdateCategoryController.php?type=update&categoryId=' + categoryId;
 }
+
+function deleteCategory() {
+
+    if(!confirm('해당 카테고리를 삭제하시겠습니까?')) {
+        return;
+    }
+
+    var categoryId = $('#categoryId').val();
+
+    $.ajax({
+        url : '/loginboard2/process/admin/deleteCategory.php',
+        type : 'POST',
+        data : {
+            categoryId : categoryId
+        },
+        dataType : 'json',
+
+        success : function(data) {
+            
+            if(data.result) {
+                alert(data.msg);
+                location.href = '/loginboard2/controller/admin/CategoryListController.php';
+            }
+            else {
+                alert(data.msg)
+            }
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+    });
+}
+
+function deleteMenu() {
+
+    if(!confirm('해당 메뉴를 삭제하시겠습니까?')) {
+        return;
+    }
+
+    var menuId = $('#menuId').val();
+
+    $.ajax({
+        url : '/loginboard2/process/admin/deleteMenu.php',
+        type : 'POST',
+        data : {
+            menuId : menuId
+        },
+        dataType : 'json',
+
+        success : function(data) {
+            
+            if(data.result) {
+                alert(data.msg);
+                location.href = '/loginboard2/controller/admin/MenuListController.php';
+            }
+            else {
+                alert(data.msg)
+            }
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+    });
+}

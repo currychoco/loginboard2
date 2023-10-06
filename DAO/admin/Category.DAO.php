@@ -85,4 +85,13 @@ class CategoryDAO extends common\CommonDAO{
         
         return $stmt->execute();
     }
+
+    public function deleteCategoryById($categoryId) {
+
+        $query = 'DELETE FROM category WHERE id = ?';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $categoryId);
+
+        return $stmt->execute();
+    }
 }

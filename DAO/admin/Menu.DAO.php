@@ -101,4 +101,14 @@ class MenuDAO extends common\CommonDAO{
 
         return $stmt->execute();
     }
+
+    public function deleteMenuById($menuId) {
+        
+        $query = 'DELETE FROM menu WHERE id = ?';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $menuId);
+
+        return $stmt->execute();
+    }
 }
