@@ -3,11 +3,12 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/loginboard2/conf.php";
     require_once ROOT_PATH . "/common/Template.php";
     require_once ROOT_PATH . "/common/Utility.php";
-    require_once DAO_PATH . "/admin/Category.DAO.php";
+    require_once DAO_PATH . "/admin/Menu.DAO.php";
+    require_once DAO_PATH . '/admin/Category.DAO.php';
 
     $utility = new Utility();
-    $dao = new CategoryDAO();
-    $oTemplate = new Template();
+    $menuDao = new MenuDAO();
+    $categoryDao = new CategoryDAO();
 
     // 관리자 아닐 경우 게시판 리스트로
     if($_SESSION['user'] != 'admin') {
@@ -22,18 +23,25 @@
     if(isset($_GET['type'])) {
         $type = $utility->filter_SQL($_GET['type']);
     }
+    
+    $menuId = $utility->filter_SQL($_GET['menuId']);
 
-    $categoryId = $utility->filter_SQL($_GET['categoryId']);
+    $menu = $menuDao->getMenuById($menuId);
 
-    $category = $dao->getCategoryById($categoryId);
+    $categoryList = $categoryDao->getCategoryList();
 
-    $oTemplate->set('category', $category);
+    $oTemplate = new Template();
+
+    $oTemplate->set('menu', $menu);
+    $oTemplate->set('categoryList', $categoryList);
+
 
     if($type == 'read') {
-        $templateType = ROOT_PATH . "/tpl/admin/readCategory.tpl.php";
+        $templateType = ROOT_PATH . "/tpl/admin/readMenu.tpl.php";
     }
-    else {
-        $templateType = ROOT_PATH . "/tpl/admin/updateCategory.tpl.php";
+    else if($type == 'update') {
+        $templateType = ROOT_PATH . "/tpl/admin/updateMenu.tpl.php";
     }
     
+
     echo $oTemplate->fetch($templateType);

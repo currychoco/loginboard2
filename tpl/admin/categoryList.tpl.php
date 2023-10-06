@@ -31,10 +31,10 @@
                 <?php for($i = 0; $i < count($listResult); $i++) { ?>
                     <tr>
                         <td>
-                            <a href=''><?=$listResult[$i]['id']?></a>
+                            <a href="/loginboard2/controller/admin/UpdateCategoryController.php?type=read&categoryId=<?=$listResult[$i]['id']?>"><?=$listResult[$i]['id']?></a>
                         </td>
                         <td>
-                            <a href=''><?=$listResult[$i]['name']?></a>
+                            <a href="/loginboard2/controller/admin/UpdateCategoryController.php?type=read&categoryId=<?=$listResult[$i]['id']?>"><?=$listResult[$i]['name']?></a>
                         </td>
                         <td>
                             <?=$listResult[$i]['content']?>

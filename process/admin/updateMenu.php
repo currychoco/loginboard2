@@ -11,9 +11,11 @@
 
     $utility = new Utility();
 
+    $menuId = $utility->filter_SQL($_POST['menuId']);
     $name = $utility->filter_SQL($_POST['name']);
     $content = $utility->filter_SQL($_POST['content']);
     $categoryId = $utility->filter_SQL($_POST['categoryId']);
+    $onlyMenu = $utility->filter_SQL($_POST['onlyMenu']);
     $visible = $utility->filter_SQL($_POST['visible']);
 
     if(strlen($name) < 2 || strlen($name) > 20) {
@@ -27,18 +29,20 @@
     }
 
     $menu = array(
+        'id' => $menuId,
         'name' => $name,
         'content' => $content,
         'categoryId' => $categoryId,
+        'onlyMenu' => $onlyMenu,
         'visible' => $visible
     );
 
     $dao = new MenuDAO();
-    $result = $dao->createMenu($menu);
+    $result = $dao->updateMenuById($menu);
 
     if($result) {
-        echo json_encode(array('result' => 1, 'msg' => '메뉴 생성 성공'));
+        echo json_encode(array('result' => 1, 'msg' => '메뉴 수정 성공'));
     }
     else {
-        echo json_encode(array('result' => -1, 'msg' => '메뉴 생성에 실패하였습니다.'));
+        echo json_encode(array('result' => -1, 'msg' => '메뉴 수정에 실패하였습니다.'));
     }

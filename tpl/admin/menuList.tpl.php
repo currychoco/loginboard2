@@ -33,13 +33,13 @@
                 <?php for($i = 0; $i < count($listResult); $i++) { ?>
                     <tr>
                         <td>
-                            <?=$listResult[$i]['id']?>
+                            <a href="/loginboard2/controller/admin/UpdateMenuController.php?menuId=<?=$listResult[$i]['id']?>&type=read"><?=$listResult[$i]['id']?></a>
                         </td>
                         <td>
                             <?=$listResult[$i]['category']?>
                         </td>
                         <td>
-                            <a href=''><?=$listResult[$i]['name']?></a>
+                            <a href="/loginboard2/controller/admin/UpdateMenuController.php?menuId=<?=$listResult[$i]['id']?>&type=read"><?=$listResult[$i]['name']?></a>
                         </td>
                         <td>
                             <?=$listResult[$i]['order']?>

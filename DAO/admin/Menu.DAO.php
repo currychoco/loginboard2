@@ -54,4 +54,51 @@ class MenuDAO extends common\CommonDAO{
         $stmt->bind_param("ssis", $menu['name'], $menu['content'], $menu['categoryId'], $menu['visible']);
         return $stmt->execute();
     }
+
+    public function getMenuById($menuId) {
+        
+        $query = ("
+            SELECT
+                m.id,
+                m.name,
+                m.category_id,
+                m.content,
+                m.only_menu,
+                m.visible,
+                c.name as category
+            FROM menu m
+            INNER JOIN category c
+            ON m.category_id = c.id
+            WHERE m.id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $menuId);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+
+        $row = mysqli_fetch_array($result);
+
+        return $row;
+    }
+
+    public function updateMenuById($menu) {
+
+        $query = ("
+            UPDATE menu
+            SET 
+                name = ?,
+                category_id = ?,
+                content = ?,
+                only_menu = ?,
+                visible = ?
+            WHERE id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('sisssi', $menu['name'], $menu['categoryId'], $menu['content'], $menu['onlyMenu'], $menu['visible'], $menu['id']);
+
+        return $stmt->execute();
+    }
 }

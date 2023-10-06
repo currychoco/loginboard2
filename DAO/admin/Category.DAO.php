@@ -50,4 +50,39 @@ class CategoryDAO extends common\CommonDAO{
 
         return $row['count'];
     }
+
+    public function getCategoryById($categoryId) {
+
+        $query = ("
+            SELECT
+                id,
+                name,
+                content
+            FROM category
+            WHERE id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $categoryId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = mysqli_fetch_array($result);
+
+        return $row;
+    }
+
+    public function updateCategoryById($category) {
+
+        $query = ("
+            UPDATE category
+            SET name = ?, content = ?
+            WHERE id = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ssi', $category['name'], $category['content'], $category['id']);
+        
+        return $stmt->execute();
+    }
 }
