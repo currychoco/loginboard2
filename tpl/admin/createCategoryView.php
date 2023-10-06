@@ -20,16 +20,22 @@
             <h3 class="title">카테고리 생성</h3>
             
             <form id = "categoryForm">
-                <div class="form-inline" style="margin-bottom: 15px">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="카테고리명" />
-                </div>
-                <div class="form-inline" style="margin-bottom: 15px">
-                    <input type="tel" class="form-control" name="content" id="content" placeholder="카테고리 설명" />
-                    <span id="checkNumResult"></span>
-                </div>
-                <div class="form-inline" style="margin-bottom: 15px">
-                    <button type="button" class="btn btn-primary" id="categoryFormButton">생성</button>
-                </div>
+
+                <table class='table'>
+                    <tr>
+                        <th>카테고리명</th>
+                        <td><input class='form-control' type='text' id='name' name='name'></td>
+                    </tr>
+                    <tr>
+                        <th>카테고리 설명</th>
+                        <td><textarea class='form-control' name='content' name='content' cols=65 rows=4></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' style='text-align:right;'>
+                            <button type="button" class="btn btn-primary" id="categoryFormButton">생성</button>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
 	</body>

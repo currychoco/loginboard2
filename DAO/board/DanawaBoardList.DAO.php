@@ -9,7 +9,7 @@ class DanawaBoardList extends common\CommonDAO {
     }
 
     // 쿼리로 조회된 결과물 배열로 반환
-    public function getBoardList($no = 0, $pageSize = PAGE_SIZE, $search='', $keyword='') {
+    public function getBoardList($no = 0, $pageSize = PAGE_SIZE, $search='', $keyword='', $menuId = 0) {
 
         $stmt = null;
 
@@ -29,13 +29,14 @@ class DanawaBoardList extends common\CommonDAO {
                 ON b.user_no = u.no
                 LEFT OUTER JOIN image i
                 ON b.id = i.board_id
+                WHERE b.menu_id = ?
                 GROUP BY b.id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("ii", $no, $pageSize);
+            $stmt->bind_param("iii", $menuId, $no, $pageSize);
             $stmt->execute();
         }
         else if($search == 'title') { 
@@ -54,14 +55,16 @@ class DanawaBoardList extends common\CommonDAO {
                 ON b.user_no = u.no
                 LEFT OUTER JOIN image i
                 ON b.id = i.board_id
-                WHERE title like CONCAT('%', ?, '%')
+                WHERE 
+                    title like CONCAT('%', ?, '%')
+                    AND b.menu_id = ?
                 GROUP BY b.id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("sii", $keyword, $no, $pageSize);
+            $stmt->bind_param("siii", $keyword, $menuId, $no, $pageSize);
             $stmt->execute();
         }
         else if($search == 'writer') {
@@ -80,14 +83,16 @@ class DanawaBoardList extends common\CommonDAO {
                 ON b.user_no = u.no
                 LEFT OUTER JOIN image i
                 ON b.id = i.board_id
-                WHERE u.user_id like CONCAT('%', ?, '%')
+                WHERE 
+                    u.user_id like CONCAT('%', ?, '%')
+                    AND b.menu_id = ?
                 GROUP BY b.id
                 ORDER BY id DESC
                 LIMIT ?, ?
             ");
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("sii", $keyword, $no, $pageSize);
+            $stmt->bind_param("siii", $keyword, $menuId, $no, $pageSize);
             $stmt->execute();
         }
 
@@ -106,21 +111,25 @@ class DanawaBoardList extends common\CommonDAO {
     }
 
     // 총 게시글 개수 반환
-    public function getBoardListCount($search = '', $keyword = ''){
+    public function getBoardListCount($search = '', $keyword = '', $menuId = 0){
 
         $result = null;
         if(empty($keyword) && strlen($keyword) < 1) {
 
-            $query = "SELECT COUNT(*) AS count FROM login_board";
-            $result = mysqli_query($this->conn, $query);
+            $query = "SELECT COUNT(*) AS count FROM login_board WHERE menu_id = ?";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('i', $menuId);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
         }
         else if($search == 'title') {
 
-            $query = "SELECT COUNT(*) AS count FROM login_board WHERE title LIKE CONCAT('%', ?, '%')";
+            $query = "SELECT COUNT(*) AS count FROM login_board WHERE title LIKE CONCAT('%', ?, '%') AND menu_id = ?";
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('s', $keyword);
+            $stmt->bind_param('si', $keyword, $menuId);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -134,10 +143,11 @@ class DanawaBoardList extends common\CommonDAO {
                 ON u.no = b.user_no
                 WHERE
                     u.user_id LIKE CONCAT('%', ?, '%')       
+                    AND b.menu_id = ?
             ");
 
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('s', $keyword);
+            $stmt->bind_param('si', $keyword, $menuId);
             $stmt->execute();
             $result = $stmt->get_result();
         }

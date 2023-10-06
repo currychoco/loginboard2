@@ -6,7 +6,6 @@
     require_once ROOT_PATH . "/common/Template.php";
     require_once ROOT_PATH . "/common/Utility.php";
     require_once DAO_PATH . "/board/DanawaBoardList.DAO.php";
-    require_once DAO_PATH . '/admin/Admin.DAO.php';
 
     $utility = new Utility();
 
@@ -58,11 +57,16 @@
 
     $boardDao  = new DanawaBoardList();
 
+    $menuId = 2;
+    if(isset($_GET['menu'])) {
+        $menuId = $utility->filter_SQL($_GET['menu']);
+    }  
+
     // 리스트
-    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword);
+    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword, $menuId);
 
     // 리스트 총 개수
-    $listResultCnt = $boardDao->getBoardListCount($search, $keyword);
+    $listResultCnt = $boardDao->getBoardListCount($search, $keyword, $menuId);
 
     //생성자
     $oTemplate = new Template();

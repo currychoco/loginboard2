@@ -4,11 +4,14 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/Template.php';
-    require_once DAO_PATH . '/admin/Admin.DAO.php';
+    require_once DAO_PATH . '/admin/Category.DAO.php';
+    require_once DAO_PATH . '/admin/Menu.DAO.php';
 
-    $dao = new AdminDAO();
-    $categoryList = $dao->getCategoryList();
-    $menuList = $dao->getMenuList();
+    $categoryDao = new CategoryDAO();
+    $menuDao = new MenuDAO();
+
+    $categoryList = $categoryDao->getCategoryList();
+    $menuList = $menuDao->getMenuList();
 
     //생성자
     $oTemplate = new Template();
