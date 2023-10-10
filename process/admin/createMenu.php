@@ -15,6 +15,12 @@
     $content = $utility->filter_SQL($_POST['content']);
     $categoryId = $utility->filter_SQL($_POST['categoryId']);
     $visible = $utility->filter_SQL($_POST['visible']);
+    $onlyMenu = $utility->filter_SQL($_POST['onlyMenu']);
+    
+    $parentId = 0;
+    if(isset($_POST['parentId'])) {
+        $parentId = $utility->filter_SQL($_POST['parentId']);
+    }
 
     if(strlen($name) < 2 || strlen($name) > 20) {
         echo json_encode(array('result' => -3, 'msg' => '메뉴명을 확인해 주세요.'));
@@ -30,7 +36,9 @@
         'name' => $name,
         'content' => $content,
         'categoryId' => $categoryId,
-        'visible' => $visible
+        'visible' => $visible,
+        'onlyMenu' => $onlyMenu,
+        'parentId' => $parentId
     );
 
     $dao = new MenuDAO();

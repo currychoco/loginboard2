@@ -9,24 +9,42 @@ class CategoryDAO extends common\CommonDAO{
 
     public function createCategory($category) {
 
+        $order = $this->getMaxOrder();
+
         $query = ("
             INSERT INTO category (
                 name,
-                content
+                content,
+                `order`
             )
             values (
-                ?, ?
+                ?, ?, ?
             )
         ");
         
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ss", $category['name'], $category['content']);
+        $stmt->bind_param("ssi", $category['name'], $category['content'], $order);
         return $stmt->execute();
+    }
+
+    public function getMaxOrder() {
+
+        $order = 1;
+        
+        $query = 'SELECT MAX(`order`) as `order` FROM category';
+        $row = mysqli_query($this->conn, $query);
+        $result = mysqli_fetch_array($row);
+
+        if(isset($result['order']) && !empty($result['order'])) {
+            $order = $result['order'] + 1;
+        }
+
+        return $order;
     }
 
     public function getCategoryList() {
 
-        $query = 'SELECT id, name, content FROM category ORDER BY id DESC';
+        $query = 'SELECT id, name, content, `order` FROM category ORDER BY id DESC';
         
         $result = mysqli_query($this->conn, $query);
 

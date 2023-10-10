@@ -42,6 +42,11 @@
 
         <div class="container body-container">
 
+            <div>
+                <h3><?=$menu['name']?></h3>
+                <p><?=$menu['content']?></p>
+            </div>
+
             <!-- 검색창 -->
             <div class="form-inline" style="margin-bottom: 15px; text-align: right;">
 

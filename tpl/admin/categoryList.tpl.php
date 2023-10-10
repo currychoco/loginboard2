@@ -25,6 +25,7 @@
                         <th>아이디</th>
                         <th>이름</th>
                         <th>설명</th>
+                        <th>순서</th>
                    </tr> 
                 </thead>
                 <tbody>
@@ -38,6 +39,9 @@
                         </td>
                         <td>
                             <?=$listResult[$i]['content']?>
+                        </td>
+                        <td>
+                            <?=$listResult[$i]['order']?>
                         </td>
                     </tr>
                 <?php } ?>

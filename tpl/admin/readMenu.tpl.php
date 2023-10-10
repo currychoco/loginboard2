@@ -58,6 +58,7 @@
                         <td colspan='2' style='text-align:right;'>
                             <input type='button' class='btn btn-primary' id='toUpdateMenu' value='수정하기'>
                             <input type='button' class='btn btn-danger' id='deleteMenu' value='삭제'>
+                            <input type='button' class='btn btn-primary' id='toUpdateMenu' value='수정하기'>
                         </td>
                     </tr>
                 </table>

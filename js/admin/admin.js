@@ -80,7 +80,7 @@ function createMenu() {
         success : function(data) {
 
             if(data.result == 1) {
-                location.href = '/loginboard2/controller/admin/CategoryListController.php';
+                location.href = '/loginboard2/controller/admin/MenuListController.php';
             }
             else if(data.result == -1) {
                 alert(data.msg);
@@ -161,7 +161,6 @@ function updateMenu() {
     }
 
     $.ajax({
-
         url : '/loginboard2/process/admin/updateMenu.php',
         type : 'POST',
         data : $('#updateMenuForm').serialize(),

@@ -17,6 +17,7 @@ class MenuDAO extends common\CommonDAO{
                 m.parent_id,
                 m.category_id,
                 m.order,
+                m.only_menu,
                 c.name as category
             FROM menu m
             INNER JOIN category c
@@ -38,21 +39,48 @@ class MenuDAO extends common\CommonDAO{
 
     public function createMenu($menu) {
 
+        $order = $this->getMaxOrder($menu['categoryId'], $menu['parentId']);
+
         $query = ("
             INSERT INTO menu (
                 name,
                 content,
                 category_id,
-                visible
+                parent_id,
+                visible,
+                only_menu,
+                `order`
             )
             values (
-                ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?
             )
         ");
         
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssis", $menu['name'], $menu['content'], $menu['categoryId'], $menu['visible']);
+        $stmt->bind_param("ssiissi", $menu['name'], $menu['content'], $menu['categoryId'], $menu['parentId'], $menu['visible'], $menu['onlyMenu'], $order);
         return $stmt->execute();
+    }
+
+    public function getMaxOrder($categoryId, $parentId) {
+
+        $order = 1;
+        
+        $query = ("
+            SELECT MAX(`order`) as `order` FROM menu WHERE category_id = ? AND parent_id = ?
+        ");
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ii', $categoryId, $parentId);
+        $stmt->execute();
+
+        $row = $stmt->get_result();
+        $result = mysqli_fetch_array($row);
+
+        if(isset($result['order']) && !empty($result['order'])) {
+            $order = $result['order'] + 1;
+        }
+
+        return $order;
     }
 
     public function getMenuById($menuId) {
@@ -110,5 +138,20 @@ class MenuDAO extends common\CommonDAO{
         $stmt->bind_param('i', $menuId);
 
         return $stmt->execute();
+    }
+
+    public function getOnlyMenuList() {
+
+        $query = 'SELECT id, name FROM menu WHERE only_menu = 1';
+        $result = mysqli_query($this->conn, $query);
+
+        $listResult = array();
+        while($row = mysqli_fetch_array($result)) {
+
+            array_push($listResult, $row);
+
+        }
+
+        return $listResult;
     }
 }

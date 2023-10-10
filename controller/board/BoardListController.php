@@ -2,10 +2,11 @@
     session_start();
     ini_set('display_errors', 1);
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/loginboard2/conf.php";
-    require_once ROOT_PATH . "/common/Template.php";
-    require_once ROOT_PATH . "/common/Utility.php";
-    require_once DAO_PATH . "/board/DanawaBoardList.DAO.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
+    require_once ROOT_PATH . '/common/Template.php';
+    require_once ROOT_PATH . '/common/Utility.php';
+    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
+    require_once DAO_PATH . '/admin/Menu.DAO.php';
 
     $utility = new Utility();
 
@@ -62,6 +63,10 @@
         $menuId = $utility->filter_SQL($_GET['menu']);
     }  
 
+    // 메뉴 정보
+    $menuDao = new MenuDAO();
+    $menu = $menuDao->getMenuById($menuId);
+
     // 리스트
     $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword, $menuId);
 
@@ -72,18 +77,19 @@
     $oTemplate = new Template();
 
     //변수 셋팅
-	$oTemplate->set("listResult", $listResult);
-    $oTemplate->set("no", $no);
-    $oTemplate->set("totalRow", $listResultCnt);
-    $oTemplate->set("pageSize", PAGE_SIZE);
-    $oTemplate->set("pageListSize", PAGE_LIST_SIZE);
+	$oTemplate->set('listResult', $listResult);
+    $oTemplate->set('no', $no);
+    $oTemplate->set('totalRow', $listResultCnt);
+    $oTemplate->set('pageSize', PAGE_SIZE);
+    $oTemplate->set('pageListSize', PAGE_LIST_SIZE);
     $oTemplate->set('keyword', $keyword);
     $oTemplate->set('search', $search);
     $oTemplate->set('list', $setList);
+    $oTemplate->set('menu', $menu);
 
     //템플릿 위치 지정
     //$templateType = ROOT_PATH . "/tpl/board/boardListView.tpl.php"; // 기존에 페이징 부분을 'include'로 처리했었던 템플릿
-	$templateType = ROOT_PATH . "/tpl/board/paginationTest.tpl.php"; // 페이징 부분을 ajax를 통해 html 문서를 받아오는 템플릿
+	$templateType = ROOT_PATH . '/tpl/board/paginationTest.tpl.php'; // 페이징 부분을 ajax를 통해 html 문서를 받아오는 템플릿
 
     //패치
     echo $oTemplate->fetch($templateType);
