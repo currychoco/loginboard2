@@ -25,11 +25,9 @@
      }
 
 
-    // 제목, 내용 유효성 검사
+    // 유효성 검사
     if(isset($_POST['title']) && isset($_POST['content'])) {
 
-        // $title = $utility->filter_SQL($_POST['title']);
-        // $content = $utility->filter_SQL($_POST['content']);
         $title = $_POST['title'];
         $content = $_POST['content'];
 
@@ -45,10 +43,29 @@
         }
     }
 
+    if(!isset($_POST['menuId']) || $_POST['menuId'] == 0) {
+        echo ("
+                <script>
+                    alert('게시판을 확인해 주세요.');
+                    go.history(-1);
+                </script>
+            ");
+
+            exit;
+    }
+    $menuId = $utility->filter_SQL($_POST['menuId']);
+
     $dao = new DanawaBoardList();
 
+    $board = array(
+        'title' => $title,
+        'content' => $content,
+        'no' => $user['no'],
+        'menuId' => $menuId
+    );
+
     // 게시글 생성 후 생성된 게시글의 id 반환
-    $boardId = $dao->insertBoard($title, $content, $user['no']);
+    $boardId = $dao->insertBoard($board);
     
     // 업로드 된 이미지 지정된 파일로 이동
     if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'][0])) {

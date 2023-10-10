@@ -75,11 +75,12 @@ function checkLogin() {
     }
 }
 
-function writeButton() {
+function createBoard() {
 
     // 유효성 검사
     var title = $('#title').val();
     var content = $('#content').val();
+    var menuId = $('#menuId option:selected').val();
 
     if(title.length < 2 || title.length > 30) {
         alert('제목은 2자 이상 30자 이하여야 합니다.');
@@ -87,6 +88,10 @@ function writeButton() {
     }
     if(content.length < 1) {
         alert('내용은 1자 이상이어야 합니다.');
+        return;
+    }
+    if(menuId == 0 && !Number.isInteger(menuId)) {
+        alert('게시판을 선택해 주십시오.');
         return;
     }
 

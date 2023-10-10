@@ -22,19 +22,16 @@
             <table class="table table-hover">
                 <thead>
                    <tr>
-                        <th>아이디</th>
                         <th>카테고리</th>
                         <th>이름</th>
                         <th>순서</th>
                         <th>상위 메뉴</th>
+                        <th>노출 여부</th>
                    </tr> 
                 </thead>
                 <tbody>
                 <?php for($i = 0; $i < count($listResult); $i++) { ?>
                     <tr>
-                        <td>
-                            <a href="/loginboard2/controller/admin/UpdateMenuController.php?menuId=<?=$listResult[$i]['id']?>&type=read"><?=$listResult[$i]['id']?></a>
-                        </td>
                         <td>
                             <?=$listResult[$i]['category']?>
                         </td>
@@ -46,6 +43,10 @@
                         </td>
                         <td>
                             <?=$listResult[$i]['parent_id']?>
+                        </td>
+                        <td>
+                            <?= $listResult[$i]['visible']==1?'O':'X'?>
+
                         </td>
                     </tr>
                 <?php } ?>

@@ -5,9 +5,17 @@
         <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
             $(function() {
+
+                getOnlyMenuList();
+
                 $('#menuCreateButton').click(function() {
                     createMenu();
                 });
+
+                $('#categoryId').on('change', function() {
+                    getOnlyMenuList();
+                });
+
             });
         </script>
 	</head>
@@ -36,16 +44,7 @@
                     </tr>
                     <tr>
                         <th>상위 메뉴</th>
-                        <td>
-                            <select class='form-control' id='parentId' name='parentId'>
-                                
-                                <option value='0'>없음</option>
-
-                                <?php for($i = 0; $i < count($onlyMenuList); $i++) { ?>
-                                    <option value="<?=$onlyMenuList[$i]['id']?>"><?=$onlyMenuList[$i]['name']?></option>
-                                <?php } ?>
-                            </select>
-                        </td>
+                        <td id='menuList'></td>
                     </tr>
                     <tr>
                         <th>메뉴 설명</th>

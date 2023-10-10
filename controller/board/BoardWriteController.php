@@ -5,8 +5,10 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/Template.php';
     require_once ROOT_PATH . '/common/Utility.php';
+    require_once DAO_PATH . '/admin/Category.DAO.php';
 
     $utility = new Utility();
+    $categoryDao = new CategoryDAO();
 
     // 로그인 체크
     $login = false;
@@ -26,10 +28,13 @@
         $no = $utility->filter_SQL($_GET['no']);
     }
 
+    $categoryList = $categoryDao->getCategoryList();
+
     $oTemplate = new Template();
 
     $oTemplate->set('checkLogin', $login);
     $oTemplate->set('no', $no);
+    $oTemplate->set('categoryList', $categoryList);
 
     $templateType = ROOT_PATH . '/tpl/board/boardWriteView.tpl.php';
 

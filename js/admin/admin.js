@@ -58,6 +58,7 @@ function createMenu() {
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
     var tmpName = $('#name').val();
     var content = $('#content').val();
+    var menuId = $('#menuId').val();
 
     var name = tmpName.replace(reg, '');
 
@@ -256,6 +257,51 @@ function deleteMenu() {
             else {
                 alert(data.msg)
             }
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+    });
+}
+
+function getWriteMenuList() {
+
+    var categoryId = $('#selectCategory option:selected').val();
+
+    $.ajax({
+        url : '/loginboard2/controller/admin/MenuSelectBoxController.php',
+        type : 'POST',
+        data : {
+            categoryId : categoryId
+        },
+        dataType : 'html',
+
+        success : function(data) {
+            $('#menuList').empty();
+            $('#menuList').append(data);
+        },
+        error : function(request) {
+            console.log(request.responseText);
+        }
+    });
+}
+
+function getOnlyMenuList() {
+
+    var categoryId = $('#categoryId option:selected').val();
+
+    $.ajax({
+        url : '/loginboard2/controller/admin/MenuSelectBoxController.php',
+        type : 'POST',
+        data : {
+            categoryId : categoryId,
+            type : 'onlyMenu'
+        },
+        dataType : 'html',
+
+        success : function(data) {
+            $('#menuList').empty();
+            $('#menuList').append(data);
         },
         error : function(request) {
             console.log(request.responseText);

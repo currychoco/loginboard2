@@ -3,20 +3,25 @@
 	<head>
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
+        <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
 
             $(function() {
 
                 checkLogin();
+                getWriteMenuList();
 
                 $('#write').click(function() {
-                    writeButton();
+                    createBoard();
                 });
 
                 $('#toList').click(function() {
                     toListButton();
                 });
 
+                $('#selectCategory').on('change', function() {
+                    getWriteMenuList();
+                });
             })
 
         </script>
@@ -40,13 +45,27 @@
                         <col width="90%" />
                     </colgroup>
                     <tr>
-                        <td>제목</td>
+                        <th>제목</th>
                         <td>
                             <input type="text" class="form-control" name="title" id="title" size=60 maxlength=35>
                         </td>
                     </tr>
                     <tr>
-                        <td>내용</td>
+                        <th>카테고리</th>
+                        <td>
+                            <select class='form-control' id='selectCategory' name='selectCategory'>
+                                <?php for($i = 0; $i < count($categoryList); $i++) { ?>
+                                    <option value="<?=$categoryList[$i]['id']?>"><?=$categoryList[$i]['name']?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>게시판</th>
+                        <td id='menuList'></td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
                         <td>
                             <textarea class="form-control" name="content" id="content" cols=65 rows=15></textarea>
                         </td>

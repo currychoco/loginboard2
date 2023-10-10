@@ -18,11 +18,11 @@ class MenuDAO extends common\CommonDAO{
                 m.category_id,
                 m.order,
                 m.only_menu,
+                m.visible,
                 c.name as category
             FROM menu m
             INNER JOIN category c
             ON m.category_id = c.id
-            WHERE m.visible = 1;
         ");
 
         $result = mysqli_query($this->conn, $query);
@@ -153,5 +153,30 @@ class MenuDAO extends common\CommonDAO{
         }
 
         return $listResult;
+    }
+
+    public function getMenuListByCategoryId($categoryId, $type) {
+
+        $query = ("
+            SELECT
+                id,
+                name
+            FROM menu
+            WHERE
+                category_id = ?
+                AND only_menu = ?
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('is', $categoryId, $type);
+        $stmt->execute();
+        $resultList = $stmt->get_result();
+
+        $result = array();
+        while($row = mysqli_fetch_array($resultList)) {
+            array_push($result, $row);
+        }
+
+        return $result;
     }
 }

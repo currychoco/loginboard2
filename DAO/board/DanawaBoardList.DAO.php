@@ -159,20 +159,21 @@ class DanawaBoardList extends common\CommonDAO {
     }
 
     // 게시글 생성
-    public function insertBoard($title, $content, $userNo) {
+    public function insertBoard($board) {
 
         $stmt = $this->conn->prepare("
             INSERT INTO login_board (
                 title,
                 content,
-                user_no
+                user_no,
+                menu_id
             ) 
             VALUES (
-                ?, ?, ?
+                ?, ?, ?, ?
             )
         ");
 
-        $stmt->bind_param('sss', $title, $content, $userNo);
+        $stmt->bind_param('sssi', $board['title'], $board['content'], $board['no'], $board['menuId']);
         $stmt->execute();
 
         return $this->conn->insert_id;

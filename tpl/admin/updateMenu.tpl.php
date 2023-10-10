@@ -5,9 +5,17 @@
         <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
             $(function() {
+
+                getOnlyMenuList();
+
                 $('#updateMenu').click(function() {
                     updateMenu();
                 });
+
+                $('#categoryId').on('change', function() {
+                    getOnlyMenuList();
+                });
+
             });
         </script>
 	</head>
@@ -34,6 +42,10 @@
                                 <?php } ?>
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <th>상위 메뉴</th>
+                        <td id='menuList'></td>
                     </tr>
                     <tr>
                         <th>메뉴 설명</th>
