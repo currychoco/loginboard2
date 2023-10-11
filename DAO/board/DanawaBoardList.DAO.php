@@ -302,5 +302,35 @@ class DanawaBoardList extends common\CommonDAO {
         return $stmt->execute();
 
     }
+
+    // 전체 게시글 조회
+    public function getBoardListForCache($menuId) {
+
+        $query = ("
+            SELECT 
+                * 
+            FROM
+                login_board
+            WHERE
+                menu_id = ?
+            ORDER BY id DESC
+            LIMIT 5
+        ");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $menuId);
+        $stmt->execute();
+
+        $tmp = $stmt->get_result();
+
+        $result = array();
+        while($row = mysqli_fetch_array($tmp)) {
+
+            array_push($result, $tmp);
+
+        }
+
+        return $result;
+    }
     
 }

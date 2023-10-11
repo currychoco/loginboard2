@@ -61,7 +61,6 @@
                 <input type='hidden' name='checkFileUpdate' id='checkFileUpdate' value=''>
                 <input type='hidden' name='menu' id='menu' value="<?=$board['menu_id']?>">
 
-
                 <table class="table">
                     <colgroup>
                         <col width="10%" />

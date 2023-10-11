@@ -2,7 +2,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/loginboard2/controller/board/BoardListController.php" style="padding: 15px 10px;">
+                <a class="navbar-brand" href="/loginboard2/controller/main/MainPageController.php" style="padding: 15px 10px;">
                     다나가게시판
                 </a>
             </div>
