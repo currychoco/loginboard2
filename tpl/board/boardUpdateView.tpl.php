@@ -3,11 +3,13 @@
 	<head>
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
+        <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
 
             $(function() {
 
                 checkWriter();
+                getWriteMenuList();
 
                 $('#toList').click(function() {
                     toListButton();
@@ -27,6 +29,10 @@
                     $('#getFile').hide();
                     $('#setFile').show(); 
                     $('#checkFileUpdate').val('1');
+                });
+
+                $('#selectCategory').on('change', function() {
+                    getWriteMenuList();
                 });
             })
 
@@ -49,6 +55,7 @@
                 <input type='hidden' name='checkWriter' id='checkWriter' value="<?=$checkWriter?>">
                 <input type='hidden' name='boardId' id='boardId' value="<?=$board['id']?>">
                 <input type='hidden' name='checkFileUpdate' id='checkFileUpdate' value=''>
+                <input type='hidden' name='menu' id='menu' value="<?=$board['menu_id']?>">
 
                 <table class="table">
                     <colgroup>
@@ -60,6 +67,20 @@
                         <td>
                             <input type="text" class="form-control" name="title" id="title" size=60 maxlength=35 value="<?=$board['title']?>">
                         </td>
+                    </tr>
+                    <tr>
+                        <th>카테고리</th>
+                        <td>
+                            <select class='form-control' id='selectCategory' name='selectCategory'>
+                                <?php for($i = 0; $i < count($categoryList); $i++) { ?>
+                                    <option value="<?=$categoryList[$i]['id']?>" <?php if($board['category_id'] == $categoryList[$i]['id']) {?> selected='selected' <?php }?>><?=$categoryList[$i]['name']?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>게시판</th>
+                        <td id='menuList'></td>
                     </tr>
                     <tr>
                         <td>내용</td>

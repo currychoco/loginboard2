@@ -267,12 +267,14 @@ function deleteMenu() {
 function getWriteMenuList() {
 
     var categoryId = $('#selectCategory option:selected').val();
+    var menu = $('#menu').val();
 
     $.ajax({
         url : '/loginboard2/controller/admin/MenuSelectBoxController.php',
         type : 'POST',
         data : {
-            categoryId : categoryId
+            categoryId : categoryId,
+            menuId : menu
         },
         dataType : 'html',
 

@@ -18,8 +18,8 @@
     $onlyMenu = $utility->filter_SQL($_POST['onlyMenu']);
     
     $parentId = 0;
-    if(isset($_POST['parentId'])) {
-        $parentId = $utility->filter_SQL($_POST['parentId']);
+    if(isset($_POST['menuId'])) {
+        $parentId = $utility->filter_SQL($_POST['menuId']);
     }
 
     if(strlen($name) < 2 || strlen($name) > 20) {

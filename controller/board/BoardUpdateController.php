@@ -6,9 +6,11 @@
     require_once ROOT_PATH . '/common/Template.php';
     require_once ROOT_PATH . '/common/Utility.php';
     require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
+    require_once DAO_PATH . '/admin/Category.DAO.php';
 
     $utility = new Utility();
     $dao = new DanawaBoardList();
+    $categoryDao = new CategoryDAO();
 
     // 로그인 체크
     $login = false;
@@ -27,6 +29,8 @@
     if(isset($_GET['no']) && $_GET['no'] > 0) {
         $no = $utility->filter_SQL($_GET['no']);
     }
+
+    $categoryList = $categoryDao->getCategoryList();
 
     // 게시글 정보
     $boardId = $utility->filter_SQL($_GET['boardId']);
@@ -47,6 +51,7 @@
     $oTemplate->set('isWriter', $isWriter);
     $oTemplate->set('board', $board);
     $oTemplate->set('image', $image);
+    $oTemplate->set('categoryList', $categoryList);
 
     $templateType = ROOT_PATH . '/tpl/board/boardUpdateView.tpl.php';
 

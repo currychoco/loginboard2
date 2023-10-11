@@ -9,20 +9,63 @@ class MenuDAO extends common\CommonDAO{
 
     public function getMenuList() {
 
+        // $query = ("
+        //     SELECT 
+        //         m.id,
+        //         m.name,
+        //         m.content,
+        //         m.parent_id,
+        //         m.category_id,
+        //         m.order,
+        //         m.only_menu,
+        //         m.visible,
+        //         c.name as category
+        //     FROM menu m
+        //     INNER JOIN category c
+        //     ON m.category_id = c.id
+        // ");
+
         $query = ("
-            SELECT 
+        WITH RECURSIVE test AS (
+
+            SELECT
                 m.id,
                 m.name,
                 m.content,
                 m.parent_id,
                 m.category_id,
-                m.order,
+                m.`order`,
                 m.only_menu,
                 m.visible,
-                c.name as category
+                m.depth,
+                c.name AS category,
+                CAST(m.id AS char(100)) AS path
             FROM menu m
             INNER JOIN category c
             ON m.category_id = c.id
+            WHERE 
+                m.parent_id = 0
+            
+            UNION ALL
+            
+            SELECT
+                m.id,
+                m.name,
+                m.content,
+                m.parent_id,
+                m.category_id,
+                m.`order`,
+                m.only_menu,
+                m.visible,
+                m.depth,
+                c.name AS category,
+                CONCAT(t.path, ',', m.`id`) AS path
+            FROM menu m
+            INNER JOIN category c
+            ON m.category_id = c.id
+            INNER JOIN test t ON m.parent_id = t.id
+            )
+            SELECT * FROM test
         ");
 
         $result = mysqli_query($this->conn, $query);
@@ -165,6 +208,7 @@ class MenuDAO extends common\CommonDAO{
             WHERE
                 category_id = ?
                 AND only_menu = ?
+                AND visible = 1
         ");
 
         $stmt = $this->conn->prepare($query);

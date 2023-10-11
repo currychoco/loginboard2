@@ -212,10 +212,13 @@ class DanawaBoardList extends common\CommonDAO {
                 b.content,
                 u.user_id,
                 b.reg_date,
-                b.view_count
+                b.view_count,
+                b.menu_id,
+                m.category_id
             FROM login_board b
-                INNER JOIN board_user u ON b.user_no = u.no
-            WHERE id = ?
+            INNER JOIN board_user u ON b.user_no = u.no
+            INNER JOIN menu m ON b.menu_id = m.`id`
+            WHERE b.id = ?
         ");
         $stmt->bind_param('i', $id);
 

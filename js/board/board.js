@@ -12,7 +12,7 @@ function pagination(){
     var search = $('#search').val();
 
     $.ajax({
-        url : '/loginboard2/common/paginationTest.php',
+        url : '/loginboard2/common/pagination.php',
         type : 'GET',
         data : {
             totalRow : totalRow,

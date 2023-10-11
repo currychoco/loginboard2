@@ -3,7 +3,7 @@
         if(count($menuList) > 0) {
             for($i = 0; $i < count($menuList); $i++) {
     ?>
-        <option value="<?=$menuList[$i]['id']?>"><?=$menuList[$i]['name']?></option>
+        <option value="<?=$menuList[$i]['id']?>" <?php if($menuId == $menuList[$i]['id']) { ?> selected='selected' <?php } ?>><?=$menuList[$i]['name']?></option>
     <?php
             }
         }

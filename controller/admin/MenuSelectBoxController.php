@@ -25,12 +25,18 @@
     else {
         $templateType = ROOT_PATH . '/tpl/admin/selectMenuList.tpl.php';
     }
-
+    
     $categoryId = $utility->filter_SQL($_POST['categoryId']);
     $menuList = $dao->getMenuListByCategoryId($categoryId, $type);
+
+    $menuId = 0;
+    if(isset($_POST['menuId'])){
+        $menuId = $utility->filter_SQL($_POST['menuId']);
+    }
 
     $oTemplate = new Template();
 
     $oTemplate->set('menuList', $menuList);
+    $oTemplate->set('menuId', $menuId);
     
     echo $oTemplate->fetch($templateType);

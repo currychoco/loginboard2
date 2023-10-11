@@ -74,11 +74,11 @@
                         <td colspan="2">
                             <input type='file' name='imageFile[]' multiple>
                             <br>
-                            <input type="button" class="btn" id='write' value="글 저장하기">
+                            <input type="button" class="btn btn-success" id='write' value="글 저장하기">
                             &nbsp;&nbsp;
                             <input type="reset" class="btn" value="다시 쓰기">
                             &nbsp;&nbsp;
-                            <input type="button" class="btn" id='toList' value="목록">
+                            <input type="button" class="btn btn-primary" id='toList' value="목록">
                             &nbsp;&nbsp;
                         </td>
                     </tr>
