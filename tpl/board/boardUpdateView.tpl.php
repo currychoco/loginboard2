@@ -47,6 +47,10 @@
 
             <form >
                 <input type='hidden' id='checkLogin' value="<?=$checkLogin?>"> 
+                <input type='hidden' id='urlCategoryId' value="<?=$urlCategoryId?>">
+                <input type='hidden' id='urlMenuId' value="<?=$urlMenuId?>">
+                <input type='hidden' id='search' value="<?=$search?>">
+                <input type='hidden' id='keyword' value="<?=$keyword?>">
             </form>
 
             <form id="updateForm" enctype='multipart/form-data' action='/loginboard2/process/board/update.php' method='POST'> 
@@ -56,6 +60,7 @@
                 <input type='hidden' name='boardId' id='boardId' value="<?=$board['id']?>">
                 <input type='hidden' name='checkFileUpdate' id='checkFileUpdate' value=''>
                 <input type='hidden' name='menu' id='menu' value="<?=$board['menu_id']?>">
+
 
                 <table class="table">
                     <colgroup>

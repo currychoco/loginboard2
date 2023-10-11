@@ -28,13 +28,37 @@
         $no = $utility->filter_SQL($_GET['no']);
     }
 
+    $search = '';
+    if(isset($_GET['search'])) {
+        $search = $utility->filter_SQL($_GET['search']);
+    }
+
+    $keyword = '';
+    if(isset($_GET['keyword'])) {
+        $keyword = $utility->filter_SQL($_GET['keyword']);
+    }
+
+    $urlMenuId = 2;
+    if(isset($_GET['menu'])) {
+        $urlMenuId = $utility->filter_SQL($_GET['menu']);
+    }  
+
+    $urlCategoryId = 5;
+    if(isset($_GET['category'])) {
+        $categoryId = $utility->filter_SQL($_GET['category']);
+    }
+
     $categoryList = $categoryDao->getCategoryList();
 
     $oTemplate = new Template();
 
     $oTemplate->set('checkLogin', $login);
     $oTemplate->set('no', $no);
+    $oTemplate->set('search', $search);
+    $oTemplate->set('keyword', $keyword);
     $oTemplate->set('categoryList', $categoryList);
+    $oTemplate->set('urlCategoryId', $urlCategoryId);
+    $oTemplate->set('urlMenuId', $urlMenuId);
 
     $templateType = ROOT_PATH . '/tpl/board/boardWriteView.tpl.php';
 

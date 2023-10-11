@@ -92,15 +92,16 @@ class MenuDAO extends common\CommonDAO{
                 parent_id,
                 visible,
                 only_menu,
-                `order`
+                `order`,
+                depth
             )
             values (
-                ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?
             )
         ");
         
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssiissi", $menu['name'], $menu['content'], $menu['categoryId'], $menu['parentId'], $menu['visible'], $menu['onlyMenu'], $order);
+        $stmt->bind_param("ssiissii", $menu['name'], $menu['content'], $menu['categoryId'], $menu['parentId'], $menu['visible'], $menu['onlyMenu'], $order, $menu['depth']);
         return $stmt->execute();
     }
 
@@ -136,7 +137,10 @@ class MenuDAO extends common\CommonDAO{
                 m.content,
                 m.only_menu,
                 m.visible,
-                c.name as category
+                c.name as category,
+                m.depth,
+                m.parent_id,
+                (SELECT name p FROM menu p WHERE p.id = m.parent_id) AS parent
             FROM menu m
             INNER JOIN category c
             ON m.category_id = c.id
@@ -163,12 +167,14 @@ class MenuDAO extends common\CommonDAO{
                 category_id = ?,
                 content = ?,
                 only_menu = ?,
-                visible = ?
+                visible = ?,
+                parent_id = ?,
+                depth = ?
             WHERE id = ?
         ");
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('sisssi', $menu['name'], $menu['categoryId'], $menu['content'], $menu['onlyMenu'], $menu['visible'], $menu['id']);
+        $stmt->bind_param('sisssiii', $menu['name'], $menu['categoryId'], $menu['content'], $menu['onlyMenu'], $menu['visible'], $menu['parentId'], $menu['depth'], $menu['id']);
 
         return $stmt->execute();
     }

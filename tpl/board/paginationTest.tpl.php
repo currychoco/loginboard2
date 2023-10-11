@@ -12,7 +12,7 @@
                 $('.table tbody tr:nth-child(odd)').css('background', '#9F9F9F');
 
                 $('#toWrite').click(function() {
-                    location.href = '/loginboard2/controller/board/BoardWriteController.php?no=' + $('#no').val();
+                    location.href = '/loginboard2/controller/board/BoardWriteController.php?no=' + $('#no').val() + '&search=' + $('#search').val() + '&keyword=' + $('#keyword').val() + '&category=' + $('#urlCategoryId').val() + '&menu=' + $('#urlMenuId').val();
                 });
 
                 $('#searchButton').click(function() {
@@ -82,10 +82,10 @@
                         <?php for($i = 0; $i < count($listResult); $i++) { ?>
                         <tr>
                             <td>
-                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['id']?></a>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>&category=<?=$urlCategoryId?>&menu=<?=$urlMenuId?>"><?=$listResult[$i]['id']?></a>
                             </td>
                             <td>
-                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['title']?></a>
+                                <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>&category=<?=$urlCategoryId?>&menu=<?=$urlMenuId?>"><?=$listResult[$i]['title']?></a>
                             </td>
                             <td>
                                 <p><?=$listResult[$i]['user_id']?></p>
@@ -109,12 +109,12 @@
 
                     <div class='contentBox'>
                         <div>
-                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
+                            <a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>&category=<?=$urlCategoryId?>&menu=<?=$urlMenuId?>"><img src="http://myimage.com<?=$listResult[$i]['path']?>" onerror="this.src='http://myimage.com/loginboard2/img/no_image.png'"/></a>
                          </div>
                          <table>
                             <tr>
                                 <th>제목</th>
-                                <td><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>"><?=$listResult[$i]['title']?></a></td>
+                                <td><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$listResult[$i]['id']?>&no=<?=$no?>&search=<?=$search?>&keyword=<?=$keyword?>&category=<?=$urlCategoryId?>&menu=<?=$urlMenuId?>"><?=$listResult[$i]['title']?></a></td>
                             </tr>
                             <tr>
                                 <th>작성자</th>
@@ -141,6 +141,9 @@
                 <input type="hidden" value="<?=$pageSize?>" id='pageSize'>
                 <input type="hidden" value="<?=$pageListSize?>" id='pageListSize'>
                 <input type='hidden' value="<?=$list?>" id='list'>
+                <input type='hidden' id='urlCategoryId' value="<?=$urlCategoryId?>">
+                <input type='hidden' id='urlMenuId' value="<?=$urlMenuId?>">
+
             </form>
 
             <div class="text-center" id='pagination'></div>

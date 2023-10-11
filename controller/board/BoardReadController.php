@@ -20,6 +20,16 @@
         $search = $utility->filter_SQL($_GET['search']);
     }
 
+    $urlMenuId = 2;
+    if(isset($_GET['menu'])) {
+        $urlMenuId = $utility->filter_SQL($_GET['menu']);
+    }  
+
+    $urlCategoryId = 5;
+    if(isset($_GET['category'])) {
+        $categoryId = $utility->filter_SQL($_GET['category']);
+    }
+
     $keyword = '';
     if(isset($_GET['keyword'])) {
         $keyword = $utility->filter_SQL($_GET['keyword']);
@@ -74,6 +84,8 @@
     $oTemplate->set('userId', $userId);
     $oTemplate->set('search', $search);
     $oTemplate->set('keyword', $keyword);
+    $oTemplate->set('urlCategoryId', $urlCategoryId);
+    $oTemplate->set('urlMenuId', $urlMenuId);
 
     $templateType = ROOT_PATH . '/tpl/board/boardReadView.tpl.php';
 

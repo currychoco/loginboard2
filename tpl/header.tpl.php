@@ -42,24 +42,21 @@
                     <ul class='dropdown-menu'>
                         <?php 
                             for($j = 0; $j < count($menuList); $j++) { 
-                        ?>
-                           
-                        <?php
                                 if(($categoryList[$i]['id'] == $menuList[$j]['category_id']) && ($menuList[$j]['only_menu'] == 0) && empty($menuList[$j]['parent_id'])) {
                         ?>
-                                <li><a href="/loginboard2/controller/board/BoardListController.php?category=<?=$categoryList[$i]['id']?>&menu=<?=$menuList[$j]['id']?>"><?=$menuList[$j]['name']?></a></li>
+                                <li><a href="/loginboard2/controller/board/BoardListController.php?category=<?=$categoryList[$i]['id']?>&menu=<?=$menuList[$j]['id']?>">
+                                    <?=$menuList[$j]['name']?>
+                                </a></li>
                         <?php
                                 }
                                 else if(($categoryList[$i]['id'] == $menuList[$j]['category_id']) && ($menuList[$j]['only_menu'] == 1)) {
                         ?>
-                                <li><a style='text-align:center'><?=$menuList[$j]['name']?></a></li>
+                                <li style='font-size: small;'><?=$menuList[$j]['name']?></li>
                         <?php
                                 }
                                 else if(($categoryList[$i]['id'] == $menuList[$j]['category_id']) && ($menuList[$j]['only_menu'] == 0) && !empty($menuList[$j]['parent_id'])) {
                         ?>
-
-                            <li><a href="/loginboard2/controller/board/BoardListController.php?category=<?=$categoryList[$i]['id']?>&menu=<?=$menuList[$j]['id']?>">ㄴ<?=$menuList[$j]['name']?></a></li>
-
+                            <li><a href="/loginboard2/controller/board/BoardListController.php?category=<?=$categoryList[$i]['id']?>&menu=<?=$menuList[$j]['id']?>"><?=$menuList[$j]['name']?></a></li>
                         <?php
                                 }
                             }

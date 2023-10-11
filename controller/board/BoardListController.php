@@ -58,20 +58,25 @@
 
     $boardDao  = new DanawaBoardList();
 
-    $menuId = 2;
+    $urlMenuId = 2;
     if(isset($_GET['menu'])) {
-        $menuId = $utility->filter_SQL($_GET['menu']);
+        $urlMenuId = $utility->filter_SQL($_GET['menu']);
     }  
+
+    $urlCategoryId = 5;
+    if(isset($_GET['category'])) {
+        $categoryId = $utility->filter_SQL($_GET['category']);
+    }
 
     // 메뉴 정보
     $menuDao = new MenuDAO();
-    $menu = $menuDao->getMenuById($menuId);
+    $menu = $menuDao->getMenuById($urlMenuId);
 
     // 리스트
-    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword, $menuId);
+    $listResult = $boardDao->getBoardList($firstNo, PAGE_SIZE, $search, $keyword, $urlMenuId);
 
     // 리스트 총 개수
-    $listResultCnt = $boardDao->getBoardListCount($search, $keyword, $menuId);
+    $listResultCnt = $boardDao->getBoardListCount($search, $keyword, $urlMenuId);
 
     //생성자
     $oTemplate = new Template();
@@ -86,6 +91,8 @@
     $oTemplate->set('search', $search);
     $oTemplate->set('list', $setList);
     $oTemplate->set('menu', $menu);
+    $oTemplate->set('urlCategoryId', $urlCategoryId);
+    $oTemplate->set('urlMenuId', $urlMenuId);
 
     //템플릿 위치 지정
     //$templateType = ROOT_PATH . "/tpl/board/boardListView.tpl.php"; // 기존에 페이징 부분을 'include'로 처리했었던 템플릿

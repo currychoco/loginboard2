@@ -5,12 +5,18 @@
         <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
             $(function() {
+
                 $('#toUpdateMenu').click(function() {
                     toUpdateMenu();
                 });
+
                 $('#deleteMenu').click(function() {
                     deleteMenu();
                 });
+
+                $('#toMenuListButton').click(function() {
+                    toMenuList();
+                })
             });
         </script>
 	</head>
@@ -31,6 +37,10 @@
                     <tr>
                         <th>카테고리</th>
                         <td><input class='form-control' type='text' id='name' name='name' value="<?=$menu['category']?>" readonly></td>
+                    </tr>
+                    <tr>
+                        <th>상위 메뉴</th>
+                        <td><input class='form-control' type='text' id='name' name='name' value="<?=$menu['parent']?>" readonly></td>
                     </tr>
                     <tr>
                         <th>메뉴 설명</th>
@@ -58,7 +68,7 @@
                         <td colspan='2' style='text-align:right;'>
                             <input type='button' class='btn btn-primary' id='toUpdateMenu' value='수정하기'>
                             <input type='button' class='btn btn-danger' id='deleteMenu' value='삭제'>
-                            <input type='button' class='btn btn-primary' id='toUpdateMenu' value='수정하기'>
+                            <input type='button' class='btn' id='toMenuListButton' value='목록'>
                         </td>
                     </tr>
                 </table>

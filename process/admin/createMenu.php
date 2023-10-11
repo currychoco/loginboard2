@@ -10,6 +10,7 @@
     }
 
     $utility = new Utility();
+    $dao = new MenuDAO();
 
     $name = $utility->filter_SQL($_POST['name']);
     $content = $utility->filter_SQL($_POST['content']);
@@ -20,6 +21,12 @@
     $parentId = 0;
     if(isset($_POST['menuId'])) {
         $parentId = $utility->filter_SQL($_POST['menuId']);
+    }
+
+    $depth = 0;
+    if($parentId != 0) {
+        $parent = $dao->getMenuById($parentId);
+        $depth = $parent['depth'] + 1;
     }
 
     if(strlen($name) < 2 || strlen($name) > 20) {
@@ -38,10 +45,10 @@
         'categoryId' => $categoryId,
         'visible' => $visible,
         'onlyMenu' => $onlyMenu,
-        'parentId' => $parentId
+        'parentId' => $parentId,
+        'depth' => $depth
     );
 
-    $dao = new MenuDAO();
     $result = $dao->createMenu($menu);
 
     if($result) {

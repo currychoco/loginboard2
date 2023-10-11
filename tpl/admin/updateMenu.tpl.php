@@ -16,6 +16,10 @@
                     getOnlyMenuList();
                 });
 
+                $('#toMenuListButton').click(function() {
+                    toMenuList();
+                });
+
             });
         </script>
 	</head>
@@ -27,7 +31,6 @@
             <h3 class="title">메뉴 수정</h3>
 
             <form id = "updateMenuForm">
-                <input type='hidden' id='menuId' name='menuId' value="<?=$menu['id']?>">
                 <table class='table'>
                     <tr>
                         <th>메뉴명</th>
@@ -72,9 +75,12 @@
                     <tr>
                         <td colspan='2' style='text-align:right;'>
                             <input type='button' class='btn btn-primary' id='updateMenu' value='수정'>
+                            <input type='button' class='btn' id='toMenuListButton' value='목록'>
                         </td>
                     </tr>
                 </table>
+                <input type='hidden' id='id' name='id' value="<?=$menu['id']?>">
+                <input type='hidden' id='menu' name='menu' value="<?=$menu['parent_id']?>">
             </form>
         </div>
 	</body>

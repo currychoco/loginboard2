@@ -10,7 +10,9 @@
     }
 
     $utility = new Utility();
+    $dao = new MenuDAO();
 
+    $id = $utility -> filter_SQL($_POST['id']);
     $menuId = $utility->filter_SQL($_POST['menuId']);
     $name = $utility->filter_SQL($_POST['name']);
     $content = $utility->filter_SQL($_POST['content']);
@@ -19,7 +21,7 @@
     $visible = $utility->filter_SQL($_POST['visible']);
 
     if(strlen($name) < 2 || strlen($name) > 20) {
-        echo json_encode(array('result' => -3, 'msg' => '메뉴명을 확인해 주세요.'));
+        echo json_encode(array('result' => -3, 'msg' => '메뉴명을 확인해 주세요.' . $name));
         exit;
     }
 
@@ -28,16 +30,28 @@
         exit;
     }
 
+    $parentId = 0;
+    if(isset($_POST['menuId'])) {
+        $parentId = $utility->filter_SQL($_POST['menuId']);
+    }
+
+    $depth = 0;
+    if($parentId != 0) {
+        $parent = $dao->getMenuById($parentId);
+        $depth = $parent['depth'] + 1;
+    }
+
     $menu = array(
-        'id' => $menuId,
+        'id' => $id,
         'name' => $name,
         'content' => $content,
         'categoryId' => $categoryId,
         'onlyMenu' => $onlyMenu,
-        'visible' => $visible
+        'visible' => $visible,
+        'depth' => $depth,
+        'parentId' => $parentId
     );
 
-    $dao = new MenuDAO();
     $result = $dao->updateMenuById($menu);
 
     if($result) {

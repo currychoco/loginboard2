@@ -5,8 +5,13 @@
         <script src='/loginboard2/js/admin/admin.js'></script>
         <script>
             $(function() {
+
                 $('#updateCategory').click(function() {
                     updateCategory();
+                });
+
+                $('#toCategoryListButton').click(function() {
+                    toCategoryList();
                 });
             });
         </script>
@@ -31,7 +36,8 @@
                     </tr>
                     <tr>
                         <td colspan='2' style='text-align:right;'>
-                            <button type="button" class="btn btn-primary" id="updateCategory">수정</button>
+                            <button type='button' class='btn btn-primary' id='updateCategory'>수정</button>
+                            <button type='button' class='btn' id='toCategoryListButton'>목록</button>
                         </td>
                     </tr>
                 </table>

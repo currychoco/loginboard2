@@ -5,6 +5,15 @@
         <script src='/loginboard2/js/board/board.js'></script>
         <script src='/loginboard2/js/comment/comment.js'></script>
         <link rel = 'stylesheet' href='/loginboard2/css/answerList.css' />
+        <script>
+            $(function() {
+
+                $('#toList').click(function() {
+                    toListButton();
+                });
+
+            })
+        </script>
     </head>
     <body>
         <!-- header -->
@@ -16,6 +25,8 @@
             <input type='hidden' id='search' value="<?=$search?>">
             <input type='hidden' id='keyword' value="<?=$keyword?>">
             <input type='hidden' id='userId' value="<?=$userId?>">
+            <input type='hidden' id='urlCategoryId' value="<?=$urlCategoryId?>">
+            <input type='hidden' id='urlMenuId' value="<?=$urlMenuId?>">
         </form>
 
         <div class="container body-container">

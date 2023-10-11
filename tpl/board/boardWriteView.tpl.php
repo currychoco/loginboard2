@@ -35,6 +35,10 @@
 
             <form >
                 <input type='hidden' id='checkLogin' value="<?=$checkLogin?>">
+                <input type='hidden' id='search' value="<?=$search?>">
+                <input type='hidden' id='keyword' value="<?=$keyword?>">
+                <input type='hidden' id='urlCategoryid' value="<?=$urlCategoryId?>">
+                <input type='hidden' id='urlMenuId' value="<?=$urlMenuId?>">
             </form>
 
             <form id="writeForm" enctype='multipart/form-data' action='/loginboard2/process/board/write.php' method='POST'> 

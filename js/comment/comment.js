@@ -10,9 +10,9 @@ $(function() {
         toUpdateButton();
     });
 
-    $('#toList').click(function() {
-        toListButton();
-    });
+    // $('#toList').click(function() {
+    //     toListButton();
+    // });
 
     $('#delete').click(function() {
         deleteBoard();

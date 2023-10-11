@@ -12,7 +12,7 @@ function pagination(){
     var search = $('#search').val();
 
     $.ajax({
-        url : '/loginboard2/common/pagination.php',
+        url : '/loginboard2/common/paginationTest.php',
         type : 'GET',
         data : {
             totalRow : totalRow,
@@ -104,9 +104,10 @@ function toListButton() {
     var no = $('#no').val();
     var search = $('#search').val();
     var keyword = $('#keyword').val();
-    console.log(search);
+    var urlCategoryId = $('#urlCategoryId').val();
+    var urlMenuId = $('#urlMenuId').val();
 
-    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&keyword=' + keyword;
+    location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no + '&search=' + search + '&keyword=' + keyword + '&category=' + urlCategoryId + '&menu=' + urlMenuId;
 
 }
 
@@ -128,8 +129,20 @@ function toUpdateButton() {
 
     var no = $('#no').val();
     var boardId = $('#boardId').val();
+    var search = $('#search').val();
+    var keyword = $('#keyword').val();
+    var urlCategoryId = $('#urlCategoryId').val();
+    var urlMenuId = $('#urlMenuId').val();
 
     location.href = '/loginboard2/controller/board/BoardUpdateController.php?no=' + no + '&boardId=' + boardId;
+
+    var no = $('#no').val();
+    var search = $('#search').val();
+    var keyword = $('#keyword').val();
+    var urlCategoryId = $('#urlCategoryId').val();
+    var urlMenuId = $('#urlMenuId').val();
+
+    location.href = '/loginboard2/controller/board/BoardUpdateController.php?no=' + no + '&search=' + search + '&keyword=' + keyword + '&category=' + urlCategoryId + '&menu=' + urlMenuId + '&boardId=' + boardId;
 
 }
 

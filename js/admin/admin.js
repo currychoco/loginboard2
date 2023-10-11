@@ -291,13 +291,15 @@ function getWriteMenuList() {
 function getOnlyMenuList() {
 
     var categoryId = $('#categoryId option:selected').val();
+    var menu = $('#menu').val();
 
     $.ajax({
         url : '/loginboard2/controller/admin/MenuSelectBoxController.php',
         type : 'POST',
         data : {
             categoryId : categoryId,
-            type : 'onlyMenu'
+            type : 'onlyMenu',
+            menuId : menu
         },
         dataType : 'html',
 
@@ -309,4 +311,12 @@ function getOnlyMenuList() {
             console.log(request.responseText);
         }
     });
+}
+
+function toMenuList() {
+    location.href = '/loginboard2/controller/admin/MenuListController.php';
+}
+
+function toCategoryList() {
+    location.href = '/loginboard2/controller/admin/CategoryListController.php';
 }

@@ -13,33 +13,7 @@ class DanawaBoardList extends common\CommonDAO {
 
         $stmt = null;
 
-        if(empty($keyword) && strlen($keyword) < 1) {
-
-            $query = ("
-                SELECT 
-                    b.id,
-                    b.title,
-                    b.content,
-                    u.user_id,
-                    b.reg_date,
-                    b.view_count,
-                    i.path
-                FROM login_board b
-                INNER JOIN board_user u
-                ON b.user_no = u.no
-                LEFT OUTER JOIN image i
-                ON b.id = i.board_id
-                WHERE b.menu_id = ?
-                GROUP BY b.id
-                ORDER BY id DESC
-                LIMIT ?, ?
-            ");
-
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("iii", $menuId, $no, $pageSize);
-            $stmt->execute();
-        }
-        else if($search == 'title') { 
+        if($search == 'title') { 
 
             $query = ("
                 SELECT 
@@ -95,6 +69,32 @@ class DanawaBoardList extends common\CommonDAO {
             $stmt->bind_param("siii", $keyword, $menuId, $no, $pageSize);
             $stmt->execute();
         }
+        else {
+
+            $query = ("
+                SELECT 
+                    b.id,
+                    b.title,
+                    b.content,
+                    u.user_id,
+                    b.reg_date,
+                    b.view_count,
+                    i.path
+                FROM login_board b
+                INNER JOIN board_user u
+                ON b.user_no = u.no
+                LEFT OUTER JOIN image i
+                ON b.id = i.board_id
+                WHERE b.menu_id = ?
+                GROUP BY b.id
+                ORDER BY id DESC
+                LIMIT ?, ?
+            ");
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("iii", $menuId, $no, $pageSize);
+            $stmt->execute();
+        }
 
         
         $result = $stmt->get_result();
@@ -109,22 +109,14 @@ class DanawaBoardList extends common\CommonDAO {
         return $listResult;
 
     }
+    
 
     // 총 게시글 개수 반환
     public function getBoardListCount($search = '', $keyword = '', $menuId = 0){
 
         $result = null;
-        if(empty($keyword) && strlen($keyword) < 1) {
 
-            $query = "SELECT COUNT(*) AS count FROM login_board WHERE menu_id = ?";
-
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('i', $menuId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-        }
-        else if($search == 'title') {
+        if($search == 'title') {
 
             $query = "SELECT COUNT(*) AS count FROM login_board WHERE title LIKE CONCAT('%', ?, '%') AND menu_id = ?";
 
@@ -150,6 +142,16 @@ class DanawaBoardList extends common\CommonDAO {
             $stmt->bind_param('si', $keyword, $menuId);
             $stmt->execute();
             $result = $stmt->get_result();
+        }
+        else {
+
+            $query = "SELECT COUNT(*) AS count FROM login_board WHERE menu_id = ?";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('i', $menuId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
         }
 
         $row = mysqli_fetch_array($result);

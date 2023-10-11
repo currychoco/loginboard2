@@ -44,7 +44,7 @@ class CategoryDAO extends common\CommonDAO{
 
     public function getCategoryList() {
 
-        $query = 'SELECT id, name, content, `order` FROM category ORDER BY id DESC';
+        $query = 'SELECT id, name, content, `order` FROM category ORDER BY id';
         
         $result = mysqli_query($this->conn, $query);
 

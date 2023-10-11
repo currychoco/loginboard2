@@ -30,6 +30,27 @@
         $no = $utility->filter_SQL($_GET['no']);
     }
 
+    // 검색 키워드 체크
+    $search = '';
+    if(isset($_GET['search'])) {
+        $search = $utility->filter_SQL($_GET['search']);
+    }
+
+    $urlMenuId = 2;
+    if(isset($_GET['menu'])) {
+        $urlMenuId = $utility->filter_SQL($_GET['menu']);
+    }  
+
+    $urlCategoryId = 5;
+    if(isset($_GET['category'])) {
+        $categoryId = $utility->filter_SQL($_GET['category']);
+    }
+
+    $keyword = '';
+    if(isset($_GET['keyword'])) {
+        $keyword = $utility->filter_SQL($_GET['keyword']);
+    }
+
     $categoryList = $categoryDao->getCategoryList();
 
     // 게시글 정보
@@ -52,6 +73,11 @@
     $oTemplate->set('board', $board);
     $oTemplate->set('image', $image);
     $oTemplate->set('categoryList', $categoryList);
+
+    $oTemplate->set('search', $search);
+    $oTemplate->set('keyword', $keyword);
+    $oTemplate->set('urlCategoryId', $urlCategoryId);
+    $oTemplate->set('urlMenuId', $urlMenuId);
 
     $templateType = ROOT_PATH . '/tpl/board/boardUpdateView.tpl.php';
 
