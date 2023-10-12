@@ -229,4 +229,18 @@ class MenuDAO extends common\CommonDAO{
 
         return $result;
     }
+
+    public function getMenuListNotOnlyMenu() {
+
+        $query = 'SELECT * FROM menu WHERE visible = 1 AND only_menu = 0';
+        
+        $tmp = mysqli_query($this->conn, $query);
+        
+        $result = array();
+        while($row = mysqli_fetch_array($tmp)) {
+            array_push($result, $row);
+        }
+
+        return $result;
+    }
 }

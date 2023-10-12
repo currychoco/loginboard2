@@ -15,10 +15,21 @@
     $categoryList = $categoryDao->getCategoryList();
     $menuList = $menuDao->getMenuList();
 
+    $filename = ROOT_PATH . '/cache.php';
+    $fp = fopen($filename, 'r');
+    $list = '';
+
+    while(!feof($fp)) {
+        $list .= fgets($fp);
+    }
+
+    $boardList = (array)json_decode($list);
+
     $oTemplate = new Template();
     
     $oTemplate->set('categoryList', $categoryList);
     $oTemplate->set('menuList', $menuList);
+    $oTemplate->set('boardList', $boardList);
 
     $templateType = ROOT_PATH . '/tpl/main/mainPageView.tpl.php';
 

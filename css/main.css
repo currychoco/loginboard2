@@ -1,0 +1,9 @@
+.menuBoard{
+    display : grid;
+    grid-template-columns : 1fr 1fr;
+}
+
+.contentBox{
+    margin : 10px;
+    border : 1px;
+}

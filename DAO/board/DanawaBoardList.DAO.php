@@ -303,17 +303,20 @@ class DanawaBoardList extends common\CommonDAO {
 
     }
 
-    // 전체 게시글 조회
+    // 캐시 저장
     public function getBoardListForCache($menuId) {
 
         $query = ("
             SELECT 
-                * 
+                b.id,
+                b.title,
+                b.menu_id,
+                (SELECT COUNT(*) FROM comment c WHERE c.board_id = b.id) as comment_cnt
             FROM
-                login_board
+                login_board b
             WHERE
-                menu_id = ?
-            ORDER BY id DESC
+                b.menu_id = ?
+            ORDER BY b.id DESC
             LIMIT 5
         ");
 
@@ -326,7 +329,7 @@ class DanawaBoardList extends common\CommonDAO {
         $result = array();
         while($row = mysqli_fetch_array($tmp)) {
 
-            array_push($result, $tmp);
+            array_push($result, $row);
 
         }
 
