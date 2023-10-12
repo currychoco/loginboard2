@@ -4,10 +4,13 @@
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script src='/loginboard2/js/comment/comment.js'></script>
+        <script src='/loginboard2/js/common/common.js'></script>
         <link rel = 'stylesheet' href='/loginboard2/css/answerList.css' />
         <script>
             $(function() {
 
+                header();
+                
                 $('#toList').click(function() {
                     toListButton();
                 });
@@ -17,7 +20,10 @@
     </head>
     <body>
         <!-- header -->
-        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/header.php"; ?>
+        <div id='header'>
+
+        </div>
+
 
         <form>
             <input type='hidden' id='no' value="<?=$no?>">

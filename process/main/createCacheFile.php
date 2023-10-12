@@ -7,6 +7,9 @@
     $boardDao = new DanawaBoardList();
 
     $menuList = $menuDao->getMenuListNotOnlyMenu();
+    
+    $boardListByViewCnt = $boardDao->getBoardListbyViewCnt();
+    $boardListByComment = $boardDao->getBoardListByComment();
 
     $boardList = array();
     foreach($menuList as $menu) {
@@ -31,7 +34,13 @@
 
     }
 
+    $mainPageBoardList = array(
+        'boardList' => $boardList,
+        'boardListByView' => $boardListByViewCnt,
+        'boardListByComment' => $boardListByComment
+    );
+
     $filename = ROOT_PATH . '/cache.php';
     $fp = fopen($filename, 'w');
-    fwrite($fp, json_encode($boardList));
+    fwrite($fp, json_encode($mainPageBoardList));
     fclose($fp);

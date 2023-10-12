@@ -336,5 +336,57 @@ class DanawaBoardList extends common\CommonDAO {
 
         return $result;
     }
+
+    public function getBoardListbyViewCnt() {
+
+        $query = ('
+            SELECT 
+                b.id,
+                b.title,
+                b.menu_id,
+                (SELECT COUNT(*) FROM comment c WHERE c.board_id = b.id) as comment_cnt,
+                b.view_count,
+                (SELECT m.name FROM menu m WHERE m.id = b.menu_id) as menu,
+                (SELECT m.category_id FROM menu m WHERE m.id = b.menu_id) as category_id
+            FROM
+                login_board b
+            ORDER BY b.view_count DESC
+            LIMIT 5
+        ');
+
+        $tmp = mysqli_query($this->conn, $query);
+        $result = array();
+        while($row = mysqli_fetch_array($tmp)) {
+            array_push($result, $row);
+        }
+
+        return $result;
+    }
+
+    public function getBoardListByComment() {
+
+        $query = ('
+            SELECT 
+                b.id,
+                b.title,
+                b.menu_id,
+                (SELECT COUNT(*) FROM comment c WHERE c.board_id = b.id) as comment_cnt,
+                b.view_count,
+                (SELECT m.name FROM menu m WHERE m.id = b.menu_id) as menu,
+                (SELECT m.category_id FROM menu m WHERE m.id = b.menu_id) as category_id
+            FROM
+                login_board b
+            ORDER BY comment_cnt DESC
+            LIMIT 5
+        ');
+
+        $tmp = mysqli_query($this->conn, $query);
+        $result = array();
+        while($row = mysqli_fetch_array($tmp)) {
+            array_push($result, $row);
+        }
+
+        return $result;
+    }
     
 }

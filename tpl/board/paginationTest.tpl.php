@@ -34,8 +34,6 @@
 
 	</head>
 	<body>
-        <!-- header -->
-        <?php // include $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/common/header.php'?>
         <div id='header'>
 
         </div>

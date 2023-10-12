@@ -52,22 +52,23 @@
     $tmp_id = $_GET['id'];
     $id = $utility->filter_SQL($tmp_id);
 
-    // 조회 여부 체크 및 조회수 증가
-    if(!isset($_COOKIE['readList'])) {
-        $list = array($id);
-        setcookie('readList', json_encode($list), time() +3600 * 24);
-        $dao->countView($id);
-    }
-    else {
-        $list = json_decode($_COOKIE['readList']);
+    // // 조회 여부 체크 및 조회수 증가
+    // if(!isset($_COOKIE['readList'])) {
+    //     $list = array($id);
+    //     setcookie('readList', json_encode($list), time() +3600 * 24);
+    //     $dao->countView($id);
+    // }
+    // else {
+    //     $list = json_decode($_COOKIE['readList']);
         
-        if(!in_array($id, $list)) {
-            $list[] = $id;
-            setcookie('readList', json_encode($list), time() +3600 * 24);
-            $dao->countView(($id));
-        }
+    //     if(!in_array($id, $list)) {
+    //         $list[] = $id;
+    //         setcookie('readList', json_encode($list), time() +3600 * 24);
+    //         $dao->countView(($id));
+    //     }
 
-    }
+    // }
+    $dao->countView($id);
 
     // 번호 기반 글 가져오기
     $result = $dao->getBoardById($id);
