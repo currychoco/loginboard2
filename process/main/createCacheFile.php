@@ -20,7 +20,8 @@
                 'id' => $board['id'],
                 'title' => $board['title'],
                 'menuId' => $board['menu_id'],
-                'commentCnt' => $board['comment_cnt']
+                'commentCnt' => $board['comment_cnt'],
+                'viewCnt' => $board['view_count']
             );
 
             array_push($boardArr, $arr);
@@ -34,5 +35,3 @@
     $fp = fopen($filename, 'w');
     fwrite($fp, json_encode($boardList));
     fclose($fp);
-
-    echo '저장 됐는지 확인해봐!';

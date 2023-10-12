@@ -16,59 +16,73 @@
 
         </div>
         <div class="container body-container">
-            <?php 
-                for($i = 0; $i < count($categoryList); $i++) {              
-            ?>
 
+            <!-- 카테고리별 메뉴 리스트 -->
             <div>
-                <h4><?=$categoryList[$i]['name']?></h4>    
-                <div class='menuBoard'>
-                    <?php 
-                    for($j = 0; $j < count($menuList); $j++) { 
+                <?php 
+                    for($i = 0; $i < count($categoryList); $i++) {              
+                ?>
 
-                        if(($categoryList[$i]['id'] == $menuList[$j]['category_id']) && $menuList[$j]['only_menu'] == 0) {    
-                    ?>
+                <div>
+                    <h4><?=$categoryList[$i]['name']?></h4>    
+                    <div class='menuBoard'>
+                        <?php 
+                        $menuCnt = 0;
+                        for($j = 0; $j < count($menuList); $j++) { 
+                            if(($categoryList[$i]['id'] == $menuList[$j]['category_id']) && $menuList[$j]['only_menu'] == 0) {    
+                                $menuCnt++;
+                        ?>
 
-                        <div class='contentBox'>
-                            <table class='table'>
-                                <thead>
-                                    <tr>
-                                        <th colspan='3'><?=$menuList[$j]['name']?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                        $board = $boardList[$menuList[$j]['id']];
-                                        
-                                        if(count($board) != 0) {
-                                            foreach($board as $b) {
-                                                $tmp = (array)$b;
-                                            
-                                    ?>
+                            <div class='contentBox'>
+                                <table class='table'>
+                                    <colgroup>
+                                        <col style='width:90%'>
+                                        <col style='width:10%'>
+                                    </colgroup>
+                                    <thead>
                                         <tr>
-                                            <td><?=$tmp['id']?></td>
-                                            <td><?=$tmp['title']?></td>
-                                            <td><?=$tmp['commentCnt']?></td>
+                                            <th colspan='2'><a href="/loginboard2/controller/board/BoardListController.php?category=<?=$categoryList[$i]['id']?>&menu=<?=$menuList[$j]['id']?>"><?=$menuList[$j]['name']?></a></th>
                                         </tr>
-                                    <?php
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $board = $boardList[$menuList[$j]['id']];
+                                            
+                                            if(count($board) != 0) {
+                                                foreach($board as $b) {
+                                                    $tmp = (array)$b;
+                                                
+                                        ?>
+                                            <tr>
+                                                <td style='padding-left:16px'><a href="/loginboard2/controller/board/BoardReadController.php?id=<?=$tmp['id']?>"><?=$tmp['title']?></a><span style='color:blue;'>&nbsp;[<?=$tmp['commentCnt']?>]</span></td>
+                                                <td><?=$tmp['viewCnt']?></td>
+                                            </tr>
+                                        <?php
+                                                }
                                             }
-                                        }
-                                        else {
-                                    ?>
-                                        <td colspan='3'>게시글이 존재하지 않습니다.</td>
-                                    <?php
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                            else {
+                                        ?>
+                                            <td colspan='2'>게시글이 존재하지 않습니다.</td>
+                                        <?php
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                    <?php
-                        } 
-                    }
-                    ?>
+                        <?php
+                            } 
+                        }
+
+                        if($menuCnt == 0) {
+                        ?>
+                            <p>해당 카테고리에 게시판이 존재하지 않습니다.</p>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <?php } ?>
                 </div>
-                <?php } ?>
             </div>
         </div>
     </body>

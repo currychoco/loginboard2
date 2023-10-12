@@ -311,7 +311,8 @@ class DanawaBoardList extends common\CommonDAO {
                 b.id,
                 b.title,
                 b.menu_id,
-                (SELECT COUNT(*) FROM comment c WHERE c.board_id = b.id) as comment_cnt
+                (SELECT COUNT(*) FROM comment c WHERE c.board_id = b.id) as comment_cnt,
+                b.view_count
             FROM
                 login_board b
             WHERE

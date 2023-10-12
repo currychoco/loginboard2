@@ -16,6 +16,12 @@
     $menuList = $menuDao->getMenuList();
 
     $filename = ROOT_PATH . '/cache.php';
+
+    if(!file_exists($filename) || filemtime($filename) + CACHE_TIME < time()) {
+        require_once ROOT_PATH . '/process/main/createCacheFile.php';
+        echo '캐시 파일 생성 완료!<br>';
+    }
+   
     $fp = fopen($filename, 'r');
     $list = '';
 
