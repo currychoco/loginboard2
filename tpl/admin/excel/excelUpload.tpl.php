@@ -17,7 +17,7 @@
             <div>
                 <h3>엑셀 파일 업로드</h3>
             </div>
-            <form enctype='multipart/form-data' action='' method='post'>
+            <form enctype='multipart/form-data' action='/loginboard2/process/admin/excel/uploadExcel.php' method='post'>
                 <input type='file' name='excelFile'>
                 <input type='submit' value='업로드'>
             </form>
