@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
+    require_once EXCEL_PATH;
 
     if($_SESSION['user'] != 'admin') {
         echo ("
