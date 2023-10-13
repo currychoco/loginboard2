@@ -16,8 +16,9 @@
 
         </div>
             <div class='container body-container'>
-
+            <h3>인기글</h3>
                 <div class='menuBoard'>
+                    
                     <div class='contentBox'>
                         <table class='table'>
                             <colgroup>
@@ -86,7 +87,7 @@
 
                     <div>
                         <div>
-                            <h4><?=$categoryList[$i]['name']?></h4>    
+                            <h3><?=$categoryList[$i]['name']?></h3>    
                             <div class='menuBoard'>
                                 <?php 
                                 $menuCnt = 0;

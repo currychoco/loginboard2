@@ -21,21 +21,23 @@
         </div>
     </nav>
 
-    <div class="col-sm-1 sidenav">
-        <table class='table'>
-            <thead>
-                <tr>
-                    <th>관리자 메뉴</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><a href='/loginboard2/controller/admin/CategoryListController.php'>카테고리</a></td>
-                </tr>
-                <tr>
-                    <td><a href='/loginboard2/controller/admin/MenuListController.php'>메뉴</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-sm-2 sidenav">
+        <div>
+            <h4>관리자 메뉴</h4>
+        </div>
+        <div>
+            <ul class='nav nav-pills nav-stacked'>
+                <li><a href='/loginboard2/controller/admin/CategoryListController.php'>카테고리 작업</a></li>
+                <li><a href='/loginboard2/controller/admin/MenuListController.php'>메뉴 작업</a></li>
+                <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">엑셀 작업<span class="caret"></span></a>
+                    <ul class='dropdown-menu'>
+                        <li><a href='/loginboard2/controller/admin/excel/ExcelUploadController.php'>엑셀 정보 저장</a></li>
+                        <li><a>정보 엑셀로 추출</a></li>
+                        <li><a>엑셀 양식 다운로드</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </header>

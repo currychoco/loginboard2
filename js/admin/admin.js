@@ -320,3 +320,12 @@ function toMenuList() {
 function toCategoryList() {
     location.href = '/loginboard2/controller/admin/CategoryListController.php';
 }
+
+function authCheck() {
+    var auth = $('#auth').val();
+
+    if(auth != 'admin') {
+        alert('관리자 권한이 필요합니다.');
+        location.href = '/loginboard2/controller/main/MainPageController.php';
+    }
+}
