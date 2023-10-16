@@ -11,6 +11,9 @@ function pagination(){
 
     var search = $('#search').val();
 
+    var category = $('#urlCategoryId').val();
+    var menu = $('#urlMenuId').val();
+
     $.ajax({
         url : '/loginboard2/common/paginationTest.php',
         type : 'GET',
@@ -20,7 +23,9 @@ function pagination(){
             pageSize : pageSize,
             pageListSize : pageListSize,
             search : search,
-            keyword : keyword
+            keyword : keyword,
+            category : category,
+            menu : menu
         },
         dataType : 'html'
     })

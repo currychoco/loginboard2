@@ -33,7 +33,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">엑셀 작업<span class="caret"></span></a>
                     <ul class='dropdown-menu'>
                         <li><a href='/loginboard2/controller/admin/excel/ExcelUploadController.php'>엑셀 정보 저장</a></li>
-                        <li><a href='#'>정보 엑셀로 추출</a></li>
+                        <li><a href='/loginboard2/controller/admin/excel/ExcelDownloadController.php'>게시글 정보 엑셀로 추출</a></li>
                         <li><a href='/loginboard2/controller/admin/excel/ExcelFormDownloadController.php'>엑셀 양식 다운로드</a></li>
                     </ul>
                 </li>

@@ -389,4 +389,29 @@ class DanawaBoardList extends common\CommonDAO {
         return $result;
     }
     
+    public function getBoardListForExcel() {
+        $query = ("
+            SELECt 
+                id,
+                title,
+                content,
+                user_no,
+                reg_date,
+                mod_date,
+                view_count,
+                menu_id
+            FROM login_board
+            ORDER BY id DESC
+            limit 10;
+        ");
+
+        $tmp = mysqli_query($this->conn, $query);
+        $result = array();
+        while($row = mysqli_fetch_assoc($tmp)) {
+            array_push($result, $row);
+        }
+
+        return $result;
+
+    }
 }

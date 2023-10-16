@@ -3,13 +3,20 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\IOFactory;
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    
+    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
+    require_once ROOT_PATH . '/common/Utility.php';
+
+    // 엑셀 파일 생성
+    $utility = new Utility();
+
+    $boardDao = new DanawaBoardList();
+    $boardList = $boardDao->getBoardListForExcel();
+
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
-    // 엑셀의 헤더 생성
     $column = 'A';
-    $headers = ['title', 'content', 'user_no', 'menu_id'];
+    $headers = ['id', 'title', 'content', 'user_no', 'reg_date', 'mod_date', 'view_count', 'menu_id'];
 
     foreach($headers as $header) {
         $sheet->setCellValue($column++ . '1', $header);
@@ -17,20 +24,51 @@
 
     $column = 'A';
     $rowNum = 2;
-    $values = [
-        ['title' => 'testTitle1', 'content' => 'testContent1', 'user_no' => 40, 'menu_id' => 32],
-        ['title' => 'testTitle1', 'content' => 'testContent1', 'user_no' => 40, 'menu_id' => 32],
-        ['title' => 'testTitle1', 'content' => 'testContent1', 'user_no' => 40, 'menu_id' => 32],
-    ];
+    foreach($boardList as $board) {
+        for($i = 0; $i < count($headers); $i++) {
+            if($i != count($headers) - 1) {
+                $sheet->setCellValue($column++ . $rowNum, $board[$headers[$i]]);
+            }
+            else {
+                $sheet->setCellValue($column . $rowNum++, $board[$headers[$i]]);
 
-    foreach ($values as $value) {
-        $sheet->setCellValue($column++ . $rowNum, $value['title']);
-        $sheet->setCellValue($column++ . $rowNum, $value['content']);
-        $sheet->setCellValue($column++ . $rowNum, $value['user_no']);
-        $sheet->setCellValue($column . $rowNum++, $value['menu_id']);
+                $column = 'A';
+            }
+        }
+    }    
 
-        $column = 'A';
+    $file_name = $utility->getUUID() . '.xlsx';
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save(ROOT_PATH . '/' . $file_name);
+
+
+    // 엑셀 파일 다운로드
+    $dir_path = ROOT_PATH . '/';
+    $file_path = $dir_path . $file_name;
+    $file_size = filesize($file_path);
+
+    if (file_exists($file_path)) {
+        header('Content-Type:application/octet-stream');
+        header('Content-Disposition:attachment;filename=boardList.xlsx');
+        header('Content-Transfer-Encoding:binary');
+        header("Content-Length:{$file_size}");
+        header('Cache-Control:cache,must-revalidate');
+        header('Pragma:no-cache');
+        header('Expires:0');
+     
+        $fp = fopen($file_path, 'r');
+     
+        while(!feof($fp)) {
+            $buf = fread($fp, $file_size);
+            $read = strlen($buf);
+            print($buf);
+            flush();
+        }
+     
+        fclose($fp);
+
+    } else {
+        die('다운로드 실패');
     }
 
-    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    $writer->save(ROOT_PATH . '/excelFormDownloadTest.xlsx');
+    unlink($file_path);

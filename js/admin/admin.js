@@ -329,3 +329,20 @@ function authCheck() {
         location.href = '/loginboard2/controller/main/MainPageController.php';
     }
 }
+
+// function getExcel() {
+
+//     $.ajax({
+//         url : '/loginboard2/process/admin/excel/writeExcel',
+//         type : 'POST',
+//         dataType : 'json',
+        
+//         success : function(data) {
+//             console.log(data);
+//             location.href = '/loginboard2/process/admin/excel/getExcel';
+//         },
+//         error : function(request) {
+//             console.log(request.responseText);
+//         }
+//     });
+// }
