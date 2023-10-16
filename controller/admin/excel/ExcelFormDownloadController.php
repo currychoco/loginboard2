@@ -25,7 +25,7 @@
 	$oTemplate->set('auth', $auth);
 
     //템플릿 위치 지정
-	$templateType = ROOT_PATH . '/tpl/admin/excel/excelUpload.tpl.php';
+	$templateType = ROOT_PATH . '/tpl/admin/excel/excelFormDownload.tpl.php';
 
     //패치
     echo $oTemplate->fetch($templateType);
