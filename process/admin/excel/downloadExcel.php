@@ -2,6 +2,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/lib/vendor/autoload.php';
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\IOFactory;
+    use dao\DanawaBoardList;
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/autoload.php';
     

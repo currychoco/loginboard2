@@ -1,7 +1,9 @@
 <?php
+    use dao\Menu;
+    
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once ROOT_PATH . '/common/autoload.php';
+    require_once ROOT_PATH . '/common/autoload.php';    
 
     $utility = new Utility();
     $dao = new Menu();

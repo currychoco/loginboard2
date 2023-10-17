@@ -1,4 +1,6 @@
 <?php
+    use dao\DanawaBoardList;
+    
     session_start();
     ini_set('display_errors', 1);
 

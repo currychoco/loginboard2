@@ -4,6 +4,7 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
     use PHPOffice\PhpSpreadsheet\Reader\Xls;
+    use dao\Excel;
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/autoload.php';
 

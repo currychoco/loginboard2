@@ -13,13 +13,16 @@
 
         foreach($dirs as $dir) {
 
-            if(file_exists($dir . $className . '.DAO.php')) {
-                require_once($dir . $className . '.DAO.php');
+            $tmp = explode("\\", $className);
+            $name = end($tmp);
+
+            if(file_exists($dir . $name . '.DAO.php')) {
+                require_once($dir . $name . '.DAO.php');
                 return;
             }
 
-            if(file_exists($dir . $className . '.php')) {
-                require_once($dir . $className . '.php');
+            if(file_exists($dir . $name . '.php')) {
+                require_once($dir . $name . '.php');
                 return;
             }
         }

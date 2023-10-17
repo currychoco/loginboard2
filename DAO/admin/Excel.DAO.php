@@ -1,8 +1,10 @@
 <?php
+namespace dao;
+use mysqli_sql_exception;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
 require_once DAO_PATH . '/Common.DAO.php';
 
-class Excel extends common\CommonDAO{
+class Excel extends CommonDAO{
 
     public function __construct(){
         parent::__construct();

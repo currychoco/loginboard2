@@ -1,7 +1,9 @@
 <?php
+namespace dao;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
 require_once DAO_PATH . '/Common.DAO.php';
-class DanawaBoardList extends common\CommonDAO {
+class DanawaBoardList extends CommonDAO {
 
     //생성자 - DB 커넥션 연결
     public function __construct(){

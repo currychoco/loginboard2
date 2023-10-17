@@ -1,5 +1,7 @@
 <script src='/loginboard2/js/user/user.js'></script>
 <?php
+    use dao\User;
+    
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/autoload.php';

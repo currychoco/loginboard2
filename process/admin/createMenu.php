@@ -1,4 +1,6 @@
 <?php
+    use dao\Menu;
+    
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/Utility.php';
@@ -10,7 +12,7 @@
     }
 
     $utility = new Utility();
-    $dao = new MenuDAO();
+    $dao = new Menu();
 
     $name = $utility->filter_SQL($_POST['name']);
     $content = $utility->filter_SQL($_POST['content']);

@@ -1,4 +1,6 @@
 <?php
+    use dao\Comment;
+    
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
     require_once ROOT_PATH . '/common/Template.php';
