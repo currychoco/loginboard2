@@ -17,9 +17,7 @@ class ExcelDAO extends common\CommonDAO{
                 title,
                 content,
                 user_no,
-                menu_id,
-                reg_date,
-                mod_date
+                menu_id
             )
             VALUES (
                 ?, ?, ?, ?

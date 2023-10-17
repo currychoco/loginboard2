@@ -28,7 +28,6 @@ CREATE TABLE `menu` (
   `category_id` int(11) NOT NULL DEFAULT 1,
   `name` varchar(20) NOT NULL,
   `only_menu` char(1) NOT NULL DEFAULT '0',
-  `address` varchar(255) DEFAULT NULL,
   `order` int(8) DEFAULT 1,
   `depth` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
