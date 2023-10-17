@@ -11,7 +11,7 @@
           $userId = $_SESSION['userId'];
      }
 
-     $dao = new UserDAO();
+     $dao = new User();
      $utility = new Utility();
 
      $no = $utility->filter_SQL($_SESSION['no']);

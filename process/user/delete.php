@@ -1,9 +1,8 @@
 <script src='/loginboard2/js/user/user.js'></script>
 <?php
     session_start();
-    require_once $_SERVER['DOCUMENT_ROOT']."/loginboard2/conf.php";
-    require_once DAO_PATH . "/user/User.DAO.php";
-    require_once ROOT_PATH . "/common/Utility.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
+    require_once ROOT_PATH . '/common/autoload.php';
 
     // 로그인 체크
     $userId = null;
@@ -12,7 +11,7 @@
     }
     echo "<script>loginCheckToDelete('$userId')</script>";
 
-    $dao = new UserDAO();
+    $dao = new User();
     $utility = new Utility();
 
     $no = $utility->filter_SQL($_SESSION['no']);

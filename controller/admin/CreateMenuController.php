@@ -17,10 +17,10 @@
         ");
     }
 
-    $categoryDao = new CategoryDAO();
+    $categoryDao = new Category();
     $categoryList = $categoryDao->getCategoryList();
 
-    $menuDao = new MenuDAO();
+    $menuDao = new Menu();
     $onlyMenuList = $menuDao->getOnlyMenuList();
 
     //생성자

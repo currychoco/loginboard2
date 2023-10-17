@@ -3,9 +3,8 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\IOFactory;
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
-    require_once ROOT_PATH . '/common/Utility.php';
-
+    require_once ROOT_PATH . '/common/autoload.php';
+    
     // 엑셀 파일 생성
     $utility = new Utility();
 

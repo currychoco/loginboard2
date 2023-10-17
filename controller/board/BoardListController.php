@@ -1,12 +1,8 @@
 <?php
     session_start();
     ini_set('display_errors', 1);
-
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once ROOT_PATH . '/common/Template.php';
-    require_once ROOT_PATH . '/common/Utility.php';
-    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
-    require_once DAO_PATH . '/admin/Menu.DAO.php';
+    require_once ROOT_PATH . '/common/autoload.php';
 
     $utility = new Utility();
 
@@ -69,7 +65,7 @@
     }
 
     // 메뉴 정보
-    $menuDao = new MenuDAO();
+    $menuDao = new Menu();
     $menu = $menuDao->getMenuById($urlMenuId);
 
     // 리스트

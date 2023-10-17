@@ -8,7 +8,7 @@
     require_once DAO_PATH . '/admin/Category.DAO.php';
 
     $utility = new Utility();
-    $categoryDao = new CategoryDAO();
+    $categoryDao = new Category();
 
     // 로그인 체크
     $login = false;

@@ -17,8 +17,8 @@
         ");
     }
 
-    $categoryDao = new CategoryDAO();
-    $menuDao = new MenuDao();
+    $categoryDao = new Category();
+    $menuDao = new Menu();
     $utility = new Utility();
     $auth = $utility->filter_SQL($_SESSION['user']);
 

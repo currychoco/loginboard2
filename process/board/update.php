@@ -1,9 +1,7 @@
 <?php
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
-    require_once ROOT_PATH . '/common/Utility.php';
-
+    require_once ROOT_PATH . '/common/autoload.php';
     $utility = new Utility();
 
     // 로그인 체크

@@ -7,8 +7,8 @@
     require_once DAO_PATH . '/admin/Category.DAO.php';
 
     $utility = new Utility();
-    $menuDao = new MenuDAO();
-    $categoryDao = new CategoryDAO();
+    $menuDao = new Menu();
+    $categoryDao = new Category();
 
     // 관리자 아닐 경우 게시판 리스트로
     if($_SESSION['user'] != 'admin') {

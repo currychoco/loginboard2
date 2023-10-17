@@ -1,9 +1,8 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once DAO_PATH . '/board/DanawaBoardList.DAO.php';
-    require_once DAO_PATH . '/admin/Menu.DAO.php';
+    require_once ROOT_PATH . '/common/autoload.php';
 
-    $menuDao = new MenuDAO();
+    $menuDao = new Menu();
     $boardDao = new DanawaBoardList();
 
     $menuList = $menuDao->getMenuListNotOnlyMenu();

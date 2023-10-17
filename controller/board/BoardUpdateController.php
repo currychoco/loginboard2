@@ -10,7 +10,7 @@
 
     $utility = new Utility();
     $dao = new DanawaBoardList();
-    $categoryDao = new CategoryDAO();
+    $categoryDao = new Category();
 
     // 로그인 체크
     $login = false;

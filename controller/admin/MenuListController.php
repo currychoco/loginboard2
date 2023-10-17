@@ -16,7 +16,7 @@
         ");
     }
 
-    $dao = new MenuDAO();
+    $dao = new Menu();
     $listResult = $dao->getMenuList();
 
     //생성자

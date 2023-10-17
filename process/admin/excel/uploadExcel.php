@@ -5,7 +5,7 @@
     use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
     use PHPOffice\PhpSpreadsheet\Reader\Xls;
     require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once DAO_PATH . '/admin/Excel.DAO.php';
+    require_once ROOT_PATH . '/common/autoload.php';
 
     $fileName = $_FILES['excelFile']['name'];
     $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -26,7 +26,7 @@
         ");
     }
 
-    $excelDao = new ExcelDAO();
+    $excelDao = new Excel();
 
     $tmpName = $_FILES['excelFile']['tmp_name'];
 

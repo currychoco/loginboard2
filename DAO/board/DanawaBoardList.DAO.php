@@ -401,7 +401,7 @@ class DanawaBoardList extends common\CommonDAO {
                 view_count,
                 menu_id
             FROM login_board
-            ORDER BY id DESC
+            ORDER BY id
             limit 10;
         ");
 

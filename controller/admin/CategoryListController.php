@@ -16,7 +16,7 @@
         ");
     }
 
-    $dao = new CategoryDAO();
+    $dao = new Category();
     $listResult = $dao->getCategoryList();
 
     //생성자

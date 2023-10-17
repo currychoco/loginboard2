@@ -6,7 +6,7 @@
     require_once DAO_PATH . "/admin/Menu.DAO.php";
 
     $utility = new Utility();
-    $dao = new MenuDAO();
+    $dao = new Menu();
 
     // 관리자 아닐 경우 게시판 리스트로
     if($_SESSION['user'] != 'admin') {

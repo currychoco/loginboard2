@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
 require_once DAO_PATH . '/Common.DAO.php';
-class MenuDAO extends common\CommonDAO{
+class Menu extends common\CommonDAO{
 
     public function __construct(){
         parent::__construct();

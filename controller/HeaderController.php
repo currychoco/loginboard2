@@ -7,8 +7,8 @@
     require_once DAO_PATH . '/admin/Category.DAO.php';
     require_once DAO_PATH . '/admin/Menu.DAO.php';
 
-    $categoryDao = new CategoryDAO();
-    $menuDao = new MenuDAO();
+    $categoryDao = new Category();
+    $menuDao = new Menu();
 
     $categoryList = $categoryDao->getCategoryList();
     $menuList = $menuDao->getMenuList();
