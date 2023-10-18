@@ -16,7 +16,7 @@
         $data = array('count' => $result);
     }
     else {
-        $data = array('count' => '-1');
+        $data = array('count' => '9999');
     }
 
     echo json_encode($data);

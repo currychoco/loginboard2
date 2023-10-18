@@ -32,7 +32,7 @@ $(function(){
 
     $("input[type='tel']").mouseenter(function() {
         $("input[type='tel']").tooltip();
-    })
+    });
     
 });
 
