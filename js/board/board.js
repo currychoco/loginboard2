@@ -189,8 +189,7 @@ function deleteBoard() {
         success : function(data) {
 
             if(data) {
-                alert('삭제되었습니다.');
-                location.href = '/loginboard2/controller/board/BoardListController.php?no=' + no;
+                toListButton();
             }
             else {
                 alert('삭제에 실패하였습니다.');
@@ -204,6 +203,10 @@ function deleteBoard() {
 
 function search() {
 
+    var no = $('#no').val();
+    var urlCategoryId = $('#urlCategoryId').val();
+    var urlMenuId = $('#urlMenuId').val();
+
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
     var tmpKeyword = $('#keyword').val();
 
@@ -211,6 +214,6 @@ function search() {
 
     var search = $('#search').val();
 
-    location.href = '/loginboard2/controller/board/BoardListController.php?search=' + search + '&keyword=' + keyword;
+    location.href = '/loginboard2/controller/board/BoardListController.php?search=' + search + '&keyword=' + keyword + '&category=' + urlCategoryId + '&menu=' + urlMenuId;
 
 }

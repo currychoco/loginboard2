@@ -38,9 +38,14 @@
         <div class="container body-container">
             <table class="table">
                 <tr>
-                    <th colspan=4>
-                        <p><b><?=$board['title']?></b></p>
-                    </th>
+                    <th colspan=1>제목</th>
+                    <td colspan=3><?=$board['title']?></td>
+                </tr>
+                <tr>
+                    <th>카테고리</th>
+                    <td><?=$board['category']?></td>
+                    <th>메뉴</th>
+                    <td><?=$board['menu']?></td>
                 </tr>
                 <tr>
                     <th colspan=1>글쓴이</th>
