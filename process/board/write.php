@@ -36,7 +36,7 @@
             echo ("
                 <script>
                     alert('제목은 2자 이상, 내용은 1자 이상이 필요합니다.');
-                    go.history(-1);
+                    history.go(-1);
                 </script>
             ");
 
@@ -48,7 +48,7 @@
         echo ("
                 <script>
                     alert('게시판을 확인해 주세요.');
-                    go.history(-1);
+                    history.go(-1);
                 </script>
             ");
 
@@ -82,14 +82,13 @@
                 mkdir($dirPath, 0777);
             }
 
-            $extension = pathinfo($name, PATHINFO_EXTENSION); // 업로드 된 파일의 확장자 추출
-            $extensionArr = array('jpeg', 'bmp', 'gif', 'png');
-
-            if(in_array($extension, $extensionArr)) { // 이미지 확장자 체크
+            $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION)); // 업로드 된 파일의 확장자 추출
+            $extensionArr = array('jpeg', 'bmp', 'gif', 'png', 'jpg');
+            if(!in_array($extension, $extensionArr)) { // 이미지 확장자 체크
                 echo ("
                     <script>
                         alert('이미지 파일만 첨부 가능합니다.');
-                        go.history(-1);
+                        history.go(-1);
                     </script>
                 ");
 
@@ -98,17 +97,16 @@
 
             $size = $_FILES['imageFile']['size'][$i];
 
-            if($size > 10000) { // 파일 크기 체크
+            if($size > 50000) { // 파일 크기 체크
                 echo ("
                     <script>
-                        alert('파일의 크기는 10000바이트 이하만 가능합니다.');
-                        go.history(-1);
+                        alert('파일의 크기는 50000바이트 이하만 가능합니다.');
+                        history.go(-1);
                     </script>
                 ");
 
                 exit;
             }
-
 
             $serverName = $utility->getUUID() . ".$extension"; // 중복되지 않을 파일 이름 생성
             $path = '/loginboard2/img/' . date('Ymd') . "/$serverName";
@@ -128,7 +126,7 @@
                 echo ("
                 <script>
                     alert('파일이 정상적으로 등록되지 않았습니다.');
-                    go.history(-1);
+                    history.go(-1);
                 </script>
                 ");
             } 

@@ -41,7 +41,7 @@
     // 삭제할 게시글의 파일 삭제
     if(!empty($result['image'])) {
 
-        for($i = 0; $i < count($image); $i++) {
+        for($i = 0; $i < count($result['image']); $i++) {
 
             $imgPath = $_SERVER['DOCUMENT_ROOT'] . $result['image'][$i]['path'];
             unlink($imgPath);
