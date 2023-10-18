@@ -407,7 +407,6 @@ class DanawaBoardList extends CommonDAO {
                 menu_id
             FROM login_board
             ORDER BY id
-            limit 10;
         ");
 
         $tmp = mysqli_query($this->conn, $query);
