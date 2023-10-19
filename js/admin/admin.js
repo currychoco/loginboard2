@@ -219,7 +219,6 @@ function deleteCategory() {
         success : function(data) {
             
             if(data.result) {
-                alert(data.msg);
                 location.href = '/loginboard2/controller/admin/CategoryListController.php';
             }
             else {

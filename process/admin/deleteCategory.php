@@ -17,7 +17,7 @@
 
     $result = $dao->deleteCategoryById($categoryId);
 
-    if(!$result) {
+    if($result) {
         echo json_encode(array('result' => $result, 'msg' => '카테고리 삭제 성공'));
     }
     else {

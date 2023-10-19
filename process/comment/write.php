@@ -16,6 +16,7 @@
     }
     else {
         echo json_encode(array('result' => false, 'msg' => '로그인이 필요합니다.'));
+        exit;
     }
 
     $boardId = $utility->filter_SQL($_POST['boardId']);

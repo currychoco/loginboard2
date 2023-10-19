@@ -226,7 +226,13 @@ function writeAnswer(commentId) {
         dataType : 'json',
 
         success : function(data) {
-            getCommentList(commentId);
+            if(data.result) {
+                getCommentList(commentId);
+            }
+            else {
+                alert(data.msg);
+            }
+            
         },
         error : function(request) {
             console.log(request.responseText);
