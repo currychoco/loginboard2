@@ -4,11 +4,13 @@
         <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/board/board.js'></script>
         <script src='/loginboard2/js/admin/admin.js'></script>
+        <script src='/loginboard2/js/common/common.js'></script>
         <script>
 
             $(function() {
-
+                
                 checkLogin();
+                header();
                 getWriteMenuList();
 
                 $('#write').click(function() {
@@ -28,7 +30,9 @@
     </head>
 	<body>
         <!-- header -->
-        <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/header.php"; ?>
+        <div id='header'>
+
+        </div>
 
         <div class="container body-container">
             <br>

@@ -1,7 +1,9 @@
 <?php
+     use dao\User;
+     
      session_start();
      require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
-    require_once ROOT_PATH . '/common/autoload.php';
+     require_once ROOT_PATH . '/common/autoload.php';
 
      // 로그인 체크
      $userId = null;

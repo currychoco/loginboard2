@@ -3,8 +3,12 @@
 	<head>
 	    <?php include ROOT_PATH . '/common/head.php'; ?>
         <script src="/loginboard2/js/user/user.js"></script>
+        <script src='/loginboard2/js/common/common.js'></script>
         <script>
             $(function(){
+
+                header();
+                
                 $('#updateCancel').click(function(){
                     updateCancel();
                 });
@@ -16,7 +20,9 @@
 	</head>
     <body>
         <!-- header -->
-        <?php include ROOT_PATH . '/common/header.php'; ?>
+        <div id='header'>
+
+        </div>
 
         <div class="container body-container">
             <h3 class="title">회원정보 수정</h3>

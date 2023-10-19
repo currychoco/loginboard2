@@ -10,13 +10,4 @@
     $id = $utility->filter_SQL( $_GET['userId']);
     
     $result = $dao->idCheck($id);
-    
-    $data = null;
-    if($result) {
-        $data = array('count' => $result);
-    }
-    else {
-        $data = array('count' => '9999');
-    }
-
-    echo json_encode($data);
+    echo json_encode(array('count' => $result));

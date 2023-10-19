@@ -3,18 +3,25 @@
 	<head>
 	    <?php include $_SERVER['DOCUMENT_ROOT']."/loginboard2/common/head.php"; ?>
         <script src='/loginboard2/js/user/join.js'></script>
+        <script src='/loginboard2/js/common/common.js'></script>
         <script>
             // 로그인 체크
             const userId = $('#no').val();
             if(userId){
                 location.href = '/loginboard2/controller/board/BoardListController.php';
             }
+
+            $(function(){
+                header();
+            });
         </script>
 
 	</head>
 	<body>
         <!-- header -->
-        <?php include ROOT_PATH . "/common/header.php"; ?>
+        <div id='header'>
+
+        </div>
 
         <div class="container body-container">
             <h3 class="title">회원가입</h3>

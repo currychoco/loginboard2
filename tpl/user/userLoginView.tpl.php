@@ -3,11 +3,15 @@
     <head>
 	    <?php require_once ROOT_PATH . "/common/head.php"; ?>
         <script src="/loginboard2/js/user/user.js"></script>
+		<script src='/loginboard2/js/common/common.js'></script>
 		<script>
             const userId = "<?= $userId ?>";
             loginCheckToLogin(userId);
 
             $(function() {
+
+				header();
+				
 				$("input[type='password']").keydown(function(key) {
 					if(key.keyCode == 13) {
 						clickLoginButton($('#userId').val(), $('#password').val());
@@ -23,7 +27,9 @@
 	</head>
 	<body>
 		<!-- header -->
-        <?php include ROOT_PATH . "/common/header.php"; ?>
+        <div id='header'>
+
+        </div>
 
 		<div class="container body-container">
 			<form id="loginForm" action="/loginboard2/process/user/login.php" method="post">

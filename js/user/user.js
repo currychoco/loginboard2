@@ -78,14 +78,12 @@ function notEqualPw() {
 
 // 로그인 되었을 때
 function login() {
-    alert('로그인 성공!');
-    location.href = '/loginboard2/controller/board/BoardListController.php';
+    location.href = '/loginboard2/controller/main/MainPageController.php';
 }
 
 // 로그아웃
 function logout() {
-    alert('로그아웃 되었습니다.');
-    location.href = '/loginboard2/controller/board/BoardListController.php';
+    location.href = '/loginboard2/controller/main/MainPageController.php';
 }
 
 // 탈퇴 시
@@ -152,7 +150,7 @@ function updateSuccess(result){
         alert('회원정보 수정에 실패하였습니다. 잠시 후 다시 시도해 주세요.');
     }
 
-    location.href = '/loginboard2/controller/board/BoardListController.php';
+    location.href = '/loginboard2/controller/user/UserInfoController.php';
 
 }
 
