@@ -236,8 +236,6 @@ class DanawaBoardList extends CommonDAO {
             $stmt->execute();
         }
 
-        $this->conn->commit();
-
         return true;
         
     }

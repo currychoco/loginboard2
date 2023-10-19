@@ -64,11 +64,10 @@
         'no' => $user['no'],
         'menuId' => $menuId
     );
-
-    // 게시글 생성 후 생성된 게시글의 id 반환
-    $boardId = $dao->insertBoard($board);
     
     // 업로드 된 이미지 지정된 파일로 이동
+    $imageList = array();
+
     if(!empty($_FILES['imageFile']) && !empty($_FILES['imageFile']['name'][0])) {
 
         for($i = 0; $i < count($_FILES['imageFile']['name']); $i++) {
@@ -115,33 +114,32 @@
             $up = move_uploaded_file($tmp_name, $dirPath); // 지정 경로로 파일 업로드
 
             $image = array(
-                'boardId' => $boardId,
                 'serverName' => $serverName,
                 'originalName' => $name,
                 'path' => $path,
                 'size' => $size
             );
 
-            if(!$dao->insertImage($image)) {
-                echo ("
-                <script>
-                    alert('파일이 정상적으로 등록되지 않았습니다.');
-                    history.go(-1);
-                </script>
-                ");
-            } 
-            else {
-                echo ("
-                <script>
-                    location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-                </script>
-                ");
-            }
+            array_push($imageList, $image);
         }
         
     }
-    echo ("
-    <script>
-        location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
-    </script>
-    ");
+
+    $info = array('board' => $board, 'imageList' => $imageList);
+    $result = $dao->insertBoardAndImage($info);
+
+    if($result) {
+        echo ("
+        <script>
+            location.href = '/loginboard2/controller/board/BoardListController.php?no=$no';
+        </script>
+        ");
+    }
+    else {
+        echo ("
+        <script>
+            alert('파일이 정상적으로 등록되지 않았습니다.');
+            // history.go(-1);
+        </script>
+        ");
+    }
