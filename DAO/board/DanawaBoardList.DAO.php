@@ -1,5 +1,6 @@
 <?php
 namespace dao;
+use mysqli_sql_exception;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/loginboard2/conf.php';
 require_once DAO_PATH . '/Common.DAO.php';
@@ -202,6 +203,42 @@ class DanawaBoardList extends CommonDAO {
         $stmt->bind_param('isssi', $image['boardId'], $image['serverName'], $image['originalName'], $image['path'], $image['size']);
 
         return $stmt->execute();
+        
+    }
+
+    public function insertImage2($imageList, $boardId) {
+
+        $serverName = '';
+        $originalName = '';
+        $path = '';
+        $size = 0;
+
+        $stmt = $this->conn->prepare("
+            INSERT INTO image (
+                board_id,
+                server_name,
+                original_name,
+                path,
+                size
+            ) 
+            VALUES (
+                ?, ?, ?, ?, ?
+            )
+        ");
+        $stmt->bind_param('isssi', $boardId, $serverName, $originalName, $path, $size);
+
+        foreach($imageList as $image) {
+
+            $serverName = $image['serverName'];
+            $originalName = $image['originalName'];
+            $path = $image['path'];
+            $size = $image['size'];
+            $stmt->execute();
+        }
+
+        $this->conn->commit();
+
+        return true;
         
     }
 
@@ -416,6 +453,31 @@ class DanawaBoardList extends CommonDAO {
         }
 
         return $result;
+
+    }
+
+    public function insertBoardAndImage($info) {
+
+        $this->conn->begin_transaction();
+
+        
+        try {
+
+            $boardId = $this->insertBoard($info['board']);
+
+            if(!empty($info['imageList'])) {
+
+                $this->insertImage2($info['imageList'], $boardId);
+            }
+
+            $this->conn->commit();
+
+            return true;
+        }       
+        catch(mysqli_sql_exception $exception) {
+            $this->conn->rollback();
+            return false;
+        } 
 
     }
 }

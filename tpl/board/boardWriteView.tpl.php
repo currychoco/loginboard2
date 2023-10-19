@@ -41,7 +41,7 @@
                 <input type='hidden' id='urlMenuId' value="<?=$urlMenuId?>">
             </form>
 
-            <form id="writeForm" enctype='multipart/form-data' action='/loginboard2/process/board/write.php' method='POST'> 
+            <form id="writeForm" enctype='multipart/form-data' action='/loginboard2/process/board/write2.php' method='POST'> 
                 <input type='hidden' id='no' value="<?=$no?>">
                 <table class="table">
                     <colgroup>
